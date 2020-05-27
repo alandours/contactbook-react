@@ -1,0 +1,46 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": ["airbnb"],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+      "comma-dangle": ["error", "never"],
+      "curly": ["error", "multi-or-nest"],
+      "func-names": 0,
+      "indent": ["error", 2, {"SwitchCase": 1}],
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+      "max-len": ["error", { "code": 150 }],
+      "object-curly-newline": ["error", {
+        "ObjectPattern": { "multiline": true },
+        "ExportDeclaration": { "multiline": true, "minProperties": 3 }
+      }]
+    },
+    "settings": {
+      "import/resolver": {
+        "eslint-import-resolver-custom-alias": {
+          "alias": {
+            "@components": "resources/js/components",
+            "@pages": "resources/js/pages",
+            "@theme": "resources/js/theme",
+            "@utils": "resources/js/utils"
+          },
+          "extensions": [".js", ".jsx"]
+        }
+      }
+    }
+}
