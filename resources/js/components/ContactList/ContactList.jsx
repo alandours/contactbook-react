@@ -32,7 +32,7 @@ const ContactList = ({ hasSearch }) => {
   const [loading, setLoading] = useState(true);
 
   const getContacts = async (value) => {
-    const url = value ? `http://contactbook.test/api/contacts/search/${search}` : 'http://contactbook.test/api/contacts/list';
+    const url = value ? `/api/contacts/search/${search}` : '/api/contacts/list';
     const response = await axios.get(url);
     setLoading(false);
     setContacts(response.data);

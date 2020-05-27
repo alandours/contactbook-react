@@ -8,7 +8,7 @@ const Header = () => (
   <styled.Header>
     <styled.Sitename>
       <styled.Sitelink to="/">
-        ContactBook
+        {process.env.MIX_APP_NAME}
       </styled.Sitelink>
     </styled.Sitename>
     <Navigation />
