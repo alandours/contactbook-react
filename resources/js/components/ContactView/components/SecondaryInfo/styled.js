@@ -31,7 +31,7 @@ const Title = styled.h3`
   margin-bottom: 1rem;
   padding: 0.5rem 1.5rem;
   position: sticky;
-  top: 0;
+  top: 46px;
   width: 100%;
 `;
 

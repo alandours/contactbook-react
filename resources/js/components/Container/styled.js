@@ -13,7 +13,7 @@ const Container = styled.div`
     flex-direction: column;
     height: 80vh;
     margin-left: 1rem;
-    overflow: scroll;
+    overflow: hidden;
     width: 75%;
   `}
 

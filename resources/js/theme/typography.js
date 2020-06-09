@@ -14,6 +14,7 @@ export const weight = {
 export const size = {
   text: '0.9rem',
   info: '0.95rem',
+  normal: '1rem',
   medium: '1.1rem',
   large: '1.2rem',
   xlarge: '1.3rem',
