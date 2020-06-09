@@ -5,37 +5,56 @@ import { size, weight } from '@theme/typography';
 const SecondaryInfo = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1rem;
 `;
 
 const Section = styled.section`
-  padding: 1rem 0;
-  margin: 0 1rem;
+  position: relative;
 
   ${({ order }) => order && `
     order: ${order};
   `}
 
   & + & {
-    border-top: 1px solid ${getColor('grey', 'light')};
+    margin-top: 1rem;
+  }
+
+  &:last-child {
+    margin-bottom: 1rem;
   }
 `;
 
 const Title = styled.h3`
-  margin: 0.5rem 0.25rem 1rem;
+  background: ${getColor('grey', 'light')};
+  border-bottom: 2px solid ${getColor('grey', 'normal')};
   font-size: ${size.info};
-  font-weight: ${weight.bold};
+  font-weight: ${weight.semiBold};
+  margin-bottom: 1rem;
+  padding: 0.5rem 1.5rem;
+  position: sticky;
+  top: 0;
+  width: 100%;
 `;
 
 const Datafield = styled.div`
-  display: flex;
-  padding: 0.125rem 0.5rem;
-  transition: all ease 250ms;
+  border-radius: 2px;
+  padding: 0.25rem 1.5rem;
+  margin: 0 1.5rem;
+  transition: all ease 200ms;
 
   &:hover{
     background: ${getColor('grey', 'lighter')};;
-    transition: all ease 250ms;
+    transition: all ease 100ms;
   }
+`;
+
+const Link = styled.a`
+  display: flex;
+`;
+
+const Name = styled.div`
+  color: ${getColor('primary', 'dark')};
+  font-weight: ${weight.semiBold};
+  width: 50%;
 `;
 
 const Label = styled.div`
@@ -44,13 +63,12 @@ const Label = styled.div`
   width: 50%;
 `;
 
-const Link = styled.a`
-  color: ${getColor('primary', 'dark')};
-  font-weight: ${weight.semiBold};
-  width: 50%;
-`;
-
 const Text = styled.p`
 `;
 
-export default { SecondaryInfo, Section, Title, Datafield, Label, Link, Text };
+const Notes = styled.p`
+  padding: 0.25rem 1.75rem;
+  white-space: pre-wrap;
+`;
+
+export default { SecondaryInfo, Section, Title, Datafield, Link, Name, Label, Text, Notes };

@@ -1,17 +1,26 @@
 import React from 'react';
 import { objectOf, any } from 'prop-types';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faUser, faPhone, faEnvelope, faShareAlt, faStickyNote } from '@fortawesome/free-solid-svg-icons';
+
+import Icon from '@components/Icon';
 
 import styled from './styled';
 
+library.add(faUser, faPhone, faEnvelope, faShareAlt, faStickyNote);
+
 const renderSection = (section) => {
-  const { title, data, order, urlStart } = section;
+  const { title, icon, data, order, urlStart } = section;
 
   return data && !!data.length && (
     <styled.Section key={title} order={order}>
-      <styled.Title>{title}</styled.Title>
+      <styled.Title>
+        { !!icon && <Icon icon={icon} />}
+        {title}
+      </styled.Title>
       <>
         {
-          title === 'Notes' ? data : (
+          title === 'Notes' ? <styled.Notes>{data}</styled.Notes> : (
             data.map((datafield) => {
               const {
                 id,
@@ -43,10 +52,10 @@ const renderSection = (section) => {
               return (
                 <styled.Datafield key={id + name}>
                   { title === 'Aliases' ? <styled.Text>{name}</styled.Text> : (
-                    <>
+                    <styled.Link href={`${urlStart}${url}`}>
+                      <styled.Name>{name}</styled.Name>
                       <styled.Label>{label}</styled.Label>
-                      <styled.Link href={`${urlStart}${url}`}>{name}</styled.Link>
-                    </>
+                    </styled.Link>
                   )}
                 </styled.Datafield>
               );
@@ -64,29 +73,34 @@ const SecondaryInfo = ({ contact }) => {
   const sections = [
     {
       title: 'Aliases',
+      icon: 'user',
       data: aliases,
       order: 1
     },
     {
       title: 'Numbers',
+      icon: 'phone',
       data: numbers,
       order: 2,
       urlStart: 'tel:'
     },
     {
       title: 'Emails',
+      icon: 'envelope',
       data: emails,
       order: 3,
       urlStart: 'mailto:'
     },
     {
       title: 'Social Networks',
+      icon: 'share-alt',
       data: socialNetworks,
       order: 4,
       urlStart: 'https://'
     },
     {
       title: 'Notes',
+      icon: 'sticky-note',
       data: notes,
       order: 5
     }

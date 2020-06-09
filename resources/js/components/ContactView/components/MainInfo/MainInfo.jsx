@@ -4,6 +4,8 @@ import { objectOf, any } from 'prop-types';
 import { formatDate, calculateAge } from '@utils';
 import { getPalette } from '@utils/color';
 
+import Icon from '@components/Icon';
+
 import styled from './styled';
 
 const MainInfo = ({ contact }) => {
@@ -34,19 +36,19 @@ const MainInfo = ({ contact }) => {
           </styled.MainDatafield>
           { birthday && (
             <styled.MainDatafield>
-              <styled.Icon icon="birthday-cake" />
+              <Icon icon="birthday-cake" />
               <styled.Text>{formatDate(birthday)}</styled.Text>
             </styled.MainDatafield>
           )}
           { address && (
             <styled.MainDatafield>
-              <styled.Icon icon="home" />
+              <Icon icon="home" />
               <styled.Link href={`https://www.google.com/maps/search/${address}`}>{address}</styled.Link>
             </styled.MainDatafield>
           )}
           { met && (
             <styled.MainDatafield>
-              <styled.Icon icon="calendar-check" />
+              <Icon icon="calendar-check" />
               <styled.Text>{met}</styled.Text>
             </styled.MainDatafield>
           )}

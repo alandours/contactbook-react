@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components';
 import { getColor } from '@theme/mixins';
 import { size, weight } from '@theme/typography';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import zindex from '@theme/zindex';
 
 const Gradient = styled.div`
   background: ${getColor('primary', 'main')};
@@ -11,7 +10,7 @@ const Gradient = styled.div`
   overflow: hidden;
   position: relative;
   width: 100%;
-  z-index: 1;
+  z-index: ${zindex.normal};
 
   ${({ palette }) => palette.length && css`
     background: linear-gradient(90deg,
@@ -26,7 +25,6 @@ const Gradient = styled.div`
 
 const MainInfo = styled.div`
   align-items: center;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
   display: flex;
   padding: 1rem;
   width: 100%;
@@ -42,6 +40,10 @@ const ProfilePicture = styled.img`
   min-width: 200px;
   object-fit: cover;
   width: 200px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const MainData = styled.div`
@@ -70,17 +72,8 @@ const Link = styled.a`
   font-weight: ${weight.semiBold};
 `;
 
-const Icon = styled(FontAwesomeIcon)`
-  color: ${getColor('grey', 'darker')};
-  margin-right: 0.5rem;
-
-  ${({ icon }) => icon === 'home' && `
-    margin-left: -2px;
-  `}
-`;
-
 const Text = styled.p`
   display: inline-block;
 `;
 
-export default { Gradient, MainInfo, ProfilePicture, MainData, MainDatafield, Name, Age, Link, Icon, Text };
+export default { Gradient, MainInfo, ProfilePicture, MainData, MainDatafield, Name, Age, Link, Text };
