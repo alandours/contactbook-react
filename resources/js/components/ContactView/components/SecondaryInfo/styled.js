@@ -14,10 +14,6 @@ const Section = styled.section`
     order: ${order};
   `}
 
-  & + & {
-    margin-top: 1rem;
-  }
-
   &:last-child {
     margin-bottom: 1rem;
   }
@@ -28,7 +24,6 @@ const Title = styled.h3`
   border-bottom: 2px solid ${getColor('grey', 'normal')};
   font-size: ${size.info};
   font-weight: ${weight.semiBold};
-  margin-bottom: 1rem;
   padding: 0.5rem 1.5rem;
   position: sticky;
   top: 46px;
@@ -41,9 +36,17 @@ const Datafield = styled.div`
   margin: 0 1.5rem;
   transition: all ease 200ms;
 
-  &:hover{
+  &:hover {
     background: ${getColor('grey', 'lighter')};;
     transition: all ease 100ms;
+  }
+
+  &:nth-of-type(1) {
+    margin-top: 1rem;
+  }
+
+  &:last-child {
+    margin-bottom: 1rem;
   }
 `;
 
@@ -67,6 +70,7 @@ const Text = styled.p`
 `;
 
 const Notes = styled.p`
+  margin-top: 1rem;
   padding: 0.25rem 1.75rem;
   white-space: pre-wrap;
 `;
