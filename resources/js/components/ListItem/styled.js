@@ -31,6 +31,11 @@ const ListItem = styled.li`
     padding: 1rem !important;
     text-align: center;
   `};
+
+  ${({ sticky }) => sticky && css`
+    position: sticky;
+    top: 32px;
+  `};
 `;
 
 const ListLink = styled(Link)`

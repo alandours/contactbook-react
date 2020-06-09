@@ -1,4 +1,9 @@
-export const formatFullName = (name, lastname) => (lastname ? `${name} ${lastname}` : name);
+export const formatFullName = (name, lastname, lastnameFirst, comma) => {
+  if (!lastname) return name;
+  const fullName = lastnameFirst ? [lastname, name] : [name, lastname];
+  const joinStr = comma ? ', ' : ' ';
+  return fullName.join(joinStr);
+};
 
 export const isArrayNotEmpty = (arr) => !!(arr instanceof Array && arr.length);
 

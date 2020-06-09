@@ -7,21 +7,26 @@ import InputIcon from '@components/InputIcon';
 import ListItem from '@components/ListItem';
 import Loader from '@components/Loader';
 
-const buildContactList = (contacts) => {
-  const list = [];
-  let firstLetter = '';
+import styled from './styled';
 
-  contacts.forEach((contact) => {
+const buildContactList = (contacts) => {
+  const groups = contacts.reduce((acc, contact) => {
     const { id, name, lastname } = contact;
     const fullName = formatFullName(name, lastname);
+    const letter = getFirstLetter(fullName);
 
-    if (firstLetter !== getFirstLetter(fullName)) {
-      firstLetter = getFirstLetter(fullName);
-      list.push(<ListItem type="letter" key={firstLetter}>{firstLetter}</ListItem>);
-    }
+    const listItem = <ListItem id={id} key={id}>{fullName}</ListItem>;
+    acc[letter] = acc[letter] ? [...acc[letter], listItem] : [listItem];
 
-    list.push(<ListItem id={id} key={id}>{fullName}</ListItem>);
-  });
+    return acc;
+  }, {});
+
+  const list = Object.keys(groups).map((letter) => (
+    <styled.ContactGroup key={letter}>
+      <ListItem type="letter" sticky>{letter}</ListItem>
+      { groups[letter] }
+    </styled.ContactGroup>
+  ));
 
   return list;
 };
@@ -54,10 +59,10 @@ const ContactList = ({ hasSearch }) => {
         />
       )}
       { loading ? <Loader /> : (
-        <ul>
+        <div>
           { contactList }
-          <ListItem type="count">{`${contacts.length} contacts`}</ListItem>
-        </ul>
+          <ListItem as="div" type="count">{`${contacts.length} contacts`}</ListItem>
+        </div>
       )}
     </>
   );
