@@ -35,7 +35,7 @@ class SocialNetworksTableSeeder extends Seeder
             ['id' => 20, 'name' => 'Discogs', 'url' => 'discogs.com/user/', 'usernameFirst' => NULL],
             ['id' => 21, 'name' => 'TikTok', 'url' => 'tiktok.com/@', 'usernameFirst' => NULL],
             ['id' => 22, 'name' => 'TV Time', 'url' => 'tvtime.com/', 'usernameFirst' => NULL],
-            ['id' => 999, 'name' => 'custom', 'url' => NULL, 'usernameFirst' => NULL],
+            ['id' => 999, 'name' => 'Custom', 'url' => NULL, 'usernameFirst' => NULL],
             
         ];
 

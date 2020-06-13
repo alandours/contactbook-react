@@ -16,7 +16,7 @@ class EmailTypesTableSeeder extends Seeder
             ['id' => 1, 'name' => 'Personal'],
             ['id' => 2, 'name' => 'Secondary'],
             ['id' => 3, 'name' => 'Work'],
-            ['id' => 999, 'name' => 'custom'],
+            ['id' => 999, 'name' => 'Custom'],
             
         ];
 
