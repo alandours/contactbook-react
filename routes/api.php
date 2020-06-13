@@ -17,8 +17,12 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
+Route::get('contacts/setup', 'ContactController@getAppData');
+
 Route::get('contacts/list', 'ContactController@list');
 
 Route::get('contacts/search/{text}', 'ContactController@search');
 
-Route::get('contacts/{id}', 'ContactController@getContact');
+Route::post('contacts/{id}/update', 'ContactController@update');
+
+Route::get('contacts/{id}', 'ContactController@get');

@@ -5,477 +5,352 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Redirect;
+use Intervention\Image\ImageManagerStatic as Image;
+use Validator;
+
 use App\Http\Controllers\Controller;
 use App\Alias;
 use App\Contact;
 use App\Email;
+use App\EmailType;
 use App\Number;
+use App\NumberType;
 use App\Social;
-use App\Network;
-
-use Illuminate\Support\Facades\Redirect;
+use App\SocialNetwork;
 
 class ContactController extends Controller
 {
+  public function getAppData() {
+    $numberTypes = NumberType::get();
+    $emailTypes = EmailType::get();
+    $socialNetworks = SocialNetwork::get();
 
-    public function display($id = null){
+    return compact('numberTypes', 'emailTypes', 'socialNetworks');
+  }
 
-        $displayContact = $this->getContact($id);
+  public function list() {
+    return Contact::where('active', 1)
+                  ->select(['id', 'name', 'lastname'])
+                  ->orderBy('name', 'ASC')
+                  ->get();
+  }
 
-        $contacts = Contact::where('active', 1)
-                            ->orderBy('name', 'ASC')
-                            ->get();
+  public function search($text) {
+    $text = preg_replace('/\s+/', '', $text);
 
-        foreach($contacts as $contact){
-            $contact->full_name = $this->getFullName($contact->name, $contact->lastname);
-        }
+    return DB::select('SELECT * FROM 
+                        (SELECT CONCAT_WS(" ", name, lastname) AS fullname, name, lastname, address, notes, contacts.id AS id, email, number, username FROM contacts
+                        LEFT JOIN emails ON contacts.id = emails.id_contact
+                        LEFT JOIN numbers ON contacts.id = numbers.id_contact
+                        LEFT JOIN social ON contacts.id = social.id_contact
+                        WHERE active = 1
+                        GROUP BY id) AS fields 
+                        WHERE (REPLACE(fullname, " ", "") LIKE ?
+                        OR REPLACE(name, " ", "") LIKE ?
+                        OR REPLACE(lastname, " ", "") LIKE ?
+                        OR REPLACE(address, " ", "") LIKE ?
+                        OR REPLACE(notes, " ", "") LIKE ?
+                        OR REPLACE(email, " ", "") LIKE ?
+                        OR REPLACE(number, " ", "") LIKE ?
+                        OR REPLACE(username, " ", "") LIKE ?)
+                        ORDER BY name ASC', ['%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%']);
 
-        return view('contacts/index', compact('contacts', 'displayContact'));
-        
+  }
+
+  public function get($id) {
+    try{
+      if ($id == null) {
+        $contact = Contact::orderBy('name', 'ASC')->firstOrFail();
+      } else {
+        $contact = Contact::findOrFail($id);
+      }
+    } catch(ModelNotFoundException $e) {
+      return null;
     }
 
-    public function getContact($id){
+    $contact->fullName = $this->getFullName($contact->name, $contact->lastname);
+    $contact->photo = $contact->photo ?? 'contact.jpg';
 
-        try{
+    return $contact;
+  }
 
-            if($id == null){
+  private function getFullName($name, $lastname) {
+    return $lastname !== null ? $name.' '.$lastname : $name;
+  }
 
-                $contact = Contact::orderBy('name', 'ASC')->firstOrFail();
+  public function update($id, Request $request) {
+    $data = json_decode($request->data, true);
 
-            }else{
+    $validationErrors = $this->validateContact($data);
 
-                $contact = Contact::findOrFail($id);
-
-            }
-        
-        }catch(ModelNotFoundException $e){
-
-            return null;
-
-        }
-
-        $contact->full_name = $this->getFullName($contact->name, $contact->lastname);
-        $contact->photo = $contact->photo ?? 'contact.jpg';
-
-        return $contact;
-        
+    if (count($validationErrors)) {
+      return response()->json([
+        'type' => 'error',
+        'message' => 'The data is invalid',
+        'errors' => json_encode($validationErrors)
+      ]);
     }
 
-    public function getFullName($name, $lastname){
+    if ($this->updateMainInfo($id, $data)) {
+      $image_data = $request->file('image');
 
-        return $lastname !== null ? $name.' '.$lastname : $name;
+      if ($data['removeImage']) {
+        $this->updatePhoto($id, null);
+      } else if (isset($image_data)) {
+        $photo = $this->uploadPhoto($id, $image_data);
+        $this->updatePhoto($id, $photo);
+      }
 
+      $updateAliases = $this->handleAliases($id, $data);
+      $updateNumbers = $this->handleNumbers($id, $data);
+      $updateEmails = $this->handleEmails($id, $data);
+      $updateSocialNetworks = $this->handleSocialNetworks($id, $data);
+
+      return response()->json([
+        'type' => 'success',
+        'message' => 'The contact was updated succesfully',
+        'contact' => $this->get($id)
+      ]);
+    } else {
+      return response()->json([
+        'type' => 'error',
+        'message' => 'There was an error updating the contact',
+        'contact' => $this->get($id)
+      ]);
+    }
+  }
+
+  private function validateContact($data) {
+    $rules = [
+      'name' => 'required|max:50',
+      'lastname' => 'max:50',
+      'birthday' => 'nullable|date_format:Y-m-d|before_or_equal:today',
+      'address' => 'max:50',
+      'notes' => 'max:1000',
+      'met' => 'nullable|date_format:Y|after_or_equal:1000',
+      'aliases' => 'array',
+      'aliases.*.alias' => 'max:50',
+      'emails' => 'array',
+      'emails.*.email' => 'max:80',
+      'numbers' => 'array',
+      'numbers.*.number' => 'max:50',
+      'socialNetworks' => 'array',
+      'socialNetworks.*.username' => 'max:80',
+    ];
+
+    $validator = Validator::make($data, $rules);
+
+    return $validator->errors()->all();
+  }
+
+  private function updateMainInfo($id, $data) {
+    return Contact::where('id', $id)
+                  ->where('active', 1)
+                  ->update([
+                      'name' => $data['name'],
+                      'lastname' => $data['lastname'],
+                      'birthday' => $data['birthday'],
+                      'address' => $data['address'],
+                      'notes' => $data['notes'],
+                      'met' => $data['met']
+                  ]);
+  }
+
+  private function updatePhoto($id, $photo) {
+    Contact::find($id)->update(['photo' => $photo]);
+  }
+
+  private function uploadPhoto($id, $image_data) {
+    $image = Image::make($image_data);
+    $name = ($id + 1000000).'_'.sha1(date('YmdHis')).'.jpg';
+    $destination = public_path().'/img/contacts/'.$name;
+
+    $image->resize(1600, 1600, function ($constraint) {
+        $constraint->aspectRatio();
+        $constraint->upsize();
+    });
+
+    $orientation = $image->exif('Orientation');
+
+    switch($orientation) {
+      case 3:
+        $image->rotate(180);
+        break;
+      case 6:
+        $image->rotate(-90);
+        break;
+      case 8:
+        $image->rotate(90);
+        break;
+    }
+  
+    $image->save($destination);
+
+    return $name;
+  }
+
+  private function handleAliases($id, $data) {
+    $aliases = $data['aliases'];
+
+    /* Delete aliases that were deleted by the user */
+    $aliasesToKeep = $this->getIds($aliases);
+    Alias::where('id_contact', $id)->whereNotIn('id', $aliasesToKeep)->delete();
+
+    /* Update aliases or create new ones */
+    foreach($aliases as $alias) {
+      if ($alias['alias']) {
+        Alias::updateOrCreate(
+          ['id_contact' => $id, 'id' => $alias['id']],
+          ['alias' => $alias['alias']]
+        );
+      }
+    }
+  }
+
+  private function handleNumbers($id, $data) {
+    $numbers = $data['numbers'];
+
+    /* Delete phone numbers that were deleted by the user */
+    $numbersToKeep = $this->getIds($numbers);
+    Number::where('id_contact', $id)->whereNotIn('id', $numbersToKeep)->delete();
+
+    /* Update phone numbers or create new ones */
+    foreach($numbers as $number) {
+      if ($number['number'] && $number['type']) {
+        $customLabel = $this->getLabel($number);
+
+        Number::updateOrCreate(
+          ['id_contact' => $id, 'id' => $number['id']],
+          ['number' => $number['number'], 'id_type' => $number['type'], 'custom_label' => $customLabel]
+        );
+      }
+    }
+  }
+
+  private function handleEmails($id, $data) {
+    $emails = $data['emails'];
+
+    /* Delete emails that were deleted by the user */
+    $emailsToKeep = $this->getIds($emails);
+    Email::where('id_contact', $id)->whereNotIn('id', $emailsToKeep)->delete();
+
+    /* Update emails or create new ones */
+    foreach($emails as $email) {
+      if ($email['email'] && $email['type']) {
+        $customLabel = $this->getLabel($email);
+
+        Email::updateOrCreate(
+          ['id_contact' => $id, 'id' => $email['id']],
+          ['email' => $email['email'], 'id_type' => $email['type'], 'custom_label' => $customLabel]
+        );
+      }
+    }
+  }
+
+  private function handleSocialNetworks($id, $data) {
+    $socialNetworks = $data['social'];
+
+    /* Delete social networks that were deleted by the user */
+    $socialNetworksToKeep = $this->getIds($socialNetworks);
+    Social::where('id_contact', $id)->whereNotIn('id', $socialNetworksToKeep)->delete();
+
+    /* Update social networks or create new ones */
+    foreach($socialNetworks as $social) {
+      
+      if ($social['username'] && $social['id_network']) {
+        $customLabel = $this->getLabel($social);
+
+        Social::updateOrCreate(
+          ['id_contact' => $id, 'id' => $social['id']],
+          ['username' => $social['username'], 'id_network' => $social['id_network'], 'custom_label' => $customLabel]
+        );
+      }
+    }
+  }
+
+  private function getIds($fields) {
+    return array_map(function($field) {
+      return $field['id'];
+    }, $fields);
+  }
+
+  private function getLabel($field) {
+    $isCustomType = isset($field['type']) && $field['type'] === '999';
+    $isCustomNetwork = isset($field['id_network']) && $field['id_network'] === '999';
+
+    if ($isCustomType || $isCustomNetwork) {
+      return isset($field['custom_label']) ? $field['custom_label'] : 'Custom';
+    } else {
+      return null;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+  public function add(Request $request) {
+    $this->validateContact($request);
+
+    $validatedData = $request->post();
+
+    $photo_path = $request->file('photo') ? $request->file('photo')->path() : NULL;
+
+    if ($id_contact = $this->create($validatedData)) {
+      if (!empty($photo_path) && !isset($validatedData['no-photo'])) {
+        $photo_name = $this->uploadPhoto($photo_path, $id_contact);
+
+        Contact::find($id_contact)->update(['photo' => $photo_name]);
+      }
+
+      $this->handleAliases($id_contact, $validatedData);
+
+      $this->handleEmails($id_contact, $validatedData);
+
+      $this->handleNumbers($id_contact, $validatedData);
+
+      $this->handleSocialNetworks($id_contact, $validatedData);
+
+      //was added to your contacts
+    } else {
+      //There was a problem adding '.$full_name
     }
 
-    public function getSocialNetworks(){
+    return Redirect::to('contacts/add')->with($message);
+  }
 
-        $networks = Network::where('id', '!=', '999')->orderByRaw('CASE WHEN name regexp "^[a-zA-Z]" THEN 1 ELSE 2 END ASC, name ASC')->get();
-        $custom = ['id' => 999, 'name' => 'custom'];
-
-        return compact('networks', 'custom');
-
-    }
-
-    public function addForm(){
-        
-        return view('contacts/add', $this->getSocialNetworks());
-
-    }
-
-    public function add(Request $request){
-
-        $this->validateContact($request);
-
-        $validatedData = $request->post();
-
-        $photo_path = $request->file('photo') ? $request->file('photo')->path() : NULL;
-
-        $full_name = $this->getFullName($validatedData['name'], $validatedData['lastname']);
-
-        if($id_contact = $this->create($validatedData)){
-
-            if(!empty($photo_path) && !isset($validatedData['no-photo'])){
-
-                $photo_name = $this->uploadPhoto($photo_path, $id_contact);
-
-                Contact::find($id_contact)->update(['photo' => $photo_name]);
-                
-            }
-
-            $this->handleAliases($id_contact, $validatedData);
-
-            $this->handleEmails($id_contact, $validatedData);
-
-            $this->handleNumbers($id_contact, $validatedData);
-
-            $this->handleSocialNetworks($id_contact, $validatedData);
-
-            $message = ['message_type' => 'success', 'message' => '<a href="'.url('contacts/'.$id_contact).'" class="msg-link">'.$full_name.'</a> was added to your contacts.'];
-
-        }else{
-
-            $message = ['message_type' => 'error', 'message' => 'There was a problem adding '.$full_name];
-
-        }
-
-        return Redirect::to('contacts/add')->with($message);
-
-    }
-
-    public function validateContact($data){
-
-        $data->validate([
-                    'name' => 'required|max:50',
-                    'lastname' => 'max:50',
-                    'photo' => 'mimes:jpeg,png,gif,bmp|max:10000',
-                    'birthday' => 'nullable|date_format:Y-m-d|before_or_equal:today',
-                    'address' => 'max:50',
-                    'notes' => 'max:1000',
-                    'met' => 'nullable|date_format:Y|after_or_equal:1000',
-                    'alias' => 'array',
-                    'alias.*' => 'max:50',
-                    'email' => 'array',
-                    'email.*' => 'max:80',
-                    'number' => 'array',
-                    'number.*' => 'max:50',
-                    'username' => 'array',
-                    'username.*' => 'max:80',
+  public function create($data){
+    $contact = Contact::create([
+                  'name' => $data['name'],
+                  'lastname' => $data['lastname'],
+                  'birthday' => $data['birthday'],
+                  'address' => $data['address'],
+                  'notes' => $data['notes'],
+                  'met' => $data['met']
                 ]);
+    return $contact->id;
+  }
 
+  public function delete($id_contact) {
+    if (Contact::where('id', $id_contact)->where('active', 1)->update(['active' => 0])) {
+      $message = ['message_type' => 'success', 'message' => 'The contact was deleted'];
+    } else {
+      $message = ['message_type' => 'error', 'message' => 'The contact couldn\'t be deleted'];
     }
 
-    public function create($data){
-
-        $contact = Contact::create([
-                        'name' => $data['name'],
-                        'lastname' => $data['lastname'],
-                        'birthday' => $data['birthday'],
-                        'address' => $data['address'],
-                        'notes' => $data['notes'],
-                        'met' => $data['met']
-                    ]);
-
-        return $contact->id;
-
-    }
-
-    public function uploadPhoto($photo, $id_contact){
-
-        list($width, $height, $format) = getimagesize($photo);
-
-        $photo_name = ($id_contact + 1000).'_'.sha1(date('YmdHis')).'.jpg';
-
-        switch($format){
-            case IMAGETYPE_JPEG:
-                $exif = exif_read_data($photo);
-                $original = imagecreatefromjpeg($photo);
-                break;
-            case IMAGETYPE_PNG:
-                $original = imagecreatefrompng($photo);
-                break;
-        }
-
-        if($width > 1600 || $height > 1600){
-
-            $original_proportion = $width / $height;
-
-            if($width > $height){
-
-                $new_width = 1600;
-                $new_height = (int) (1600 / $original_proportion);
-
-            }else{
-
-                $new_height = 1600;
-                $new_width = (int) (1600 * $original_proportion);
-
-            }
-
-            $resized_photo = imagecreatetruecolor($new_width, $new_height);
-            imagecopyresampled($resized_photo, $original, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-
-            if(!empty($exif['Orientation'])) {
-
-                switch($exif['Orientation']) {
-                    case 3:
-                        $resized_photo = imagerotate($resized_photo, 180, 0);
-                        break;
-                    case 6:
-                        $resized_photo = imagerotate($resized_photo, -90, 0);
-                        break;
-                    case 8:
-                        $resized_photo = imagerotate($resized_photo, 90, 0);
-                        break;
-                }
-
-            }
-
-            imagejpeg($resized_photo, public_path().'/img/contacts/'.$photo_name, 100);
-            imagedestroy($resized_photo);
-            
-        }else{
-
-            move_uploaded_file($photo, public_path().'/img/contacts/'.$photo_name);
-
-        }
-
-        imagedestroy($original);
-        
-        return $photo_name;
-
-    }
-
-    public function editForm($id){
-
-        $contact = $this->getContact($id);
-
-        $networks = $this->getSocialNetworks();
-
-        return view('contacts/edit', array_merge(compact('contact'), $networks));
-
-    }
-
-    public function edit($id_contact, Request $request){
-
-        $this->validateContact($request);
-
-        $validatedData = $request->post();
-
-        $photo_path = $request->file('photo') ? $request->file('photo')->path() : NULL;
-
-        $full_name = $this->getFullName($validatedData['name'], $validatedData['lastname']);
-
-        if($this->update($id_contact, $validatedData)){
-
-            if(!empty($photo_path) && !isset($validatedData['no-photo'])){
-
-                $photo_name = $this->uploadPhoto($photo_path, $id_contact);
-
-                Contact::find($id_contact)->update(['photo' => $photo_name]);
-
-            }elseif(isset($validatedData['no-photo'])){
-
-                $this->deletePhoto($id_contact);
-
-            }
-
-            $this->handleAliases($id_contact, $validatedData);
-
-            $this->handleEmails($id_contact, $validatedData);
-
-            $this->handleNumbers($id_contact, $validatedData);
-
-            $this->handleSocialNetworks($id_contact, $validatedData);
-
-            $message = ['message_type' => 'success', 'message' => '<a href="'.url('contacts/'.$id_contact).'" class="msg-link">'.$full_name.'</a> was updated.'];
-
-        }else{
-
-            $message = ['message_type' => 'error', 'message' => 'There was a problem updating '.$full_name];
-
-        }
-
-        return Redirect::to('contacts/'.$id_contact.'/edit')->with($message);
-
-    }
-
-    public function update($id_contact, $data){
-
-        return Contact::where('id', $id_contact)
-                            ->where('active', 1)
-                            ->update([
-                                'name' => $data['name'],
-                                'lastname' => $data['lastname'],
-                                'birthday' => $data['birthday'],
-                                'address' => $data['address'],
-                                'notes' => $data['notes'],
-                                'met' => $data['met']
-                            ]);
-
-    }
-
-    public function deletePhoto($id_contact){
-
-        return Contact::where('id', $id_contact)
-                            ->update(['photo' => NULL]);
-
-    }
-
-    public function getCustomLabel($element_type, $custom_label, $value){
-
-        if($element_type == $value && empty($custom_label)){
-            return 'Other';
-        }elseif($element_type != $value){
-            return NULL;
-        }else{
-            return $custom_label;
-        }
-
-    }
-
-    public function handleAliases($id_contact, $data){
-
-        $aliases = $data['alias'];
-        $id_aliases = !empty($data['id_alias']) ? $data['id_alias'] : null;
-
-        for($i = 0; $i < count($aliases); $i++){
-
-            if(!empty($aliases[$i]) && !empty($id_aliases[$i])){
-
-                Alias::where('id', $id_aliases[$i])->where('id_contact', $id_contact)->update(['alias' => $aliases[$i]]);
-
-            }elseif(!empty($aliases[$i]) && empty($id_aliases[$i])){
-
-                Alias::insert(['id_contact' => $id_contact, 'alias' => $aliases[$i]]);
-
-            }else{
-
-                Alias::where('id', $id_aliases[$i])->where('id_contact', $id_contact)->delete();
-
-            }
-
-        }
-
-    }
-
-    public function handleEmails($id_contact, $data){
-
-        $emails = $data['email'];
-        $id_emails = !empty($data['id_email']) ? $data['id_email'] : null;
-        $type = $data['email_type'];
-        $custom_labels = $data['email_custom'];
-
-        for($i = 0; $i < count($emails); $i++){
-
-            $custom_label = $this->getCustomLabel($type[$i], $custom_labels[$i], 5);
-
-            if(!empty($emails[$i]) && !empty($id_emails[$i])){
-
-                Email::where('id', $id_emails[$i])->where('id_contact', $id_contact)->update(['email' => $emails[$i], 'id_type' => $type[$i], 'custom_label' => $custom_label]);
-
-            }elseif(!empty($emails[$i]) && empty($id_emails[$i])){
-
-                Email::insert(['id_contact' => $id_contact, 'email' => $emails[$i], 'id_type' => $type[$i], 'custom_label' => $custom_label]);
-
-            }else{
-
-                Email::where('id', $id_emails[$i])->where('id_contact', $id_contact)->delete();
-
-            }
-
-        }
-
-    }
-
-    public function handleNumbers($id_contact, $data){
-
-        $numbers = $data['number'];
-        $id_numbers = !empty($data['id_number']) ? $data['id_number'] : null;
-        $type = $data['number_type'];
-        $custom_labels = $data['number_custom'];
-
-        for($i = 0; $i < count($numbers); $i++){
-
-            $custom_label = $this->getCustomLabel($type[$i], $custom_labels[$i], 5);
-            $number = str_replace(' ', '', $numbers[$i]);
-
-            if(!empty($numbers[$i]) && !empty($id_numbers[$i])){
-
-                Number::where('id', $id_numbers[$i])->where('id_contact', $id_contact)->update(['number' => $number, 'id_type' => $type[$i], 'custom_label' => $custom_label]);
-
-            }elseif(!empty($numbers[$i]) && empty($id_numbers[$i])){
-
-                Number::insert(['id_contact' => $id_contact, 'number' => $number, 'id_type' => $type[$i], 'custom_label' => $custom_label]);
-
-            }else{
-
-                Number::where('id', $id_numbers[$i])->where('id_contact', $id_contact)->delete();
-
-            }
-
-
-        }
-
-    }
-
-    public function handleSocialNetworks($id_contact, $data){
-
-        $usernames = $data['username'];
-        $id_social = !empty($data['id_social']) ? $data['id_social'] : null;
-        $network = $data['social_network'];
-        $custom_labels = $data['social_custom'];
-
-        for($i = 0; $i < count($usernames); $i++){
-
-            $custom_label = $this->getCustomLabel($network[$i], $custom_labels[$i], 100);
-
-            if(!empty($usernames[$i]) && !empty($id_social[$i])){
-
-                Social::where('id', $id_social[$i])->where('id_contact', $id_contact)->update(['username' => $usernames[$i], 'id_network' => $network[$i], 'custom_label' => $custom_label]);
-
-            }elseif(!empty($usernames[$i]) && empty($id_social[$i])){
-
-                Social::insert(['id_contact' => $id_contact, 'username' => $usernames[$i], 'id_network' => $network[$i], 'custom_label' => $custom_label]);
-
-            }else{
-
-                Social::where('id', $id_social[$i])->where('id_contact', $id_contact)->delete();
-
-            }
-
-        }
-
-    }
-
-    public function delete($id_contact){
-
-        if(Contact::where('id', $id_contact)->where('active', 1)->update(['active' => 0])){
-            $message = ['message_type' => 'success', 'message' => 'The contact was deleted'];
-        }else{
-            $message = ['message_type' => 'error', 'message' => 'The contact couldn\'t be deleted'];
-        }
-
-        return Redirect::to('contacts')->with($message);
-
-    }
-
-    public function search($text){
-
-        $text = preg_replace('/\s+/', '', $text);
-
-        return DB::select('SELECT * FROM 
-                            (SELECT CONCAT_WS(" ", name, lastname) AS fullname, name, lastname, address, notes, contacts.id AS id, email, number, username FROM contacts
-                            LEFT JOIN emails ON contacts.id = emails.id_contact
-                            LEFT JOIN numbers ON contacts.id = numbers.id_contact
-                            LEFT JOIN social ON contacts.id = social.id_contact
-                            WHERE active = 1
-                            GROUP BY id) AS fields 
-                            WHERE (REPLACE(fullname, " ", "") LIKE ?
-                            OR REPLACE(name, " ", "") LIKE ?
-                            OR REPLACE(lastname, " ", "") LIKE ?
-                            OR REPLACE(address, " ", "") LIKE ?
-                            OR REPLACE(notes, " ", "") LIKE ?
-                            OR REPLACE(email, " ", "") LIKE ?
-                            OR REPLACE(number, " ", "") LIKE ?
-                            OR REPLACE(username, " ", "") LIKE ?)
-                            ORDER BY name ASC', ['%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%']);
-
-    }
-
-    public function list(){
-        return Contact::where('active', 1)
-                          ->select(['id', 'name', 'lastname'])
-                          ->orderBy('name', 'ASC')
-                          ->get();
-    }
-
-    public function all(){
-
-      return Contact::where('active', 1)
-                          ->select(['contacts.id AS id_contact', 'contacts.*'])
-                          ->orderBy('name', 'ASC')
-                          ->get();
-
-    }
-
+    return Redirect::to('contacts')->with($message);
+  }
+
+  public function all(){
+    return Contact::where('active', 1)
+                  ->select(['contacts.id AS id_contact', 'contacts.*'])
+                  ->orderBy('name', 'ASC')
+                  ->get();
+  }
 }
