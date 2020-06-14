@@ -35,7 +35,9 @@
         "eslint-import-resolver-custom-alias": {
           "alias": {
             "@components": "resources/js/components",
+            "@hoc": "resources/js/hoc",
             "@pages": "resources/js/pages",
+            "@store": "resources/js/store",
             "@theme": "resources/js/theme",
             "@utils": "resources/js/utils"
           },

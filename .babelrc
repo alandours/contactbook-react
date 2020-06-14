@@ -1,0 +1,13 @@
+{
+  "plugins": [
+    [
+      "babel-plugin-styled-components",
+      {
+        "minify": false,
+        "pure": true,
+        "TranspileTemplateLiterals": false,
+        "fileName": false
+      }
+    ]
+  ]
+}
