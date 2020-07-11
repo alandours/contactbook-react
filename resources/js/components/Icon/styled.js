@@ -4,8 +4,11 @@ import { getColor } from '@theme/mixins';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Icon = styled(FontAwesomeIcon)`
-  color: ${getColor('grey', 'darker')};
-  margin-right: 0.5rem;
+  color: ${getColor('grey', 'darkest')};
+
+  ${({ inline }) => inline && `
+    margin-right: 0.5rem;
+  `}
 
   ${({ icon }) => icon === 'home' && `
     margin-left: -2px;

@@ -9,7 +9,7 @@ const Navigation = styled.div`
 `;
 
 const HeaderLink = styled(Link)`
-  color: ${getColor('common', 'white')};
+  color: ${getColor('common', 'black')};
   display: flex;
   font-size: ${size.max};
   & + & {

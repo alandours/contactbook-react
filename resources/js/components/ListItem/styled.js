@@ -25,16 +25,9 @@ const ListItem = styled.li`
     padding: 0.45rem 0.75rem;
   `};
 
-  ${({ type }) => type === 'count' && css`
-    border-top: 1px solid ${getColor('grey', 'normal')};
-    color: ${getColor('grey', 'darker')};
-    padding: 1rem !important;
-    text-align: center;
-  `};
-
   ${({ sticky }) => sticky && css`
     position: sticky;
-    top: 32px;
+    top: 30px;
   `};
 `;
 

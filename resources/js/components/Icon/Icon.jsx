@@ -1,12 +1,17 @@
 import React from 'react';
-import { string } from 'prop-types';
+import { string, bool } from 'prop-types';
 
 import styled from './styled';
 
-const Icon = ({ icon }) => <styled.Icon icon={icon} />;
+const Icon = ({ icon, inline }) => <styled.Icon icon={icon} inline={inline ? 1 : 0} />;
 
 Icon.propTypes = {
-  icon: string.isRequired
+  icon: string.isRequired,
+  inline: bool
+};
+
+Icon.defaultProps = {
+  inline: false
 };
 
 export default Icon;

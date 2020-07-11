@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { bool } from 'prop-types';
+import { connect } from 'react-redux';
+import { bool, arrayOf, any, func } from 'prop-types';
+import { getContactList } from '@store/actions';
 import { isArrayNotEmpty, getFirstLetter, formatFullName } from '@utils';
 
-import InputIcon from '@components/InputIcon';
+import SearchInput from '@components/SearchInput';
 import ListItem from '@components/ListItem';
 import Loader from '@components/Loader';
 
@@ -31,37 +32,42 @@ const buildContactList = (contacts) => {
   return list;
 };
 
-const ContactList = ({ hasSearch }) => {
-  const [contacts, setContacts] = useState([]);
+const mapStateToProps = (state, ownProps) => ({
+  ...state,
+  ...ownProps
+});
+
+const mapDispatchToProps = {
+  getContactList
+};
+
+const ContactList = ({ hasSearch, contactList, getContactList }) => {
+  const [list, setList] = useState([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
 
-  const getContacts = async (value) => {
-    const url = value ? `/api/contacts/search/${search}` : '/api/contacts/list';
-    const response = await axios.get(url);
-    setLoading(false);
-    setContacts(response.data);
-  };
-
   useEffect(() => {
-    getContacts(search);
+    getContactList(search);
   }, [search]);
 
-  const contactList = isArrayNotEmpty(contacts) && buildContactList(contacts);
+  useEffect(() => {
+    if (isArrayNotEmpty(contactList)) {
+      setLoading(false);
+      setList(buildContactList(contactList));
+    }
+  }, [contactList]);
 
   return (
     <>
       { hasSearch && (
-        <InputIcon
-          icon="search"
-          placeholder="Search contacts"
+        <SearchInput
           handleTyping={(e) => setSearch(e.target.value)}
         />
       )}
       { loading ? <Loader /> : (
         <div>
-          { contactList }
-          <ListItem as="div" type="count">{`${contacts.length} contacts`}</ListItem>
+          { list }
+          <styled.Count>{`${contactList.length} contacts`}</styled.Count>
         </div>
       )}
     </>
@@ -69,11 +75,15 @@ const ContactList = ({ hasSearch }) => {
 };
 
 ContactList.propTypes = {
-  hasSearch: bool
+  hasSearch: bool,
+  contactList: arrayOf(any),
+  getContactList: func
 };
 
 ContactList.defaultProps = {
-  hasSearch: false
+  hasSearch: false,
+  contactList: [],
+  getContactList: () => {}
 };
 
-export default ContactList;
+export default connect(mapStateToProps, mapDispatchToProps)(ContactList);

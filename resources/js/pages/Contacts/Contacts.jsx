@@ -1,31 +1,33 @@
 import React from 'react';
-import { string } from 'prop-types';
+import { Switch, Route } from 'react-router-dom';
 
 import Container from '@components/Container';
 import ContactList from '@components/ContactList';
-import ContactView from '@components/ContactView';
+import Contact from './components/Contact';
+import AddContact from './components/AddContact';
+import EditContact from './components/EditContact';
 
 import styled from './styled';
 
-const Contacts = ({ id }) => {
-  return (
-    <styled.Contacts>
-      <Container type="sidebar">
-        <ContactList hasSearch />
-      </Container>
-      <Container type="main">
-        <ContactView id={id} />
-      </Container>
-    </styled.Contacts>
-  );
-};
-
-Contacts.propTypes = {
-  id: string
-};
-
-Contacts.defaultProps = {
-  id: '1'
-};
+const Contacts = () => (
+  <styled.Contacts>
+    <Container type="sidebar">
+      <ContactList hasSearch />
+    </Container>
+    <Container type="main">
+      <Switch>
+        <Route path="/contacts/new">
+          <AddContact />
+        </Route>
+        <Route path="/contacts/:id/edit">
+          <EditContact />
+        </Route>
+        <Route path="/contacts/:id?">
+          <Contact />
+        </Route>
+      </Switch>
+    </Container>
+  </styled.Contacts>
+);
 
 export default Contacts;
