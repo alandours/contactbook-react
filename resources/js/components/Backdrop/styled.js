@@ -1,7 +1,4 @@
 import styled from 'styled-components';
-import { responsive } from '@theme/mixins';
-import { primary, secondary, grey, common } from '@theme/palette';
-import { weight, size } from '@theme/typography';
 import zindex from '@theme/zindex';
 
 const Backdrop = styled.div`
@@ -11,7 +8,7 @@ const Backdrop = styled.div`
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: ${zindex.fixed}
+  z-index: ${zindex.fixed};
 `;
 
 export default { Backdrop };

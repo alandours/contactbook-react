@@ -3,7 +3,7 @@ import { element, func } from 'prop-types';
 
 import styled from './styled';
 
-const Backdrop = ({ children, handleClick }) => {
+const Backdrop = ({ children, handleClick, handleKeyDown }) => {
   return (
     <styled.Backdrop
       onClick={handleClick}
@@ -16,7 +16,8 @@ const Backdrop = ({ children, handleClick }) => {
 
 Backdrop.propTypes = {
   children: element.isRequired,
-  handleClick: func.isRequired
+  handleClick: func.isRequired,
+  handleKeyDown: func.isRequired
 };
 
 export default Backdrop;
