@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 import breakpoints from './breakpoints';
 import palette from './palette';
-import { size } from './typography';
+import { size, fontFamily } from './typography';
 
 const getMin = key => `@media screen and (min-width: ${breakpoints[key]}px)`;
 
@@ -134,13 +134,20 @@ export const scrollbar = css`
 `;
 
 export const formStyles = css`
-  border: 1px solid ${getColor('grey', 'normal')};
+  border: 0;
+  border-bottom: 1px solid ${getColor('grey', 'dark')};
+  ${fontFamily}
   font-size: ${size.text};
   outline: none;
-  padding: 2px;
+  padding: 0.25rem 0;
   width: 100%;
 
+  ${({ hasIcon }) => hasIcon && `
+    padding-left: 1.5rem;
+  `}
+
   &:hover, &:focus {
-    border: 1px solid ${getColor('grey', 'dark')};
+    border: 0;
+    border-bottom: 1px solid ${getColor('primary', 'main')};
   }
 `;
