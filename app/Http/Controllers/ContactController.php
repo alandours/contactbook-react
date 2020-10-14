@@ -79,33 +79,135 @@ class ContactController extends Controller
     return $lastname !== null ? $name.' '.$lastname : $name;
   }
 
-  public function update($id, Request $request) {
-    $data = json_decode($request->data, true);
+  private function validateContact($request) {
+    $rules = [
+      'name' => 'required|max:50',
+      'lastname' => 'nullable|max:50',
+      'birthday' => 'nullable|date_format:Y-m-d|before_or_equal:today',
+      'address' => 'nullable|max:50',
+      'notes' => 'nullable|max:1000',
+      'met' => 'nullable|date_format:Y|after_or_equal:1000',
+      'aliases' => 'nullable|array',
+      'aliases.*.alias' => 'required|max:50',
+      'emails' => 'nullable|array',
+      'emails.*.email' => 'required|max:80',
+      'numbers' => 'nullable|array',
+      'numbers.*.number' => 'required|max:50',
+      'social' => 'nullable|array',
+      'social.*.username' => 'required|max:80',
+    ];
 
-    $validationErrors = $this->validateContact($data);
+    $validator = Validator::make($request->all(), $rules);
+
+    return $validator->errors()->all();
+  }
+
+  public function add(Request $request) {
+    $request->merge([
+      'aliases' => json_decode($request->aliases, true),
+      'numbers' => json_decode($request->numbers, true),
+      'emails' => json_decode($request->emails, true),
+      'social' => json_decode($request->social, true)
+    ]);
+
+    $validationErrors = $this->validateContact($request);
 
     if (count($validationErrors)) {
       return response()->json([
         'type' => 'error',
         'message' => 'The data is invalid',
-        'errors' => json_encode($validationErrors)
+        'errors' => $validationErrors
       ]);
     }
 
-    if ($this->updateMainInfo($id, $data)) {
+    if ($id = $this->create($request)) {
       $image_data = $request->file('image');
 
-      if ($data['removeImage']) {
+      if ($request->removeImage === 'true') {
         $this->updatePhoto($id, null);
-      } else if (isset($image_data)) {
+      } else if ($image_data) {
         $photo = $this->uploadPhoto($id, $image_data);
         $this->updatePhoto($id, $photo);
       }
 
-      $updateAliases = $this->handleAliases($id, $data);
-      $updateNumbers = $this->handleNumbers($id, $data);
-      $updateEmails = $this->handleEmails($id, $data);
-      $updateSocialNetworks = $this->handleSocialNetworks($id, $data);
+      if ($request->aliases)
+        $this->handleAliases($id, $request->aliases);
+
+      if ($request->numbers)
+        $this->handleNumbers($id, $request->numbers);
+
+      if ($request->emails)
+        $this->handleEmails($id, $request->emails);
+
+      if ($request->social)
+        $this->handleSocialNetworks($id, $request->social);
+
+      return response()->json([
+        'type' => 'success',
+        'message' => 'The contact was added succesfully',
+        'contact' => $this->get($id)
+      ]);
+    } else {
+      return response()->json([
+        'type' => 'error',
+        'message' => 'There was an error adding the contact',
+        'contact' => $this->get($id)
+      ]);
+    }
+  }
+
+  private function create($data){
+    $contact = Contact::create([
+                'name' => $data['name'],
+                'lastname' => $data['lastname'],
+                'birthday' => $data['birthday'],
+                'address' => $data['address'],
+                'notes' => $data['notes'],
+                'met' => $data['met']
+              ]);
+
+    return $contact->id;
+  }
+
+  public function update($id, Request $request) {
+    $request->merge([
+      'aliases' => json_decode($request->aliases, true),
+      'numbers' => json_decode($request->numbers, true),
+      'emails' => json_decode($request->emails, true),
+      'social' => json_decode($request->social, true)
+    ]);
+
+    $validationErrors = $this->validateContact($request);
+
+    if (count($validationErrors)) {
+      return response()->json([
+        'type' => 'error',
+        'message' => 'The data is invalid',
+        'errors' => $validationErrors
+      ]);
+    }
+
+    if ($this->updateMainInfo($id, $request)) {
+      $image_data = $request->file('image');
+
+      if ($request->removeImage === 'true') {
+        $this->updatePhoto($id, null);
+      } else if ($image_data) {
+        $photo = $this->uploadPhoto($id, $image_data);
+        $this->updatePhoto($id, $photo);
+      }
+
+      if ($request->aliases)
+        $this->handleAliases($id, $request->aliases);
+
+      if ($request->numbers)
+        $this->handleNumbers($id, $request->numbers);
+
+      if ($request->emails)
+        $this->handleEmails($id, $request->emails);
+
+      if ($request->social)
+        $this->handleSocialNetworks($id, $request->social);
 
       return response()->json([
         'type' => 'success',
@@ -121,39 +223,16 @@ class ContactController extends Controller
     }
   }
 
-  private function validateContact($data) {
-    $rules = [
-      'name' => 'required|max:50',
-      'lastname' => 'max:50',
-      'birthday' => 'nullable|date_format:Y-m-d|before_or_equal:today',
-      'address' => 'max:50',
-      'notes' => 'max:1000',
-      'met' => 'nullable|date_format:Y|after_or_equal:1000',
-      'aliases' => 'array',
-      'aliases.*.alias' => 'max:50',
-      'emails' => 'array',
-      'emails.*.email' => 'max:80',
-      'numbers' => 'array',
-      'numbers.*.number' => 'max:50',
-      'socialNetworks' => 'array',
-      'socialNetworks.*.username' => 'max:80',
-    ];
-
-    $validator = Validator::make($data, $rules);
-
-    return $validator->errors()->all();
-  }
-
-  private function updateMainInfo($id, $data) {
+  private function updateMainInfo($id, $request) {
     return Contact::where('id', $id)
                   ->where('active', 1)
                   ->update([
-                      'name' => $data['name'],
-                      'lastname' => $data['lastname'],
-                      'birthday' => $data['birthday'],
-                      'address' => $data['address'],
-                      'notes' => $data['notes'],
-                      'met' => $data['met']
+                      'name' => $request->name,
+                      'lastname' => $request->lastname,
+                      'birthday' => $request->birthday,
+                      'address' => $request->address,
+                      'notes' => $request->notes,
+                      'met' => $request->met
                   ]);
   }
 
@@ -190,9 +269,7 @@ class ContactController extends Controller
     return $name;
   }
 
-  private function handleAliases($id, $data) {
-    $aliases = $data['aliases'];
-
+  private function handleAliases($id, $aliases) {
     /* Delete aliases that were deleted by the user */
     $aliasesToKeep = $this->getIds($aliases);
     Alias::where('id_contact', $id)->whereNotIn('id', $aliasesToKeep)->delete();
@@ -208,9 +285,7 @@ class ContactController extends Controller
     }
   }
 
-  private function handleNumbers($id, $data) {
-    $numbers = $data['numbers'];
-
+  private function handleNumbers($id, $numbers) {
     /* Delete phone numbers that were deleted by the user */
     $numbersToKeep = $this->getIds($numbers);
     Number::where('id_contact', $id)->whereNotIn('id', $numbersToKeep)->delete();
@@ -228,9 +303,7 @@ class ContactController extends Controller
     }
   }
 
-  private function handleEmails($id, $data) {
-    $emails = $data['emails'];
-
+  private function handleEmails($id, $emails) {
     /* Delete emails that were deleted by the user */
     $emailsToKeep = $this->getIds($emails);
     Email::where('id_contact', $id)->whereNotIn('id', $emailsToKeep)->delete();
@@ -248,9 +321,7 @@ class ContactController extends Controller
     }
   }
 
-  private function handleSocialNetworks($id, $data) {
-    $socialNetworks = $data['social'];
-
+  private function handleSocialNetworks($id, $socialNetworks) {
     /* Delete social networks that were deleted by the user */
     $socialNetworksToKeep = $this->getIds($socialNetworks);
     Social::where('id_contact', $id)->whereNotIn('id', $socialNetworksToKeep)->delete();
