@@ -51,3 +51,12 @@ export const updateContact = (id, data) => async (dispatch) => {
   dispatch(setContact(contact));
   dispatch(setContactMessage(message));
 };
+
+export const addContact = (data) => async (dispatch) => {
+  dispatch(setContactLoading());
+  const url = '/api/contacts/add';
+  const response = await axios.post(url, data);
+  const { contact, message } = response.data || {};
+  dispatch(setContact(contact));
+  dispatch(setContactMessage(message));
+};

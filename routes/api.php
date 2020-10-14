@@ -23,6 +23,8 @@ Route::get('contacts/list', 'ContactController@list');
 
 Route::get('contacts/search/{text}', 'ContactController@search');
 
+Route::post('contacts/add', 'ContactController@add');
+
 Route::post('contacts/{id}/update', 'ContactController@update');
 
 Route::get('contacts/{id}', 'ContactController@get');

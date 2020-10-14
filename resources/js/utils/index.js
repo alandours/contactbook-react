@@ -51,3 +51,10 @@ export const formatDate = (birthdayDate) => {
 
   return `${birthday.getUTCDate()} de ${birthday.toLocaleDateString('es-AR', options)}`;
 };
+
+export const appendFormattedData = (formData, data) => {
+  Object.keys(data).forEach((key) => {
+    const value = typeof data[key] === 'string' ? data[key] : JSON.stringify(data[key]);
+    formData.append(`${key}`, value);
+  });
+};

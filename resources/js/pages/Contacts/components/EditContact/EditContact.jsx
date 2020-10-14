@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useForm, FormProvider } from 'react-hook-form';
-import { updateContact, setContactMessage } from '@store/actions';
 import { objectOf, any, func } from 'prop-types';
+import { updateContact, setContactMessage } from '@store/actions';
+import { appendFormattedData } from '@utils';
 
 import FixedInfo from '@components/FixedInfo';
 import Button from '@components/Button';
@@ -42,7 +43,7 @@ const EditContact = ({ contact, appData, updateContact, setContactMessage }) => 
 
   const onSubmit = (data) => {
     const formData = new FormData();
-    formData.append('data', JSON.stringify(data));
+    appendFormattedData(formData, data);
     formData.append('image', data.image[0]);
 
     updateContact(contactId, formData);
