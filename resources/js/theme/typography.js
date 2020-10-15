@@ -12,6 +12,7 @@ export const weight = {
 };
 
 export const size = {
+  small: '0.75rem',
   text: '0.9rem',
   info: '0.95rem',
   normal: '1rem',

@@ -9,7 +9,7 @@ const palette = {
   },
   primary: {
     main: '#12c450',
-    light: '#19e952',
+    light: '#1Acc58',
     dark: '#199f48'
   },
   secondary: {
@@ -21,9 +21,9 @@ const palette = {
     lighter: '#f8f8f8',
     light: '#eee',
     normal: '#ddd',
-    dark: '#aaa',
-    darker: '#777',
-    darkest: '#333'
+    dark: '#c8c8c8',
+    darker: '#aaa',
+    darkest: '#777'
   }
 };
 
