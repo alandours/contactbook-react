@@ -21,12 +21,13 @@ const renderData = (data, urlStart) => (
     } = field || {};
 
     const {
+      id: typeId,
       name: typeName,
       url: networkUrl,
       usernameFirst
     } = type || network || {};
 
-    const label = (customLabel && typeName === 'custom' ? customLabel : typeName);
+    const label = (customLabel && typeId === 999 ? customLabel : typeName);
     const url = email || number || (usernameFirst ? `${username}${networkUrl}` : `${networkUrl}${username}`);
     const name = type ? url : `@${username}`;
     const fieldUrl = `${urlStart}${url}`;
