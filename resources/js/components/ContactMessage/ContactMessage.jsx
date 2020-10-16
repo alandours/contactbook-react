@@ -15,7 +15,6 @@ const ContactMessage = ({ contact, setContactMessage }) => {
   const { type, message: messageText } = message || {};
 
   useEffect(() => {
-    console.log(message);
     if (message) {
       setTimeout(() => {
         setContactMessage(null);

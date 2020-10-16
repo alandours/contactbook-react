@@ -14,14 +14,14 @@ class Contact extends Model
   }
 
   public function numbers(){
-    return $this->hasMany(Number::class, 'id_contact');
+    return $this->hasMany(Number::class, 'id_contact')->orderBy('id_type');
   }
 
   public function emails(){
-    return $this->hasMany(Email::class, 'id_contact');
+    return $this->hasMany(Email::class, 'id_contact')->orderBy('id_type');
   }
 
   public function social(){
-    return $this->hasMany(Social::class, 'id_contact');
+    return $this->hasMany(Social::class, 'id_contact')->orderBy('id_network');
   }
 }

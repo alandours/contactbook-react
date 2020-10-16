@@ -8,7 +8,7 @@ const SecondaryInfo = styled.div`
 `;
 
 const Notes = styled.p`
-  margin-top: 1rem;
+  margin: 1rem 0;
   padding: 0.25rem 1.75rem;
   white-space: pre-wrap;
 `;

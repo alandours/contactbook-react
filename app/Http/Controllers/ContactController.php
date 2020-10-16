@@ -40,7 +40,8 @@ class ContactController extends Controller
     $text = preg_replace('/\s+/', '', $text);
 
     return DB::select('SELECT * FROM 
-                        (SELECT CONCAT_WS(" ", name, lastname) AS fullname, name, lastname, address, notes, contacts.id AS id, email, number, username FROM contacts
+                        (SELECT CONCAT_WS(" ", name, lastname) AS fullname, name, lastname, address, notes, contacts.id AS id, alias, email, number, username FROM contacts
+                        LEFT JOIN alias ON contacts.id = alias.id_contact
                         LEFT JOIN emails ON contacts.id = emails.id_contact
                         LEFT JOIN numbers ON contacts.id = numbers.id_contact
                         LEFT JOIN social ON contacts.id = social.id_contact
@@ -51,10 +52,11 @@ class ContactController extends Controller
                         OR REPLACE(lastname, " ", "") LIKE ?
                         OR REPLACE(address, " ", "") LIKE ?
                         OR REPLACE(notes, " ", "") LIKE ?
+                        OR REPLACE(alias, " ", "") LIKE ?
                         OR REPLACE(email, " ", "") LIKE ?
                         OR REPLACE(number, " ", "") LIKE ?
                         OR REPLACE(username, " ", "") LIKE ?)
-                        ORDER BY name ASC', ['%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%']);
+                        ORDER BY name ASC', ['%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%']);
 
   }
 
@@ -142,10 +144,12 @@ class ContactController extends Controller
       if ($request->social)
         $this->handleSocialNetworks($id, $request->social);
 
+      $contact = $this->get($id);
+
       return response()->json([
         'type' => 'success',
-        'message' => 'The contact was added succesfully',
-        'contact' => $this->get($id)
+        'message' => $contact->fullName.' was added to your contacts',
+        'contact' => $contact
       ]);
     } else {
       return response()->json([
@@ -209,16 +213,20 @@ class ContactController extends Controller
       if ($request->social)
         $this->handleSocialNetworks($id, $request->social);
 
+      $contact = $this->get($id);
+
       return response()->json([
         'type' => 'success',
-        'message' => 'The contact was updated succesfully',
-        'contact' => $this->get($id)
+        'message' => $contact->fullName.' was updated',
+        'contact' => $contact
       ]);
     } else {
+      $contact = $this->get($id);
+
       return response()->json([
         'type' => 'error',
-        'message' => 'There was an error updating the contact',
-        'contact' => $this->get($id)
+        'message' => 'There was an error updating '.$contact->fullName,
+        'contact' => $contact
       ]);
     }
   }
