@@ -22,7 +22,7 @@ const ContactMessage = ({ contact, setContactMessage }) => {
     }
   }, [message]);
 
-  return message && (
+  return !!message && (
     <styled.ContactMessage type={type}>
       { messageText }
     </styled.ContactMessage>

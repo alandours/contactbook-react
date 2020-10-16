@@ -10,7 +10,7 @@ const reducer = combineReducers({
   theme: themeReducer
 });
 
-const initialState = {
+export const initialState = {
   contactList: null,
   contact: {
     id: null,

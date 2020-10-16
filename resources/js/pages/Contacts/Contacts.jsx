@@ -16,10 +16,10 @@ const Contacts = () => (
     <Container type="main">
       <Switch>
         <Route path="/contacts/new">
-          <ContactForm action="add" />
+          <ContactForm />
         </Route>
         <Route path="/contacts/:id/edit">
-          <ContactForm action="edit" />
+          <ContactForm edit />
         </Route>
         <Route path="/contacts/:id?">
           <Contact />

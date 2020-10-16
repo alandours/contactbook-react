@@ -16,6 +16,12 @@ const contactReducer = (state = {}, { type, payload }) => {
         ...state,
         message: payload
       };
+    case 'RESET_CONTACT':
+      return {
+        photo: 'contact.jpg',
+        loading: true,
+        message: null
+      };
     default:
       return state;
   }

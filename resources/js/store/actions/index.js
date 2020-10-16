@@ -5,6 +5,10 @@ export const setContact = (data) => ({
   payload: data
 });
 
+export const resetContact = () => ({
+  type: 'RESET_CONTACT'
+});
+
 export const setContactLoading = () => ({
   type: 'SET_CONTACT_LOADING'
 });

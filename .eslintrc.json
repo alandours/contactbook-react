@@ -28,7 +28,8 @@
       "object-curly-newline": ["error", {
         "ObjectPattern": { "multiline": true },
         "ExportDeclaration": { "multiline": true, "minProperties": 3 }
-      }]
+      }],
+      "nonblock-statement-body-position": ["error", "any"]
     },
     "settings": {
       "import/resolver": {

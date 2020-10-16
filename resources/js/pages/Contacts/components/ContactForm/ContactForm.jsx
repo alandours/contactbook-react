@@ -2,59 +2,66 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
-import { objectOf, any, func } from 'prop-types';
-import { addContact, updateContact, setContactMessage } from '@store/actions';
+import { objectOf, any, func, bool } from 'prop-types';
+import * as actions from '@store/actions';
 import { appendFormattedData } from '@utils';
 
 import FixedInfo from '@components/FixedInfo';
 import ContactMessage from '@components/ContactMessage';
 import Button from '@components/Button';
+import Loader from '@components/Loader';
 import MainForm from './components/MainForm';
 import SecondaryForm from './components/SecondaryForm';
 
 import styled from './styled';
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = (state, ownProps) => ({
+  ...state,
+  ...ownProps
+});
 
-const mapDispatchToProps = {
-  addContact,
-  updateContact,
-  setContactMessage
-};
-
-const ContactForm = ({ contact, appData, addContact, updateContact, setContactMessage, action }) => {
+const ContactForm = ({ edit, contact, appData, addContact, updateContact, getContactList, resetContact }) => {
   const [showFixedInfo, setShowFixedInfo] = useState(false);
-  const history = useHistory();
+  const [formLoading, setFormLoading] = useState(true);
 
-  const { id: contactId, message } = contact || {};
+  const history = useHistory();
   const methods = useForm();
   const { handleSubmit, reset } = methods;
+
+  const { id: contactId, message } = contact || {};
+
+  useEffect(() => {
+    reset(contact);
+    setFormLoading(false);
+
+    const { type: messageType } = message || {};
+
+    if (messageType === 'success') history.push(`/contacts/${contactId}`);
+  }, [contact]);
+
+  useEffect(() => {
+    if (!edit) resetContact();
+  }, [edit]);
 
   const handleScroll = (e) => {
     if (e.target.scrollTop > 180) setShowFixedInfo(true);
     else setShowFixedInfo(false);
   };
 
-  useEffect(() => {
-    if (contactId) reset(action === 'add' ? {} : contact);
-    if (message && message.type === 'success') history.push(`/contacts/${contactId}`);
-  }, [contact]);
-
   const onSubmit = (data) => {
     const formData = new FormData();
     appendFormattedData(formData, data);
     formData.append('image', data.image[0]);
 
-    if (action === 'add') {
-      addContact(formData);
-    } else {
-      updateContact(contactId, formData);
-    }
+    if (edit)
+      updateContact(contactId, formData).then(getContactList);
+    else
+      addContact(formData).then(getContactList);
   };
 
   if (!appData || !appData.numberTypes) return null;
 
-  return (action === 'add' || (action === 'edit' && contactId)) && (
+  return formLoading ? <Loader /> : (
     <FormProvider { ...methods }>
       <styled.FormContainer onSubmit={handleSubmit(onSubmit)} onScroll={handleScroll}>
         { showFixedInfo && <FixedInfo contact={contact} /> }
@@ -70,19 +77,23 @@ const ContactForm = ({ contact, appData, addContact, updateContact, setContactMe
 };
 
 ContactForm.propTypes = {
+  edit: bool,
   contact: objectOf(any),
   appData: objectOf(any),
   addContact: func,
   updateContact: func,
-  setContactMessage: func
+  getContactList: func,
+  resetContact: func
 };
 
 ContactForm.defaultProps = {
+  edit: false,
   contact: {},
   appData: {},
   addContact: () => {},
   updateContact: () => {},
-  setContactMessage: () => {}
+  getContactList: () => {},
+  resetContact: () => {}
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
+export default connect(mapStateToProps, actions)(ContactForm);
