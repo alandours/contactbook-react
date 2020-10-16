@@ -8,35 +8,77 @@ import ProfileSection from '@components/ProfileSection';
 
 import styled from './styled';
 
+const getName = (field) => {
+  const {
+    number,
+    email,
+    username,
+    network,
+    type
+  } = field || {};
+
+  const {
+    url: networkUrl,
+    startWith
+  } = network || {};
+
+  if (network)
+    return type ? networkUrl : `${startWith || ''}${username}`;
+
+  return number || email;
+};
+
+const getLabel = (field) => {
+  const {
+    network,
+    type,
+    custom_label: customLabel
+  } = field || {};
+
+  const {
+    id: typeId,
+    name: typeName
+  } = type || network || {};
+
+  return customLabel && typeId === 999 ? customLabel : typeName;
+};
+
+const getUrl = (field, urlStart) => {
+  const {
+    number,
+    email,
+    username,
+    network
+  } = field || {};
+
+  const {
+    url: networkUrl,
+    usernameFirst
+  } = network || {};
+
+  let url;
+
+  if (network)
+    url = usernameFirst ? `${username}${networkUrl}` : `${networkUrl || ''}${username}`;
+  else
+    url = number || email;
+
+  return `${urlStart}${url}`;
+};
+
 const renderData = (data, urlStart) => (
   data.map((field) => {
-    const {
-      id,
-      email = null,
-      number = null,
-      username = null,
-      network = null,
-      type = null,
-      custom_label: customLabel
-    } = field || {};
+    const { id } = field || {};
 
-    const {
-      id: typeId,
-      name: typeName,
-      url: networkUrl,
-      usernameFirst
-    } = type || network || {};
-
-    const label = (customLabel && typeId === 999 ? customLabel : typeName);
-    const url = email || number || (usernameFirst ? `${username}${networkUrl}` : `${networkUrl}${username}`);
-    const name = type ? url : `@${username}`;
-    const fieldUrl = `${urlStart}${url}`;
+    const name = getName(field);
+    const label = getLabel(field);
+    const url = getUrl(field, urlStart);
 
     return (
       <Datafield
         name={name}
         label={label}
-        url={fieldUrl}
+        url={url}
         key={id + name}
       />
     );
