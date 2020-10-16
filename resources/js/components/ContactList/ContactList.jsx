@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bool, arrayOf, any, func } from 'prop-types';
 import { getContactList } from '@store/actions';
-import { isArrayNotEmpty, getFirstLetter, formatFullName } from '@utils';
+import { getFirstLetter, formatFullName } from '@utils';
 
 import SearchInput from '@components/SearchInput';
 import ListItem from '@components/ListItem';
@@ -51,7 +51,7 @@ const ContactList = ({ hasSearch, contactList, getContactList }) => {
   }, [search]);
 
   useEffect(() => {
-    if (isArrayNotEmpty(contactList)) {
+    if ((contactList)) {
       setLoading(false);
       setList(buildContactList(contactList));
     }

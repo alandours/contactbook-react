@@ -11,7 +11,7 @@ const reducer = combineReducers({
 });
 
 const initialState = {
-  contactList: [],
+  contactList: null,
   contact: {
     id: null,
     name: '',
@@ -37,7 +37,7 @@ const store = createStore(
   initialState,
   applyMiddleware(
     thunk,
-    createLogger()
+    // createLogger()
   )
 );
 
