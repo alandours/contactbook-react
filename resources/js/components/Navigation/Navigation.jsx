@@ -5,7 +5,7 @@ import styled from './styled';
 
 const Navigation = () => (
   <styled.Navigation>
-    <styled.HeaderLink to="/contacts/add">
+    <styled.HeaderLink to="/contacts/new">
       <FontAwesomeIcon icon="plus" />
     </styled.HeaderLink>
     <styled.HeaderLink to="#">

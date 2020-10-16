@@ -4,8 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Container from '@components/Container';
 import ContactList from '@components/ContactList';
 import Contact from './components/Contact';
-import AddContact from './components/AddContact';
-import EditContact from './components/EditContact';
+import ContactForm from './components/ContactForm';
 
 import styled from './styled';
 
@@ -17,10 +16,10 @@ const Contacts = () => (
     <Container type="main">
       <Switch>
         <Route path="/contacts/new">
-          <AddContact />
+          <ContactForm action="add" />
         </Route>
         <Route path="/contacts/:id/edit">
-          <EditContact />
+          <ContactForm action="edit" />
         </Route>
         <Route path="/contacts/:id?">
           <Contact />

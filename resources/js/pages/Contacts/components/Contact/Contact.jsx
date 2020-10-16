@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Loader from '@components/Loader';
 import FixedInfo from '@components/FixedInfo';
+import ContactMessage from '@components/ContactMessage';
 import MainInfo from './components/MainInfo';
 import SecondaryInfo from './components/SecondaryInfo';
 
@@ -24,6 +25,7 @@ const Contact = ({ contact }) => {
   return loading ? <Loader /> : (
     <styled.ContactView onScroll={handleScroll}>
       { showFixedInfo && <FixedInfo /> }
+      <ContactMessage />
       <MainInfo />
       <SecondaryInfo />
     </styled.ContactView>
