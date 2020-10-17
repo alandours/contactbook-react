@@ -22,6 +22,38 @@ export const size = {
   max: '1.5rem'
 };
 
+export const fontFace = css`
+  @font-face{
+    font-family: 'Open Sans';
+    font-weight: 300;
+    src: url('/fonts/OpenSans-Light.ttf');
+  }
+
+  @font-face{
+    font-family: 'Open Sans';
+    font-weight: 400;
+    src: url('/fonts/OpenSans-Regular.ttf');
+  }
+
+  @font-face{
+    font-family: 'Open Sans';
+    font-weight: 600;
+    src: url('/fonts/OpenSans-SemiBold.ttf');
+  }
+
+  @font-face{
+    font-family: 'Open Sans';
+    font-weight: 700;
+    src: url('/fonts/OpenSans-Bold.ttf');
+  }
+
+  @font-face{
+    font-family: 'Open Sans';
+    font-weight: 800;
+    src: url('/fonts/OpenSans-ExtraBold.ttf');
+  }
+`;
+
 export const fontFamily = css`
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
 `;
