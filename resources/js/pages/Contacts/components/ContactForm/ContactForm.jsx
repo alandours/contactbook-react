@@ -33,7 +33,9 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
   useEffect(() => {
     reset(contact);
     setFormLoading(false);
+  }, []);
 
+  useEffect(() => {
     const { type: messageType } = message || {};
 
     if (messageType === 'success') history.push(`/contacts/${contactId}`);

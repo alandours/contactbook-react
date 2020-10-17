@@ -8,7 +8,7 @@ const Navigation = () => (
     <styled.HeaderLink to="/contacts/new">
       <FontAwesomeIcon icon="plus" />
     </styled.HeaderLink>
-    <styled.HeaderLink to="#">
+    <styled.HeaderLink to="/settings">
       <FontAwesomeIcon icon="cog" />
     </styled.HeaderLink>
   </styled.Navigation>

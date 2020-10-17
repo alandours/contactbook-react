@@ -23,7 +23,7 @@ const MainForm = () => {
         <styled.PhotoLabel>
           <ProfilePicture
             uploadedPhoto={file ? URL.createObjectURL(file) : null}
-            isForm
+            edit
           />
           <input type="file" style={{ display: 'none' }} name="image" ref={register} onChange={fileHandler} />
         </styled.PhotoLabel>

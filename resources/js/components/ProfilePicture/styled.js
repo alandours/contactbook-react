@@ -17,4 +17,9 @@ const ProfilePicture = styled.img`
   }
 `;
 
-export default { ProfilePicture };
+const FullSizePicture = styled.img`
+  max-height: 90%;
+  max-width: 90%;
+`;
+
+export default { ProfilePicture, FullSizePicture };

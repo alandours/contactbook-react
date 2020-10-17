@@ -13,7 +13,6 @@ const reducer = combineReducers({
 export const initialState = {
   contactList: null,
   contact: {
-    photo: 'contact.jpg',
     loading: true
   },
   appData: {},
