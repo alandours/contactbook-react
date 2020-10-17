@@ -11,6 +11,7 @@ const Button = styled.button`
   font-size: ${size.text};
   font-weight: 500;
   padding: 0.5rem;
+  transition: all ease 100ms;
 
   ${({ variant }) => variant === 'danger' && `
     background: #ee5555;
@@ -18,7 +19,7 @@ const Button = styled.button`
 
   &:hover {
     background: ${getColor('primary', 'light')};
-    transition: 300ms;
+    transition: all ease 200ms;
 
     ${({ variant }) => variant === 'danger' && `
       background: #ff6666;

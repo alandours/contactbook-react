@@ -31,7 +31,7 @@ const Age = styled.span`
 
 const Link = styled.a`
   color: ${getColor('primary', 'dark')};
-  font-weight: ${weight.semiBold};
+  font-weight: ${weight.normal};
 `;
 
 const Text = styled.p`

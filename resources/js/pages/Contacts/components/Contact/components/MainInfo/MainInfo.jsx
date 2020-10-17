@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { objectOf, any } from 'prop-types';
 
-import Icon from '@components/Icon';
 import Gradient from '@components/Gradient';
+import Icon from '@components/Icon';
 import ProfilePicture from '@components/ProfilePicture';
 import ProfileData from './components/ProfileData';
 
@@ -21,9 +20,9 @@ const MainInfo = ({ contact }) => {
       <styled.MainInfo>
         <ProfilePicture />
         <ProfileData contact={contact} />
-        <Link to={`/contacts/${id}/edit`}>
-          <Icon icon="pen" />
-        </Link>
+        <styled.EditLink to={`/contacts/${id}/edit`}>
+          <Icon icon="pen" color={['common', 'white']} />
+        </styled.EditLink>
       </styled.MainInfo>
     </>
   );

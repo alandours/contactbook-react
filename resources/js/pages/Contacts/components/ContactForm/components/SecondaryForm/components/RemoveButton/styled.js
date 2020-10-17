@@ -8,7 +8,7 @@ const RemoveButton = styled.button`
   margin-left: 1.5rem;
   opacity: 0;
   visibility: hidden;
-  transition: 50ms;
+  transition: all ease 200ms;
 `;
 
 export default { RemoveButton };

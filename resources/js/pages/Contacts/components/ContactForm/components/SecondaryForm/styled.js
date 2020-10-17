@@ -14,7 +14,7 @@ const FormField = styled.div`
   &:hover ${RemoveButton.RemoveButton} {
     opacity: 1;
     visibility: visible;
-    transition: 50ms;
+    transition: all ease 100ms;
   }
 
   &:hover ${TextInput.TextInput} {

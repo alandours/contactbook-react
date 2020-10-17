@@ -30,13 +30,14 @@ const PhotoLabel = styled.label`
     left: 6px;
     width: 188px;
     height: 188px;
-    transition: 250ms;
+    transition: all ease 200ms;
     z-index: ${zindex.tooltip};
   }
 
   &:hover {
     &:before{
       opacity: 1;
+      transition: all ease 400ms;
     }
   }
 `;

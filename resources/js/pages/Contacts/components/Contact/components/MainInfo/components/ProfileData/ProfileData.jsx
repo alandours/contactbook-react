@@ -29,7 +29,7 @@ const ProfileData = ({ contact }) => {
       { address && (
         <styled.MainDatafield>
           <Icon icon="home" inline />
-          <styled.Link href={`https://www.google.com/maps/search/${address}`}>{address}</styled.Link>
+          <styled.Link href={`https://www.google.com/maps/search/${address}`} target="_blank">{address}</styled.Link>
         </styled.MainDatafield>
       )}
       { met && (

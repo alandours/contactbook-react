@@ -10,18 +10,19 @@ const ListItem = styled.li`
 
   ${({ type }) => type === 'contact' && css`
     background: transparent;
-    transition: 300ms ease;
+    transition: 400ms ease;
 
     &:hover{
       background: ${getColor('common', 'lightWhite')};
-      transition: 150ms ease;
+      transition: 200ms ease;
     }
   `};
 
   ${({ type }) => type === 'letter' && css`
     background: ${getColor('primary', 'main')};
+    border-bottom: 2px solid ${getColor('primary', 'dark')};
     color: ${getColor('common', 'white')};
-    font-weight: ${weight.bold};
+    font-weight: ${weight.semiBold};
     padding: 0.45rem 0.75rem;
   `};
 
