@@ -20,7 +20,7 @@ const mapStateToProps = (state, ownProps) => ({
   ...ownProps
 });
 
-const ContactForm = ({ edit, contact, appData, addContact, updateContact, getContactList, resetContact }) => {
+const ContactForm = ({ edit, contact, appData, addContact, updateContact, deleteContact, getContactList, resetContact }) => {
   const [showFixedInfo, setShowFixedInfo] = useState(false);
   const [formLoading, setFormLoading] = useState(true);
 
@@ -71,6 +71,13 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, getCon
         <Button type="submit">
           Save contact
         </Button>
+        <Button
+          type="button"
+          handleClick={() => deleteContact(contactId)}
+          variant="danger"
+        >
+          Delete contact
+        </Button>
       </styled.FormContainer>
     </FormProvider>
   );
@@ -82,6 +89,7 @@ ContactForm.propTypes = {
   appData: objectOf(any),
   addContact: func,
   updateContact: func,
+  deleteContact: func,
   getContactList: func,
   resetContact: func
 };
@@ -92,6 +100,7 @@ ContactForm.defaultProps = {
   appData: {},
   addContact: () => {},
   updateContact: () => {},
+  deleteContact: () => {},
   getContactList: () => {},
   resetContact: () => {}
 };

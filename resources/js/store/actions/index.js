@@ -47,6 +47,15 @@ export const getAppData = () => async (dispatch) => {
   dispatch(setAppData(response.data));
 };
 
+export const addContact = (data) => async (dispatch) => {
+  dispatch(setContactLoading());
+  const url = '/api/contacts/add';
+  const response = await axios.post(url, data);
+  const { contact, message, type } = response.data || {};
+  dispatch(setContact(contact));
+  dispatch(setContactMessage({ message, type }));
+};
+
 export const updateContact = (id, data) => async (dispatch) => {
   dispatch(setContactLoading());
   const url = `/api/contacts/${id}/update`;
@@ -56,11 +65,14 @@ export const updateContact = (id, data) => async (dispatch) => {
   dispatch(setContactMessage({ message, type }));
 };
 
-export const addContact = (data) => async (dispatch) => {
+export const deleteContact = (id) => async (dispatch) => {
   dispatch(setContactLoading());
-  const url = '/api/contacts/add';
-  const response = await axios.post(url, data);
+  const url = `/api/contacts/${id}/delete`;
+  const response = await axios.delete(url);
   const { contact, message, type } = response.data || {};
-  dispatch(setContact(contact));
+  if (contact)
+    dispatch(setContact(contact));
+  else
+    dispatch(resetContact());
   dispatch(setContactMessage({ message, type }));
 };

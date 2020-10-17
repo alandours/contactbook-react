@@ -12,9 +12,17 @@ const Button = styled.button`
   font-weight: 500;
   padding: 0.5rem;
 
+  ${({ variant }) => variant === 'danger' && `
+    background: #ee5555;
+  `}
+
   &:hover {
     background: ${getColor('primary', 'light')};
     transition: 300ms;
+
+    ${({ variant }) => variant === 'danger' && `
+      background: #ff6666;
+    `}
   }
 `;
 

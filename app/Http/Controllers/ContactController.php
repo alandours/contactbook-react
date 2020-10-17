@@ -63,9 +63,9 @@ class ContactController extends Controller
   public function get($id) {
     try{
       if ($id == null) {
-        $contact = Contact::orderBy('name', 'ASC')->firstOrFail();
+        $contact = Contact::where('active', 1)->orderBy('name', 'ASC')->firstOrFail();
       } else {
-        $contact = Contact::findOrFail($id);
+        $contact = Contact::where('active', 1)->findOrFail($id);
       }
     } catch(ModelNotFoundException $e) {
       return null;
@@ -90,13 +90,13 @@ class ContactController extends Controller
       'notes' => 'nullable|max:1000',
       'met' => 'nullable|date_format:Y|after_or_equal:1000',
       'aliases' => 'nullable|array',
-      'aliases.*.alias' => 'required|max:50',
+      'aliases.*.alias' => 'max:50',
       'emails' => 'nullable|array',
-      'emails.*.email' => 'required|max:80',
+      'emails.*.email' => 'max:80',
       'numbers' => 'nullable|array',
-      'numbers.*.number' => 'required|max:50',
+      'numbers.*.number' => 'max:50',
       'social' => 'nullable|array',
-      'social.*.username' => 'required|max:80',
+      'social.*.username' => 'max:80',
     ];
 
     $validator = Validator::make($request->all(), $rules);
@@ -363,5 +363,22 @@ class ContactController extends Controller
     } else {
       return null;
     }
+  }
+
+  public function delete($id) {
+    $contact = $this->get($id);
+
+    if (Contact::where('id', $id)->where('active', 1)->update(['active' => 0])) {
+      return response()->json([
+        'type' => 'success',
+        'message' => $contact->fullName.' was deleted from your contacts'
+      ]);
+    }
+
+    return response()->json([
+      'type' => 'error',
+      'message' => 'There was an error deleting '.$contact->fullName,
+      'contact' => $contact
+    ]);
   }
 }
