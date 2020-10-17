@@ -13,20 +13,8 @@ const reducer = combineReducers({
 export const initialState = {
   contactList: null,
   contact: {
-    id: null,
-    name: '',
-    lastname: '',
     photo: 'contact.jpg',
-    birthday: '',
-    address: '',
-    met: '',
-    aliases: [],
-    numbers: [],
-    emails: [],
-    social: [],
-    notes: '',
-    loading: true,
-    message: null
+    loading: true
   },
   appData: {},
   theme: 'light'
@@ -37,7 +25,7 @@ const store = createStore(
   initialState,
   applyMiddleware(
     thunk,
-    // createLogger()
+    createLogger()
   )
 );
 

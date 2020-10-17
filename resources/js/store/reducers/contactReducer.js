@@ -16,11 +16,15 @@ const contactReducer = (state = {}, { type, payload }) => {
         ...state,
         message: payload
       };
+    case 'SET_CONTACT_PALETTE':
+      return {
+        ...state,
+        palette: payload
+      };
     case 'RESET_CONTACT':
       return {
         photo: 'contact.jpg',
-        loading: true,
-        message: null
+        loading: true
       };
     default:
       return state;

@@ -28,6 +28,11 @@ export const setContactMessage = (data) => ({
   payload: data
 });
 
+export const setContactPalette = (data) => ({
+  type: 'SET_CONTACT_PALETTE',
+  payload: data
+});
+
 export const getContact = (id) => async (dispatch) => {
   dispatch(setContactLoading());
   const url = `/api/contacts/${id}`;

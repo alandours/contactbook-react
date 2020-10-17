@@ -1,5 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
+import { func } from 'prop-types';
+
+import { getContact } from '@store/actions';
 
 import Container from '@components/Container';
 import ContactList from '@components/ContactList';
@@ -8,7 +12,11 @@ import ContactForm from './components/ContactForm';
 
 import styled from './styled';
 
-const Contacts = () => (
+const mapDispatchToProps = {
+  getContact
+};
+
+const Contacts = ({ getContact }) => (
   <styled.Contacts>
     <Container type="sidebar">
       <ContactList hasSearch />
@@ -18,15 +26,33 @@ const Contacts = () => (
         <Route path="/contacts/new">
           <ContactForm />
         </Route>
-        <Route path="/contacts/:id/edit">
-          <ContactForm edit />
-        </Route>
-        <Route path="/contacts/:id?">
-          <Contact />
-        </Route>
+        <Route
+          path="/contacts/:id/edit"
+          render={({ match }) => {
+            const { id } = match.params || {};
+            getContact(id);
+            return <ContactForm edit />;
+          }}
+        />
+        <Route
+          path="/contacts/:id?"
+          render={({ match }) => {
+            const { id } = match.params || {};
+            getContact(id);
+            return <Contact />;
+          }}
+        />
       </Switch>
     </Container>
   </styled.Contacts>
 );
 
-export default Contacts;
+Contacts.propTypes = {
+  getContact: func
+};
+
+Contacts.defaultProps = {
+  getContact: () => {}
+};
+
+export default connect(null, mapDispatchToProps)(Contacts);

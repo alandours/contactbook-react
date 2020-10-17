@@ -1,17 +1,24 @@
 import React from 'react';
-import { arrayOf, string, bool } from 'prop-types';
+import { connect } from 'react-redux';
+import { objectOf, any, bool } from 'prop-types';
 
 import styled from './styled';
 
-const Gradient = ({ palette, smooth }) => (
-  <styled.Gradient
-    palette={palette}
-    smooth={smooth}
-  />
-);
+const mapStateToProps = (state) => state;
+
+const Gradient = ({ contact, smooth }) => {
+  const { palette } = contact || {};
+
+  return (
+    <styled.Gradient
+      palette={palette}
+      smooth={smooth}
+    />
+  );
+};
 
 Gradient.propTypes = {
-  palette: arrayOf(string).isRequired,
+  contact: objectOf(any).isRequired,
   smooth: bool
 };
 
@@ -19,4 +26,4 @@ Gradient.defaultProps = {
   smooth: true
 };
 
-export default Gradient;
+export default connect(mapStateToProps)(Gradient);

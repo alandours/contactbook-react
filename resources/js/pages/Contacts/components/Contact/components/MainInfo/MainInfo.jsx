@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { objectOf, any } from 'prop-types';
@@ -10,21 +10,16 @@ import ProfileData from './components/ProfileData';
 
 import styled from './styled';
 
-const mapStateToProps = (state, ownProps) => ({
-  ...state,
-  ...ownProps
-});
+const mapStateToProps = (state) => state;
 
 const MainInfo = ({ contact }) => {
-  const [palette, setPalette] = useState([]);
-
-  const { id } = contact;
+  const { id } = contact || {};
 
   return (
     <>
-      <Gradient palette={palette} smooth />
+      <Gradient smooth />
       <styled.MainInfo>
-        <ProfilePicture setPalette={setPalette} />
+        <ProfilePicture />
         <ProfileData contact={contact} />
         <Link to={`/contacts/${id}/edit`}>
           <Icon icon="pen" />

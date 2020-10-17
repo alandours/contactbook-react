@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import Gradient from '@components/Gradient';
@@ -8,7 +8,6 @@ import MainFormData from './components/MainFormData';
 import styled from './styled';
 
 const MainForm = () => {
-  const [palette, setPalette] = useState([]);
   const [file, setFile] = React.useState(null);
 
   const { register } = useFormContext();
@@ -19,12 +18,11 @@ const MainForm = () => {
 
   return (
     <>
-      <Gradient palette={palette} smooth />
+      <Gradient smooth />
       <styled.MainForm>
         <styled.PhotoLabel>
           <ProfilePicture
             uploadedPhoto={file ? URL.createObjectURL(file) : null}
-            setPalette={setPalette}
             isForm
           />
           <input type="file" style={{ display: 'none' }} name="image" ref={register} onChange={fileHandler} />

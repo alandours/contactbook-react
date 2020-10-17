@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { connect } from 'react-redux';
+import { setContactPalette } from '@store/actions';
 import { objectOf, any, func, string } from 'prop-types';
 
 import { getPalette } from '@utils/color';
@@ -11,7 +12,11 @@ const mapStateToProps = (state, ownProps) => ({
   ...ownProps
 });
 
-const ProfilePicture = ({ contact, setPalette, uploadedPhoto }) => {
+const mapDispatchToProps = {
+  setContactPalette
+};
+
+const ProfilePicture = ({ contact, uploadedPhoto, setContactPalette }) => {
   const { photo, fullName } = contact;
 
   const imageRef = useRef(null);
@@ -25,7 +30,7 @@ const ProfilePicture = ({ contact, setPalette, uploadedPhoto }) => {
       src={uploadedPhoto || `/img/contacts/${photo}`}
       alt={`${fullName}'s profile picture`}
       ref={imageRef}
-      onLoad={() => setPalette(getPalette(imageRef.current, 10))}
+      onLoad={() => setContactPalette(getPalette(imageRef.current, 10))}
       onClick={openProfilePicture}
     />
   );
@@ -33,13 +38,13 @@ const ProfilePicture = ({ contact, setPalette, uploadedPhoto }) => {
 
 ProfilePicture.propTypes = {
   contact: objectOf(any).isRequired,
-  setPalette: func,
+  setContactPalette: func,
   uploadedPhoto: string
 };
 
 ProfilePicture.defaultProps = {
-  setPalette: () => {},
+  setContactPalette: () => {},
   uploadedPhoto: ''
 };
 
-export default connect(mapStateToProps)(ProfilePicture);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePicture);
