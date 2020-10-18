@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { objectOf, any } from 'prop-types';
 import { connect } from 'react-redux';
 
+import NotFound from '@pages/NotFound';
 import Loader from '@components/Loader';
 import FixedInfo from '@components/FixedInfo';
 import ContactMessage from '@components/ContactMessage';
@@ -15,14 +16,18 @@ const mapStateToProps = (state) => state;
 const Contact = ({ contact }) => {
   const [showFixedInfo, setShowFixedInfo] = useState(false);
 
-  const { loading } = contact || {};
+  const { id, loading } = contact || {};
 
   const handleScroll = (e) => {
     if (e.target.scrollTop > 180) setShowFixedInfo(true);
     else setShowFixedInfo(false);
   };
 
-  return loading ? <Loader /> : (
+  if (loading) return <Loader />;
+
+  if (!loading && !id) return <NotFound page="contact" />;
+
+  return (
     <styled.ContactView onScroll={handleScroll}>
       { showFixedInfo && <FixedInfo /> }
       <ContactMessage />

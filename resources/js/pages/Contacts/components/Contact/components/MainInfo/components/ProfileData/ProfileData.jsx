@@ -3,6 +3,7 @@ import { objectOf, any } from 'prop-types';
 import { formatDate, calculateAge } from '@utils';
 
 import Icon from '@components/Icon';
+import Title from '@components/Title';
 
 import styled from './styled';
 
@@ -11,14 +12,16 @@ const ProfileData = ({ contact }) => {
   return (
     <styled.ProfileData>
       <styled.MainDatafield>
-        <styled.Name>
-          { fullName }
-          { birthday && (
-            <styled.Age>
-              {calculateAge(birthday)}
-            </styled.Age>
-          )}
-        </styled.Name>
+        <Title>
+          <>
+            { fullName }
+            { birthday && (
+              <styled.Age>
+                {calculateAge(birthday)}
+              </styled.Age>
+            )}
+          </>
+        </Title>
       </styled.MainDatafield>
       { birthday && (
         <styled.MainDatafield>

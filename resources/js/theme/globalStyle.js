@@ -14,12 +14,20 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
+  html {
+    height: 100%;
+  }
+
   body {
     background: ${getColor('grey', 'lighter')};
     height: 100%;
     ${fontFamily};
     font-size: ${size.text};
     font-weight: ${weight.regular};
+  }
+
+  #contact-book {
+    height: 100%;
   }
 `;
 

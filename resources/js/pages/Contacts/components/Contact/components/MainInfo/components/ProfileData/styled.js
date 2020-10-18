@@ -13,13 +13,6 @@ const MainDatafield = styled.div`
   margin: 0.25rem 0;
 `;
 
-const Name = styled.h2`
-  display: flex;
-  font-size: ${size.max};
-  font-weight: ${weight.bold};
-  margin-bottom: 0.5rem;
-`;
-
 const Age = styled.span`
   align-items: center;
   display: flex;
@@ -37,4 +30,5 @@ const Link = styled.a`
 const Text = styled.p`
   display: inline-block;
 `;
-export default { ProfileData, MainDatafield, Name, Age, Link, Text };
+
+export default { ProfileData, MainDatafield, Age, Link, Text };

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { getColor } from '@theme/mixins';
-import { weight, size, fontFamily } from '@theme/typography';
+import { weight, size } from '@theme/typography';
 
 const Header = styled.div`
   background: ${getColor('common', 'white')};
@@ -12,9 +12,10 @@ const Header = styled.div`
   padding: 1rem 1.5rem;
 `;
 
-const Sitename = styled.h1`
+const Sitename = styled.div`
   font-size: ${size.xlarge};
-  font-family: Avenir
+  font-family: Avenir;
+  font-weight: ${weight.semiBold};
 `;
 
 const Sitelink = styled(Link)`
