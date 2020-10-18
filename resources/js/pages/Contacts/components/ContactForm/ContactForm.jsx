@@ -31,18 +31,19 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
   const { id: contactId, message } = contact || {};
 
   useEffect(() => {
-    reset(contact);
-    setFormLoading(false);
-  }, []);
+    if (!message) {
+      reset(contact);
+      setFormLoading(false);
+    }
 
-  useEffect(() => {
     const { type: messageType } = message || {};
 
     if (messageType === 'success') history.push(`/contacts/${contactId}`);
   }, [contact]);
 
   useEffect(() => {
-    if (!edit) resetContact();
+    if (!edit)
+      resetContact();
   }, [edit]);
 
   const handleScroll = (e) => {

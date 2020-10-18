@@ -12,6 +12,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     height: 80vh;
+    justify-content: center;
     margin-left: 1rem;
     overflow: hidden;
     width: 75%;

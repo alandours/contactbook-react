@@ -7,6 +7,7 @@ import { getContact } from '@store/actions';
 
 import Container from '@components/Container';
 import ContactList from '@components/ContactList';
+import Dashboard from './components/Dashboard';
 import Contact from './components/Contact';
 import ContactForm from './components/ContactForm';
 
@@ -23,6 +24,9 @@ const Contacts = ({ getContact }) => (
     </Container>
     <Container type="main">
       <Switch>
+        <Route path="/contacts" exact>
+          <Dashboard />
+        </Route>
         <Route path="/contacts/new">
           <ContactForm />
         </Route>
