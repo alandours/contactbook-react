@@ -2,16 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { objectOf, any } from 'prop-types';
 
+import ProfilePicture from '@components/ProfilePicture';
+
 import styled from './styled';
 
 const mapStateToProps = (state) => state;
 
 const FixedInfo = ({ contact }) => {
-  const { photo, fullName } = contact;
+  const { fullName } = contact;
 
   return (
     <styled.FixedInfo>
-      { photo && <styled.ProfilePicture src={`/img/contacts/${photo}`} alt={`${fullName}'s profile picture`} /> }
+      <ProfilePicture thumbnail />
       { fullName && <styled.Name>{fullName}</styled.Name> }
     </styled.FixedInfo>
   );

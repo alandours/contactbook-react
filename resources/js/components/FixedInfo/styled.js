@@ -12,16 +12,6 @@ const FixedInfo = styled.div`
   z-index: ${zindex.fixed};
 `;
 
-const ProfilePicture = styled.img`
-  border: 2px solid ${getColor('common', 'white')};
-  border-radius: 50%;
-  box-shadow: 0 0 5px rgba(0,0,0,0.25);
-  height: 30px;
-  margin-right: 0.5rem;
-  object-fit: cover;
-  width: 30px;
-`;
-
 const Name = styled.p`
   align-items: center;
   display: flex;
@@ -29,4 +19,4 @@ const Name = styled.p`
   font-weight: ${weight.bold};
 `;
 
-export default { FixedInfo, ProfilePicture, Name };
+export default { FixedInfo, Name };

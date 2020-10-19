@@ -42,4 +42,8 @@ const PhotoLabel = styled.label`
   }
 `;
 
-export default { MainForm, PhotoLabel };
+const ImageInput = styled.input`
+  display: none;
+`;
+
+export default { MainForm, PhotoLabel, ImageInput };

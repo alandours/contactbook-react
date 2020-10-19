@@ -8,24 +8,15 @@ import MainFormData from './components/MainFormData';
 import styled from './styled';
 
 const MainForm = () => {
-  const [file, setFile] = React.useState(null);
-
   const { register } = useFormContext();
-
-  const fileHandler = (e) => {
-    setFile(e.target.files[0]);
-  };
 
   return (
     <>
       <Gradient smooth />
       <styled.MainForm>
         <styled.PhotoLabel>
-          <ProfilePicture
-            uploadedPhoto={file ? URL.createObjectURL(file) : null}
-            edit
-          />
-          <input type="file" style={{ display: 'none' }} name="image" ref={register} onChange={fileHandler} />
+          <ProfilePicture />
+          <styled.ImageInput type="file" name="image" ref={register} />
         </styled.PhotoLabel>
         <input type="checkbox" name="removeImage" ref={register} />
         <MainFormData />

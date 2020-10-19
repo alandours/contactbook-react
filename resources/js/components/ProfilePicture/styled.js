@@ -15,11 +15,19 @@ const ProfilePicture = styled.img`
   &:hover {
     cursor: pointer;
   }
+
+  ${({ thumbnail }) => !!thumbnail && `
+    border-width: 2px;
+    height: 30px;
+    min-height: 30px;
+    min-width: 30px;
+    margin-right: 0.5rem;
+    width: 30px;
+
+    &:hover {
+      cursor: initial;
+    }
+  `};
 `;
 
-const FullSizePicture = styled.img`
-  max-height: 90%;
-  max-width: 90%;
-`;
-
-export default { ProfilePicture, FullSizePicture };
+export default { ProfilePicture };

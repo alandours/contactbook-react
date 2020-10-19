@@ -4,7 +4,7 @@ import { objectOf, any } from 'prop-types';
 
 import Gradient from '@components/Gradient';
 import Icon from '@components/Icon';
-import ProfilePicture from '@components/ProfilePicture';
+import MainProfilePicture from '@components/MainProfilePicture';
 import ProfileData from './components/ProfileData';
 
 import styled from './styled';
@@ -18,7 +18,7 @@ const MainInfo = ({ contact }) => {
     <>
       <Gradient smooth />
       <styled.MainInfo>
-        <ProfilePicture />
+        <MainProfilePicture />
         <ProfileData contact={contact} />
         <styled.EditLink to={`/contacts/${id}/edit`}>
           <Icon icon="pen" color={['common', 'white']} />
