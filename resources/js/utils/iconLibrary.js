@@ -14,7 +14,8 @@ import {
   faCalendarCheck,
   faBirthdayCake,
   faPen,
-  faTimes
+  faTimes,
+  faChevronDown
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -32,7 +33,8 @@ library.add(
   faCalendarCheck,
   faBirthdayCake,
   faPen,
-  faTimes
+  faTimes,
+  faChevronDown
 );
 
 export default library;

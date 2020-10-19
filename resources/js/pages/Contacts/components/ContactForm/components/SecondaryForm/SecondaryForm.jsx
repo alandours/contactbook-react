@@ -6,6 +6,8 @@ import { objectOf, any } from 'prop-types';
 import ProfileSection from '@components/ProfileSection';
 import Button from '@components/Button';
 import TextInput from '@components/TextInput';
+import Select from '@components/Select';
+import Textarea from '@components/Textarea';
 import RemoveButton from './components/RemoveButton';
 
 import styled from './styled';
@@ -24,10 +26,10 @@ const SecondaryForm = ({ contact, appData }) => {
   const { id: contactId } = contact || {};
 
   return (
-    <>
+    <styled.SecondaryForm>
       <ProfileSection title="Aliases" icon="id-card" sticky>
         {
-          aliases.map((alias, index) => (
+          aliases.length ? aliases.map((alias, index) => (
             <styled.FormField key={alias.id}>
               <TextInput
                 name={`aliases[${index}].alias`}
@@ -45,7 +47,7 @@ const SecondaryForm = ({ contact, appData }) => {
                 handleClick={() => removeAlias(index)}
               />
             </styled.FormField>
-          ))
+          )) : appendAlias({ alias: '' })
         }
         <Button
           type="button"
@@ -56,7 +58,7 @@ const SecondaryForm = ({ contact, appData }) => {
       </ProfileSection>
       <ProfileSection title="Numbers" icon="phone" sticky>
         {
-          numbers.map((number, index) => {
+          numbers.length ? numbers.map((number, index) => {
             const numberType = watch(`numbers[${index}].type`);
 
             return (
@@ -66,9 +68,8 @@ const SecondaryForm = ({ contact, appData }) => {
                   defaultValue={number.number}
                   label="Phone number"
                 />
-                <styled.Select
+                <Select
                   name={`numbers[${index}].type`}
-                  ref={register()}
                   defaultValue={number.id_type}
                 >
                   {
@@ -77,7 +78,7 @@ const SecondaryForm = ({ contact, appData }) => {
                       return <option key={id} value={id}>{name}</option>;
                     })
                   }
-                </styled.Select>
+                </Select>
                 <TextInput
                   name={`numbers[${index}].custom_label`}
                   disabled={numberType !== '999'}
@@ -96,7 +97,7 @@ const SecondaryForm = ({ contact, appData }) => {
                 />
               </styled.FormField>
             );
-          })
+          }) : appendNumber({})
         }
         <Button
           type="button"
@@ -112,7 +113,7 @@ const SecondaryForm = ({ contact, appData }) => {
       </ProfileSection>
       <ProfileSection title="Emails" icon="envelope" sticky>
         {
-          emails.map((email, index) => {
+          emails.length ? emails.map((email, index) => {
             const emailType = watch(`emails[${index}].type`);
 
             return (
@@ -122,9 +123,8 @@ const SecondaryForm = ({ contact, appData }) => {
                   defaultValue={email.email}
                   label="E-mail"
                 />
-                <styled.Select
+                <Select
                   name={`emails[${index}].type`}
-                  ref={register()}
                   defaultValue={email.id_type}
                 >
                   {
@@ -133,7 +133,7 @@ const SecondaryForm = ({ contact, appData }) => {
                       return <option key={id} value={id}>{name}</option>;
                     })
                   }
-                </styled.Select>
+                </Select>
                 <TextInput
                   name={`emails[${index}].custom_label`}
                   disabled={emailType !== '999'}
@@ -152,7 +152,7 @@ const SecondaryForm = ({ contact, appData }) => {
                 />
               </styled.FormField>
             );
-          })
+          }) : appendEmail({})
         }
         <Button
           type="button"
@@ -168,7 +168,7 @@ const SecondaryForm = ({ contact, appData }) => {
       </ProfileSection>
       <ProfileSection title="Social networks" icon="share-alt" sticky>
         {
-          social && social.map((username, index) => {
+          social.length ? social.map((username, index) => {
             const network = watch(`social[${index}].id_network`);
 
             return (
@@ -178,9 +178,8 @@ const SecondaryForm = ({ contact, appData }) => {
                   defaultValue={username.username}
                   label="Username"
                 />
-                <styled.Select
+                <Select
                   name={`social[${index}].id_network`}
-                  ref={register()}
                   defaultValue={username.id_network}
                 >
                   {
@@ -189,7 +188,7 @@ const SecondaryForm = ({ contact, appData }) => {
                       return <option key={id} value={id}>{name}</option>;
                     })
                   }
-                </styled.Select>
+                </Select>
                 <TextInput
                   name={`social[${index}].custom_label`}
                   disabled={network !== '999'}
@@ -208,7 +207,7 @@ const SecondaryForm = ({ contact, appData }) => {
                 />
               </styled.FormField>
             );
-          })
+          }) : appendSocial({})
         }
         <Button
           type="button"
@@ -223,9 +222,11 @@ const SecondaryForm = ({ contact, appData }) => {
         </Button>
       </ProfileSection>
       <ProfileSection title="Notes" icon="sticky-note" sticky>
-        <textarea name="notes" ref={register} />
+        <Textarea
+          name="notes"
+        />
       </ProfileSection>
-    </>
+    </styled.SecondaryForm>
   );
 };
 

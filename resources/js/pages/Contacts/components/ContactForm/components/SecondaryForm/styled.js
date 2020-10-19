@@ -1,37 +1,21 @@
 import styled from 'styled-components';
-import { getColor, formStyles } from '@theme/mixins';
+import RemoveButtonStyles from './components/RemoveButton/styled';
 
-import TextInput from '@components/TextInput/styled';
-import RemoveButton from './components/RemoveButton/styled';
+const { RemoveButton } = RemoveButtonStyles;
 
 const SecondaryForm = styled.div`
 `;
 
 const FormField = styled.div`
   display: flex;
+  justify-content: space-between;
   margin: 0.75rem 0;
 
-  &:hover ${RemoveButton.RemoveButton} {
+  &:hover ${RemoveButton} {
     opacity: 1;
     visibility: visible;
     transition: all ease 100ms;
   }
-
-  &:hover ${TextInput.TextInput} {
-    border-color: ${getColor('primary', 'main')};
-  }
 `;
 
-const Select = styled.select`
-  ${formStyles};
-  border: 1px solid ${getColor('grey', 'dark')};
-  border-radius: 0;
-  margin: 0 1.5rem;
-  width: 200px;
-
-  &:hover, &:focus {
-    border: 1px solid ${getColor('primary', 'main')};
-  }
-`;
-
-export default { SecondaryForm, FormField, Select };
+export default { SecondaryForm, FormField };

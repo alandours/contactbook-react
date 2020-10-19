@@ -140,6 +140,7 @@ export const formStyles = css`
   font-size: ${size.text};
   outline: none;
   padding: 0.25rem 0;
+  resize: none;
   width: 100%;
 
   ${({ hasIcon }) => hasIcon && `
