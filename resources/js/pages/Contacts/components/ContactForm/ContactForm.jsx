@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
@@ -26,6 +26,7 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
 
   const history = useHistory();
   const methods = useForm();
+  const formRef = useRef(null);
   const { handleSubmit, reset } = methods;
 
   const { id: contactId, message } = contact || {};
@@ -47,8 +48,10 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
   }, [edit]);
 
   const handleScroll = (e) => {
-    if (e.target.scrollTop > 180) setShowFixedInfo(true);
-    else setShowFixedInfo(false);
+    if (e.target === formRef.current) {
+      if (e.target.scrollTop > 180) setShowFixedInfo(true);
+      else setShowFixedInfo(false);
+    }
   };
 
   const onSubmit = (data) => {
@@ -66,22 +69,28 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
 
   return formLoading ? <Loader /> : (
     <FormProvider { ...methods }>
-      <styled.FormContainer onSubmit={handleSubmit(onSubmit)} onScroll={handleScroll}>
+      <styled.ContactForm
+        onSubmit={handleSubmit(onSubmit)}
+        onScroll={handleScroll}
+        ref={formRef}
+      >
         { showFixedInfo && <FixedInfo contact={contact} /> }
         <ContactMessage />
         <MainForm />
         <SecondaryForm />
-        <Button type="submit">
-          Save contact
-        </Button>
-        <Button
-          type="button"
-          handleClick={() => deleteContact(contactId)}
-          variant="danger"
-        >
-          Delete contact
-        </Button>
-      </styled.FormContainer>
+        <styled.FormActions>
+          <Button
+            type="button"
+            handleClick={() => deleteContact(contactId)}
+            variant="danger"
+          >
+            Delete contact
+          </Button>
+          <Button type="submit">
+            Save contact
+          </Button>
+        </styled.FormActions>
+      </styled.ContactForm>
     </FormProvider>
   );
 };

@@ -7,6 +7,10 @@ const Label = styled.label`
   display: flex;
   width: 40%;
   position: relative;
+
+  ${({ label }) => label === 'Alias' && `
+    width: 222px;
+  `}
 `;
 
 const LabelText = styled.span`
@@ -26,7 +30,7 @@ const Container = styled.div`
 const TextInput = styled.input`
   ${formStyles};
 
-  ${({ label }) => label && `
+  ${({ label }) => !!label && `
     margin: 1rem;
   `}
 

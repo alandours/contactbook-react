@@ -1,21 +1,26 @@
 import styled from 'styled-components';
 import { getColor } from '@theme/mixins';
-import { weight, size } from '@theme/typography';
+import zindex from '@theme/zindex';
 
 const ContactForm = styled.div`
-`;
-
-const FormContainer = styled.form`
   overflow: scroll;
   width: 100%;
-`;
-
-const Label = styled.label`
-
+  margin-bottom: 3.25rem;
 `;
 
 const InputContainer = styled.div`
   display: flex;
 `;
 
-export default { ContactForm, FormContainer, Label, InputContainer };
+const FormActions = styled.div`
+  background: ${getColor('common', 'white')};
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem;
+  position: absolute;
+  width: 100%;
+  z-index: ${zindex.fixed};
+`;
+
+export default { ContactForm, InputContainer, FormActions };

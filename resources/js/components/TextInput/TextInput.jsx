@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { string, bool, oneOfType, number } from 'prop-types';
 
@@ -7,11 +7,10 @@ import Icon from '@components/Icon';
 import styled from './styled';
 
 const TextInput = ({ defaultValue, disabled, name, label, placeholder, type, icon }) => {
-  const [isFocused, setFocus] = useState(false);
   const { register } = useFormContext();
 
   return type !== 'hidden' && (
-    <styled.Label>
+    <styled.Label label={label}>
       { label && !disabled && <styled.LabelText>{ label }</styled.LabelText> }
       <styled.Container>
         { icon && <Icon icon={icon} title={label || ''} inline /> }
@@ -20,9 +19,7 @@ const TextInput = ({ defaultValue, disabled, name, label, placeholder, type, ico
           ref={register()}
           defaultValue={defaultValue}
           disabled={disabled}
-          onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
-          placeholder={(!isFocused && placeholder) || ''}
+          placeholder={placeholder}
           type={type || 'text'}
         />
       </styled.Container>

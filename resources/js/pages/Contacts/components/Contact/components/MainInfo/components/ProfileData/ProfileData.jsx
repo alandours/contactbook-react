@@ -13,14 +13,9 @@ const ProfileData = ({ contact }) => {
     <styled.ProfileData>
       <styled.MainDatafield>
         <Title>
-          <>
+          <styled.Name birthday={birthday && calculateAge(birthday)}>
             { fullName }
-            { birthday && (
-              <styled.Age>
-                {calculateAge(birthday)}
-              </styled.Age>
-            )}
-          </>
+          </styled.Name>
         </Title>
       </styled.MainDatafield>
       { birthday && (

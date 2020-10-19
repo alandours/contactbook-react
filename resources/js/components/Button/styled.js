@@ -5,6 +5,7 @@ import { size } from '@theme/typography';
 const Button = styled.button`
   background: ${getColor('primary', 'main')};
   border: 0;
+  border-bottom: 2px solid ${getColor('primary', 'dark')};
   border-radius: 2px;
   color: ${getColor('common', 'white')};
   cursor: pointer;
@@ -15,6 +16,7 @@ const Button = styled.button`
 
   ${({ variant }) => variant === 'danger' && `
     background: #ee5555;
+    border-bottom: 2px solid #dd4444;
   `}
 
   &:hover {
