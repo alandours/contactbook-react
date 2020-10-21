@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { objectOf, any, func, bool } from 'prop-types';
+import { yupResolver } from '@hookform/resolvers';
 import * as actions from '@store/actions';
 import { appendFormattedData } from '@utils';
 
@@ -12,6 +13,8 @@ import Button from '@components/Button';
 import Loader from '@components/Loader';
 import MainForm from './components/MainForm';
 import SecondaryForm from './components/SecondaryForm';
+
+import schema from './schema';
 
 import styled from './styled';
 
@@ -25,8 +28,12 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
   const [formLoading, setFormLoading] = useState(true);
 
   const history = useHistory();
-  const methods = useForm();
   const formRef = useRef(null);
+
+  const methods = useForm({
+    resolver: yupResolver(schema)
+  });
+
   const { handleSubmit, reset } = methods;
 
   const { id: contactId, message } = contact || {};

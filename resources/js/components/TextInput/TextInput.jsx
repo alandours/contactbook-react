@@ -3,10 +3,11 @@ import { useFormContext } from 'react-hook-form';
 import { string, bool, oneOfType, number } from 'prop-types';
 
 import Icon from '@components/Icon';
+import FormError from '@components/FormError';
 
 import styled from './styled';
 
-const TextInput = ({ defaultValue, disabled, name, label, placeholder, type, icon }) => {
+const TextInput = ({ defaultValue, disabled, name, label, placeholder, type, icon, error }) => {
   const { register } = useFormContext();
 
   return type !== 'hidden' && (
@@ -23,6 +24,7 @@ const TextInput = ({ defaultValue, disabled, name, label, placeholder, type, ico
           type={type || 'text'}
         />
       </styled.Container>
+      <FormError>{ error }</FormError>
     </styled.Label>
   );
 };
@@ -34,7 +36,8 @@ TextInput.propTypes = {
   label: string,
   placeholder: string,
   type: string,
-  icon: string
+  icon: string,
+  error: string
 };
 
 TextInput.defaultProps = {
@@ -43,7 +46,8 @@ TextInput.defaultProps = {
   label: '',
   placeholder: '',
   type: '',
-  icon: ''
+  icon: '',
+  error: ''
 };
 
 export default TextInput;

@@ -5,8 +5,9 @@ import { size, weight } from '@theme/typography';
 const Label = styled.label`
   background: ${getColor('common', 'white')};
   display: flex;
-  width: 40%;
+  flex-direction: column;
   position: relative;
+  width: 40%;
 
   ${({ label }) => label === 'Alias' && `
     width: 222px;
