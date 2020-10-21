@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { getColor } from '@theme/mixins';
 import zindex from '@theme/zindex';
 
-const ContactForm = styled.div`
+const ContactForm = styled.form`
   overflow: scroll;
   width: 100%;
   margin-bottom: 3.25rem;
