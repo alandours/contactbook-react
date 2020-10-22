@@ -11,7 +11,10 @@ const schema = yup.object().shape({
   lastname: yup.string()
     .max(50, "The last name can't be longer than 50 characters"),
   birthday: yup.date('The birthday should be a date')
-    .max(new Date(), "The birthday can't be in the future"),
+    .typeError('It should be a valid date')
+    .max(new Date(), "The birthday can't be in the future")
+    .nullable()
+    .transform(emptyStringToNull),
   address: yup.string()
     .max(50, "The address can't be longer than 50 characters"),
   met: yup.number()

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { getColor } from '@theme/mixins';
-import { size } from '@theme/typography';
+import { size, weight } from '@theme/typography';
 
 const Button = styled.button`
   background: ${getColor('primary', 'main')};
@@ -19,6 +19,18 @@ const Button = styled.button`
     border-bottom: 2px solid #dd4444;
   `}
 
+  ${({ variant }) => variant === 'text' && `
+    align-self: flex-end;
+    background: none;
+    border: 0;
+    color: ${getColor('grey', 'darkest')};
+    font-size: ${size.text};
+    font-weight: ${weight.regular};
+    padding: 0;
+    text-align: right;
+    width: auto;
+  `}
+
   &:hover {
     background: ${getColor('primary', 'light')};
     transition: all ease 200ms;
@@ -26,7 +38,14 @@ const Button = styled.button`
     ${({ variant }) => variant === 'danger' && `
       background: #ff6666;
     `}
+
+    ${({ variant }) => variant === 'text' && `
+      background: none;
+      color: ${getColor('primary', 'dark')};
+    `}
   }
+
+  
 `;
 
 export default { Button };

@@ -15,7 +15,7 @@ import styled from './styled';
 const mapStateToProps = (state) => state;
 
 const SecondaryForm = ({ contact, appData }) => {
-  const { register, control, watch } = useFormContext();
+  const { register, control, watch, errors } = useFormContext();
 
   const { fields: aliases, append: appendAlias, remove: removeAlias } = useFieldArray({ control, name: 'aliases' });
   const { fields: numbers, append: appendNumber, remove: removeNumber } = useFieldArray({ control, name: 'numbers' });
@@ -25,82 +25,183 @@ const SecondaryForm = ({ contact, appData }) => {
   const { numberTypes, emailTypes, socialNetworks } = appData || {};
   const { id: contactId } = contact || {};
 
+  const renderAliasField = (alias, index) => {
+    const { aliases: err } = errors || {};
+    const { message } = (err && err[index] && err[index].alias && err[index].alias) || {};
+
+    return (
+      <styled.FormField key={alias.id}>
+        <TextInput
+          name={`aliases[${index}].alias`}
+          defaultValue={alias.alias}
+          label="Alias"
+          error={message}
+        />
+        <input
+          type="hidden"
+          name={`aliases[${index}].id`}
+          ref={register()}
+          defaultValue={alias.id}
+        />
+        <RemoveButton
+          type="button"
+          handleClick={() => removeAlias(index)}
+        />
+      </styled.FormField>
+    );
+  };
+
+
+  const renderNumberFields = (number, index) => {
+    const numberType = watch(`numbers[${index}].type`);
+    const { numbers: err } = errors || {};
+    const { message } = (err && err[index] && err[index].number && err[index].number) || {};
+
+    return (
+      <styled.FormField key={number.id}>
+        <TextInput
+          name={`numbers[${index}].number`}
+          defaultValue={number.number}
+          label="Phone number"
+          error={message}
+        />
+        <Select
+          name={`numbers[${index}].type`}
+          defaultValue={number.id_type}
+        >
+          {
+            numberTypes.map((type) => {
+              const { id, name } = type;
+              return <option key={id} value={id}>{name}</option>;
+            })
+          }
+        </Select>
+        <TextInput
+          name={`numbers[${index}].custom_label`}
+          disabled={numberType !== '999'}
+          defaultValue={numberType === '999' && number.custom_label ? number.custom_label : ''}
+          label="Custom name"
+        />
+        <input
+          type="hidden"
+          name={`numbers[${index}].id`}
+          ref={register()}
+          defaultValue={number.id}
+        />
+        <RemoveButton
+          type="button"
+          handleClick={() => removeNumber(index)}
+        />
+      </styled.FormField>
+    );
+  };
+
+  const renderEmailFields = (email, index) => {
+    const emailType = watch(`emails[${index}].type`);
+    const { emails: err } = errors || {};
+    const { message } = (err && err[index] && err[index].email && err[index].email) || {};
+
+    return (
+      <styled.FormField key={email.id}>
+        <TextInput
+          name={`emails[${index}].email`}
+          defaultValue={email.email}
+          label="E-mail"
+          error={message}
+        />
+        <Select
+          name={`emails[${index}].type`}
+          defaultValue={email.id_type}
+        >
+          {
+            emailTypes.map((type) => {
+              const { id, name } = type;
+              return <option key={id} value={id}>{name}</option>;
+            })
+          }
+        </Select>
+        <TextInput
+          name={`emails[${index}].custom_label`}
+          disabled={emailType !== '999'}
+          defaultValue={emailType === '999' && email.custom_label ? email.custom_label : ''}
+          label="Custom name"
+        />
+        <input
+          type="hidden"
+          name={`emails[${index}].id`}
+          ref={register()}
+          defaultValue={email.id}
+        />
+        <RemoveButton
+          type="button"
+          handleClick={() => removeEmail(index)}
+        />
+      </styled.FormField>
+    );
+  };
+
+  const renderSocialFields = (username, index) => {
+    const network = watch(`social[${index}].id_network`);
+    const { social: err } = errors || {};
+    const { message } = (err && err[index] && err[index].username && err[index].username) || {};
+
+    return (
+      <styled.FormField key={username.id}>
+        <TextInput
+          name={`social[${index}].username`}
+          defaultValue={username.username}
+          label="Username"
+          error={message}
+        />
+        <Select
+          name={`social[${index}].id_network`}
+          defaultValue={username.id_network}
+        >
+          {
+            socialNetworks.map((type) => {
+              const { id, name } = type;
+              return <option key={id} value={id}>{name}</option>;
+            })
+          }
+        </Select>
+        <TextInput
+          name={`social[${index}].custom_label`}
+          disabled={network !== '999'}
+          defaultValue={network === '999' && username.custom_label ? username.custom_label : ''}
+          label="Custom name"
+        />
+        <input
+          type="hidden"
+          name={`social[${index}].id`}
+          ref={register()}
+          defaultValue={username.id}
+        />
+        <RemoveButton
+          type="button"
+          handleClick={() => removeSocial(index)}
+        />
+      </styled.FormField>
+    );
+  };
+
+
   return (
     <styled.SecondaryForm>
       <ProfileSection title="Aliases" icon="id-card" sticky>
-        {
-          aliases.length ? aliases.map((alias, index) => (
-            <styled.FormField key={alias.id}>
-              <TextInput
-                name={`aliases[${index}].alias`}
-                defaultValue={alias.alias}
-                label="Alias"
-              />
-              <input
-                type="hidden"
-                name={`aliases[${index}].id`}
-                ref={register()}
-                defaultValue={alias.id}
-              />
-              <RemoveButton
-                type="button"
-                handleClick={() => removeAlias(index)}
-              />
-            </styled.FormField>
-          )) : appendAlias({ alias: '' })
-        }
+        { aliases.length ? aliases.map(renderAliasField) : appendAlias({ alias: '' }) }
         <Button
           type="button"
+          variant="text"
           handleClick={() => appendAlias({ alias: '' })}
         >
-          Add new alias
+          Add a new alias
         </Button>
       </ProfileSection>
       <ProfileSection title="Numbers" icon="phone" sticky>
-        {
-          numbers.length ? numbers.map((number, index) => {
-            const numberType = watch(`numbers[${index}].type`);
-
-            return (
-              <styled.FormField key={number.id}>
-                <TextInput
-                  name={`numbers[${index}].number`}
-                  defaultValue={number.number}
-                  label="Phone number"
-                />
-                <Select
-                  name={`numbers[${index}].type`}
-                  defaultValue={number.id_type}
-                >
-                  {
-                    numberTypes.map((type) => {
-                      const { id, name } = type;
-                      return <option key={id} value={id}>{name}</option>;
-                    })
-                  }
-                </Select>
-                <TextInput
-                  name={`numbers[${index}].custom_label`}
-                  disabled={numberType !== '999'}
-                  defaultValue={numberType === '999' && number.custom_label ? number.custom_label : ''}
-                  label="Custom name"
-                />
-                <input
-                  type="hidden"
-                  name={`numbers[${index}].id`}
-                  ref={register()}
-                  defaultValue={number.id}
-                />
-                <RemoveButton
-                  type="button"
-                  handleClick={() => removeNumber(index)}
-                />
-              </styled.FormField>
-            );
-          }) : appendNumber({})
-        }
+        { numbers.length ? numbers.map(renderNumberFields) : appendNumber({}) }
         <Button
           type="button"
+          variant="text"
           handleClick={() => appendNumber({
             id_contact: contactId,
             id_type: 1,
@@ -108,54 +209,14 @@ const SecondaryForm = ({ contact, appData }) => {
             custom_label: null
           })}
         >
-          Add new phone number
+          Add a new phone number
         </Button>
       </ProfileSection>
       <ProfileSection title="Emails" icon="envelope" sticky>
-        {
-          emails.length ? emails.map((email, index) => {
-            const emailType = watch(`emails[${index}].type`);
-
-            return (
-              <styled.FormField key={email.id}>
-                <TextInput
-                  name={`emails[${index}].email`}
-                  defaultValue={email.email}
-                  label="E-mail"
-                />
-                <Select
-                  name={`emails[${index}].type`}
-                  defaultValue={email.id_type}
-                >
-                  {
-                    emailTypes.map((type) => {
-                      const { id, name } = type;
-                      return <option key={id} value={id}>{name}</option>;
-                    })
-                  }
-                </Select>
-                <TextInput
-                  name={`emails[${index}].custom_label`}
-                  disabled={emailType !== '999'}
-                  defaultValue={emailType === '999' && email.custom_label ? email.custom_label : ''}
-                  label="Custom name"
-                />
-                <input
-                  type="hidden"
-                  name={`emails[${index}].id`}
-                  ref={register()}
-                  defaultValue={email.id}
-                />
-                <RemoveButton
-                  type="button"
-                  handleClick={() => removeEmail(index)}
-                />
-              </styled.FormField>
-            );
-          }) : appendEmail({})
-        }
+        { emails.length ? emails.map(renderEmailFields) : appendEmail({}) }
         <Button
           type="button"
+          variant="text"
           handleClick={() => appendEmail({
             id_contact: contactId,
             id_type: 1,
@@ -163,54 +224,14 @@ const SecondaryForm = ({ contact, appData }) => {
             custom_label: null
           })}
         >
-          Add new e-mail
+          Add a new e-mail
         </Button>
       </ProfileSection>
       <ProfileSection title="Social networks" icon="share-alt" sticky>
-        {
-          social.length ? social.map((username, index) => {
-            const network = watch(`social[${index}].id_network`);
-
-            return (
-              <styled.FormField key={username.id}>
-                <TextInput
-                  name={`social[${index}].username`}
-                  defaultValue={username.username}
-                  label="Username"
-                />
-                <Select
-                  name={`social[${index}].id_network`}
-                  defaultValue={username.id_network}
-                >
-                  {
-                    socialNetworks.map((type) => {
-                      const { id, name } = type;
-                      return <option key={id} value={id}>{name}</option>;
-                    })
-                  }
-                </Select>
-                <TextInput
-                  name={`social[${index}].custom_label`}
-                  disabled={network !== '999'}
-                  defaultValue={network === '999' && username.custom_label ? username.custom_label : ''}
-                  label="Custom name"
-                />
-                <input
-                  type="hidden"
-                  name={`social[${index}].id`}
-                  ref={register()}
-                  defaultValue={username.id}
-                />
-                <RemoveButton
-                  type="button"
-                  handleClick={() => removeSocial(index)}
-                />
-              </styled.FormField>
-            );
-          }) : appendSocial({})
-        }
+        { social.length ? social.map(renderSocialFields) : appendSocial({}) }
         <Button
           type="button"
+          variant="text"
           handleClick={() => appendSocial({
             id_contact: contactId,
             id_network: 1,
@@ -218,7 +239,7 @@ const SecondaryForm = ({ contact, appData }) => {
             custom_label: null
           })}
         >
-          Add new social network
+          Add a new social network
         </Button>
       </ProfileSection>
       <ProfileSection title="Notes" icon="sticky-note" sticky>

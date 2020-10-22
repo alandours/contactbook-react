@@ -7,10 +7,11 @@ const Label = styled.label`
   display: flex;
   flex-direction: column;
   position: relative;
+  min-width: 30%;
   width: 40%;
 
   ${({ label }) => label === 'Alias' && `
-    width: 222px;
+    width: 207px;
   `}
 `;
 
