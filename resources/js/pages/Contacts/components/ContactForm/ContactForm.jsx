@@ -88,7 +88,7 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
         <styled.FormActions>
           <Button
             type="button"
-            handleClick={() => deleteContact(contactId)}
+            handleClick={() => deleteContact(contactId).then(getContactList)}
             variant="danger"
           >
             Delete contact

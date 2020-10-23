@@ -54,7 +54,8 @@ export const formatDate = (birthdayDate) => {
 
 export const appendFormattedData = (formData, data) => {
   Object.keys(data).forEach((key) => {
-    const value = typeof data[key] === 'string' ? data[key] : JSON.stringify(data[key]);
+    const parsedData = data[key] === null ? '' : data[key];
+    const value = typeof parsedData === 'string' ? parsedData : JSON.stringify(parsedData);
     formData.append(`${key}`, value);
   });
 };
