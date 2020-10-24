@@ -82,7 +82,7 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
         onScroll={handleScroll}
         ref={formRef}
       >
-        { showFixedInfo && <FixedInfo contact={contact} /> }
+        { showFixedInfo && <FixedInfo contact={contact} isForm /> }
         { message && message.type === 'error' && <ContactMessage /> }
         <MainForm />
         <SecondaryForm />

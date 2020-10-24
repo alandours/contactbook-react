@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useFormContext } from 'react-hook-form';
 import { func, objectOf, any, bool } from 'prop-types';
@@ -23,15 +23,16 @@ const ProfilePicture = ({ thumbnail, contact, setContactPalette, handleClick }) 
 
   const { photo, fullName, palette } = contact;
 
-  if (!uploaded && watch) {
-    const imageFile = watch('image');
+  const imageField = watch && watch('image');
+  const uploadedImage = imageField && imageField[0];
 
-    if (imageFile && imageFile[0])
-      setUploaded(URL.createObjectURL(imageFile[0]));
-  }
+  useEffect(() => {
+    if (uploadedImage)
+      setUploaded(URL.createObjectURL(uploadedImage));
+  }, [uploadedImage]);
 
   const handlePalette = () => {
-    if (thumbnail || uploaded) return;
+    if (thumbnail) return;
     const currentPalette = getPalette(imageRef.current, 10);
     if (!palette || currentPalette.toString() !== palette.toString())
       setContactPalette(currentPalette);

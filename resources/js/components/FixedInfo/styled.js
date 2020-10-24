@@ -6,6 +6,7 @@ import zindex from '@theme/zindex';
 const FixedInfo = styled.div`
   background: ${getColor('common', 'white')};
   display: flex;
+  min-height: 46px;
   padding: 0.5rem 1rem;
   position: sticky;
   top: 0;
