@@ -3,7 +3,7 @@ import { getColor } from '@theme/mixins';
 import { weight, size } from '@theme/typography';
 import zindex from '@theme/zindex';
 
-const SectionHeader = styled.h3`
+const SectionHeader = styled.h2`
   background: ${getColor('grey', 'light')};
   border-bottom: 2px solid ${getColor('grey', 'normal')};
   font-size: ${size.info};

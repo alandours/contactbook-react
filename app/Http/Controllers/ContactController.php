@@ -85,10 +85,10 @@ class ContactController extends Controller
     $rules = [
       'name' => 'required|max:50',
       'lastname' => 'nullable|max:50',
-      'birthday' => 'nullable|date_format:Y-m-d|before_or_equal:today',
+      'birthday' => 'nullable|before_or_equal:today',
       'address' => 'nullable|max:50',
       'notes' => 'nullable|max:1000',
-      'met' => 'nullable|date_format:Y|after_or_equal:1000',
+      'met' => 'nullable|date_format:Y|after_or_equal:1900',
       'aliases' => 'nullable|array',
       'aliases.*.alias' => 'max:50',
       'emails' => 'nullable|array',
@@ -117,7 +117,7 @@ class ContactController extends Controller
     if (count($validationErrors)) {
       return response()->json([
         'type' => 'error',
-        'message' => 'The data is invalid',
+        'message' => 'The was an error validating the contact data on the server',
         'errors' => $validationErrors
       ]);
     }
@@ -154,8 +154,7 @@ class ContactController extends Controller
     } else {
       return response()->json([
         'type' => 'error',
-        'message' => 'There was an error adding the contact',
-        'contact' => $this->get($id)
+        'message' => 'There was an error adding the contact'
       ]);
     }
   }
@@ -186,7 +185,7 @@ class ContactController extends Controller
     if (count($validationErrors)) {
       return response()->json([
         'type' => 'error',
-        'message' => 'The data is invalid',
+        'message' => 'The was an error validating the contact data on the server',
         'errors' => $validationErrors
       ]);
     }

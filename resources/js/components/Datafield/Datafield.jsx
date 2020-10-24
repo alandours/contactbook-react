@@ -7,7 +7,12 @@ const Datafield = ({ name, label, url }) => (
   <styled.Datafield>
     {
       url || label ? (
-        <styled.DataContainer href={url} target="_blank" as={url ? 'a' : 'div'}>
+        <styled.DataContainer
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          as={url ? 'a' : 'div'}
+        >
           <styled.Name>{name}</styled.Name>
           <styled.Label>{label}</styled.Label>
         </styled.DataContainer>

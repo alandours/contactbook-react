@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { getColor } from '@theme/mixins';
 import { weight, size } from '@theme/typography';
 
-const Header = styled.div`
+const Header = styled.header`
   background: ${getColor('common', 'white')};
   box-shadow: 0 2px 6px 0 ${getColor('grey', 'normal')};
   color: ${getColor('common', 'black')};
