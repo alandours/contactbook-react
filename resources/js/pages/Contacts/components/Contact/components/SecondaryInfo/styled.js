@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { getColor } from '@theme/mixins';
-import { size, weight } from '@theme/typography';
 
 const SecondaryInfo = styled.div`
   display: flex;

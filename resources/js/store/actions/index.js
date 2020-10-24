@@ -59,6 +59,8 @@ export const addContact = (data) => async (dispatch) => {
   const { contact, message, type } = response.data || {};
   dispatch(setContact(contact));
   dispatch(setContactMessage({ message, type }));
+  dispatch(getContactList());
+  return type === 'success';
 };
 
 export const updateContact = (id, data) => async (dispatch) => {
@@ -68,6 +70,8 @@ export const updateContact = (id, data) => async (dispatch) => {
   const { contact, message, type } = response.data || {};
   dispatch(setContact(contact));
   dispatch(setContactMessage({ message, type }));
+  dispatch(getContactList());
+  return type === 'success';
 };
 
 export const deleteContact = (id) => async (dispatch) => {

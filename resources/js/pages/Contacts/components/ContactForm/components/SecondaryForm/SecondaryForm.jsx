@@ -8,7 +8,6 @@ import Button from '@components/Button';
 import TextInput from '@components/TextInput';
 import Select from '@components/Select';
 import Textarea from '@components/Textarea';
-import RemoveButton from './components/RemoveButton';
 
 import styled from './styled';
 
@@ -43,7 +42,7 @@ const SecondaryForm = ({ contact, appData }) => {
           ref={register()}
           defaultValue={alias.id}
         />
-        <RemoveButton
+        <styled.RemoveButton
           type="button"
           handleClick={() => removeAlias(index)}
         />
@@ -88,7 +87,7 @@ const SecondaryForm = ({ contact, appData }) => {
           ref={register()}
           defaultValue={number.id}
         />
-        <RemoveButton
+        <styled.RemoveButton
           type="button"
           handleClick={() => removeNumber(index)}
         />
@@ -132,7 +131,7 @@ const SecondaryForm = ({ contact, appData }) => {
           ref={register()}
           defaultValue={email.id}
         />
-        <RemoveButton
+        <styled.RemoveButton
           type="button"
           handleClick={() => removeEmail(index)}
         />
@@ -176,7 +175,7 @@ const SecondaryForm = ({ contact, appData }) => {
           ref={register()}
           defaultValue={username.id}
         />
-        <RemoveButton
+        <styled.RemoveButton
           type="button"
           handleClick={() => removeSocial(index)}
         />

@@ -1,9 +1,15 @@
 import styled from 'styled-components';
-import RemoveButtonStyles from './components/RemoveButton/styled';
 
-const { RemoveButton } = RemoveButtonStyles;
+import CloseButton from '@components/CloseButton';
 
 const SecondaryForm = styled.div`
+`;
+
+const RemoveButton = styled(CloseButton)`
+  margin-left: 1.5rem;
+  opacity: 0;
+  transition: all ease 200ms;
+  visibility: hidden;
 `;
 
 const FormField = styled.div`
@@ -18,4 +24,4 @@ const FormField = styled.div`
   }
 `;
 
-export default { SecondaryForm, FormField };
+export default { SecondaryForm, FormField, RemoveButton };

@@ -1,32 +1,63 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setContactMessage } from '@store/actions';
+import { string, func } from 'prop-types';
 
 import styled from './styled';
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = (state) => {
+  const { message: text, type } = state.contact.message || {};
+  return {
+    text,
+    type
+  };
+};
 
 const mapDispatchToProps = {
   setContactMessage
 };
 
-const ContactMessage = ({ contact, setContactMessage }) => {
-  const { message } = contact;
-  const { type, message: messageText } = message || {};
+const ContactMessage = ({ text, type, setContactMessage }) => {
+  const [visible, setVisible] = useState(true);
+
+  const closeMessage = () => {
+    setVisible(false);
+    setTimeout(() => {
+      setContactMessage(null);
+    }, 250);
+  };
 
   useEffect(() => {
-    if (message) {
-      setTimeout(() => {
-        setContactMessage(null);
-      }, 3000);
-    }
-  }, [message]);
+    const timeOut = type === 'success' ? 1500 : 4000;
 
-  return !!message && (
-    <styled.ContactMessage type={type}>
-      { messageText }
+    if (text) {
+      const messageTimeout = setTimeout(() => {
+        closeMessage();
+        clearTimeout(messageTimeout);
+      }, timeOut);
+    }
+
+    return () => setVisible(true);
+  }, [text]);
+
+  return !!text && (
+    <styled.ContactMessage type={type} visible={visible}>
+      { text }
+      <styled.Button type="button" onClick={closeMessage} />
     </styled.ContactMessage>
   );
+};
+
+ContactMessage.propTypes = {
+  text: string,
+  type: string,
+  setContactMessage: func
+};
+
+ContactMessage.defaultProps = {
+  text: '',
+  type: '',
+  setContactMessage: () => {}
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactMessage);

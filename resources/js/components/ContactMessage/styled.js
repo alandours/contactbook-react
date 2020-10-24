@@ -1,9 +1,40 @@
 import styled from 'styled-components';
 import { getColor } from '@theme/mixins';
-import { weight, size } from '@theme/typography';
-import zindex from '@theme/zindex';
 
-const ContactMessage = styled.div`
+import CloseButton from '@components/CloseButton';
+
+const Button = styled(CloseButton)`
+  position: absolute;
+  top: 0.6rem;
+  right: 1rem;
 `;
 
-export default { ContactMessage };
+const ContactMessage = styled.div`
+  border-radius: 4px;
+  position: absolute;
+  left: 2%;
+  opacity: 0;
+  padding: 0.6rem 1rem;
+  transition: opacity 300ms;
+  top: 2%;
+  width: 96%;
+  z-index: 1000;
+
+  ${({ type }) => type === 'success' && `
+    background: ${getColor('primary', 'main')};
+    border: 1px solid ${getColor('primary', 'dark')};
+    color: ${getColor('common', 'white')};
+  `};
+
+  ${({ type }) => type === 'error' && `
+    background: #EE5555;
+    border: 1px solid #dd4444;
+    color: ${getColor('common', 'white')};
+  `};
+
+  ${({ visible }) => visible && `
+    opacity: 1;
+  `};
+`;
+
+export default { ContactMessage, Button };

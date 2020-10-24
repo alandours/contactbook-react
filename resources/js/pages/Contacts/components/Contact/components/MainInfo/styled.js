@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import RoundLinkStyles from '@components/RoundLink/styled';
-
-const { RoundLink } = RoundLinkStyles;
+import RoundLink from '@components/RoundLink';
 
 const MainInfo = styled.div`
   align-items: center;

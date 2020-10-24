@@ -39,14 +39,10 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
   const { id: contactId, message } = contact || {};
 
   useEffect(() => {
-    if (!message) {
+    if (!message || message.type !== 'error') {
       reset(contact);
       setFormLoading(false);
     }
-
-    const { type: messageType } = message || {};
-
-    if (messageType === 'success') history.push(`/contacts/${contactId}`);
   }, [contact]);
 
   useEffect(() => {
@@ -61,15 +57,20 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
     }
   };
 
+  const redirect = (success) => {
+    if (success)
+      history.push(`/contacts/${contactId}`);
+  };
+
   const onSubmit = (data) => {
     const formData = new FormData();
     appendFormattedData(formData, data);
     formData.append('image', data.image[0]);
 
     if (edit)
-      updateContact(contactId, formData).then(getContactList);
+      updateContact(contactId, formData).then(redirect);
     else
-      addContact(formData).then(getContactList);
+      addContact(formData).then(redirect);
   };
 
   if (!appData || !appData.numberTypes) return null;
@@ -82,7 +83,7 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
         ref={formRef}
       >
         { showFixedInfo && <FixedInfo contact={contact} /> }
-        <ContactMessage />
+        { message && message.type === 'error' && <ContactMessage /> }
         <MainForm />
         <SecondaryForm />
         <styled.FormActions>

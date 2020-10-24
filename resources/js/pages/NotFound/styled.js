@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import TitleStyles from '@components/Title/styled';
-
-const { Title } = TitleStyles;
+import Title from '@components/Title';
 
 const NotFound = styled.div`
 `;

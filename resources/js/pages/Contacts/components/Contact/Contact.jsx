@@ -19,7 +19,7 @@ const Contact = ({ contact }) => {
   const { id, loading } = contact || {};
 
   const handleScroll = (e) => {
-    if (e.target.scrollTop > 180) setShowFixedInfo(true);
+    if (e.target.scrollTop > 190) setShowFixedInfo(true);
     else setShowFixedInfo(false);
   };
 
