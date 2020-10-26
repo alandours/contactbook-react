@@ -7,11 +7,6 @@ import { getPalette } from '@utils/color';
 
 import styled from './styled';
 
-const mapStateToProps = (state, ownProps) => ({
-  ...state,
-  ...ownProps
-});
-
 const mapDispatchToProps = {
   setContactPalette
 };
@@ -40,7 +35,7 @@ const ProfilePicture = ({ thumbnail, contact, setContactPalette, handleClick }) 
 
   return (
     <styled.ProfilePicture
-      src={uploaded || `/img/contacts/${photo}`}
+      src={uploaded || `/img/contacts/${photo || 'contact.jpg'}`}
       alt={`${fullName}'s profile picture`}
       thumbnail={thumbnail}
       ref={imageRef}
@@ -63,4 +58,4 @@ ProfilePicture.defaultProps = {
   handleClick: () => {}
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfilePicture);
+export default connect(null, mapDispatchToProps)(ProfilePicture);

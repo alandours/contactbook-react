@@ -39,17 +39,32 @@ export const calculateAge = (birthdayDate) => {
   return (age < 100) ? age : null;
 };
 
-export const formatDate = (birthdayDate) => {
+const formatDate = (birthdayDate) => {
   const parts = birthdayDate.split('-');
-  const birthday = new Date(parts[0], (parts[1] - 1), parts[2], 12, 0o0, 0o0);
+  return new Date(parts[0], (parts[1] - 1), parts[2], 12, 0o0, 0o0);
+};
 
+export const getFullBirthday = (birthday) => {
+  const birthdayDate = formatDate(birthday);
   const options = { month: 'long' };
 
-  if (calculateAge(birthdayDate)) {
-    return `${birthday.getUTCDate()} de ${birthday.toLocaleDateString('es-AR', options)} de ${birthday.getUTCFullYear()}`;
-  }
+  if (calculateAge(birthdayDate))
+    return `${birthdayDate.getUTCDate()} de ${birthdayDate.toLocaleDateString('es-AR', options)} de ${birthdayDate.getUTCFullYear()}`;
 
-  return `${birthday.getUTCDate()} de ${birthday.toLocaleDateString('es-AR', options)}`;
+  return `${birthdayDate.getUTCDate()} de ${birthdayDate.toLocaleDateString('es-AR', options)}`;
+};
+
+export const getNextBirthday = (birthday) => {
+  const todayDate = new Date();
+  const birthdayDate = formatDate(birthday);
+
+  const currentYear = todayDate.getFullYear();
+  birthdayDate.setFullYear(currentYear);
+
+  const isBirthdayInCurrentYear = (birthdayDate - todayDate) > 0;
+  const isBirthdayToday = birthdayDate.toDateString() === todayDate.toDateString();
+
+  return (isBirthdayInCurrentYear || isBirthdayToday) ? birthdayDate : birthdayDate.setFullYear(currentYear + 1) && birthdayDate;
 };
 
 export const appendFormattedData = (formData, data) => {

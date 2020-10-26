@@ -5,6 +5,7 @@ import { func } from 'prop-types';
 
 import { getContact } from '@store/actions';
 
+import Birthdays from '@pages/Birthdays';
 import Container from '@components/Container';
 import ContactList from '@components/ContactList';
 import Dashboard from './components/Dashboard';
@@ -26,6 +27,9 @@ const Contacts = ({ getContact }) => (
       <Switch>
         <Route path="/contacts" exact>
           <Dashboard />
+        </Route>
+        <Route path="/contacts/birthdays">
+          <Birthdays />
         </Route>
         <Route path="/contacts/new">
           <ContactForm />

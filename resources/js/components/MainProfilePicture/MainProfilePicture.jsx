@@ -30,7 +30,7 @@ const MainProfilePicture = ({ contact }) => {
           />
         </Backdrop>
       )}
-      <ProfilePicture handleClick={() => setIsOpen(true)} />
+      <ProfilePicture contact={contact} handleClick={() => setIsOpen(true)} />
     </>
   );
 };
