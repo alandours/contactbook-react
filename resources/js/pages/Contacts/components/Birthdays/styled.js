@@ -17,7 +17,6 @@ const Title = styled.h2`
 `;
 
 const Month = styled.div`
-  /* margin: 1rem; */
 `;
 
 const MonthName = styled.h3`

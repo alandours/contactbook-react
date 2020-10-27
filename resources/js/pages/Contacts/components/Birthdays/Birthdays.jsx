@@ -51,7 +51,7 @@ const renderBirthdays = (contacts) => {
 };
 
 const Birthdays = () => {
-  const contacts = useSelector((state) => state.contactList);
+  const contacts = useSelector((state) => state.contactList && state.contactList.list);
 
   return contacts && contacts.length ? (
     <styled.Birthdays>

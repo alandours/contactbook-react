@@ -13,7 +13,7 @@ const FixedInfo = ({ contact, isForm }) => {
 
   return (
     <styled.FixedInfo>
-      { !isForm && <ProfilePicture contact={contact} thumbnail /> }
+      <ProfilePicture contact={contact} thumbnail />
       <styled.Name>{ fullName || 'New contact' }</styled.Name>
     </styled.FixedInfo>
   );

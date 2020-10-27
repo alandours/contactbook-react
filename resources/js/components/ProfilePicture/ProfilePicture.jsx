@@ -27,7 +27,7 @@ const ProfilePicture = ({ thumbnail, contact, setContactPalette, handleClick }) 
   }, [uploadedImage]);
 
   const handlePalette = () => {
-    if (thumbnail) return;
+    if (thumbnail || uploaded) return;
     const currentPalette = getPalette(imageRef.current, 10);
     if (!palette || currentPalette.toString() !== palette.toString())
       setContactPalette(currentPalette);
