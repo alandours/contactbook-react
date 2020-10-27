@@ -40,7 +40,7 @@ class ContactController extends Controller
     $text = preg_replace('/\s+/', '', $text);
 
     return DB::select('SELECT * FROM 
-                        (SELECT CONCAT_WS(" ", name, lastname) AS fullname, name, lastname, address, notes, contacts.id AS id, alias, email, number, username FROM contacts
+                        (SELECT CONCAT_WS(" ", name, lastname) AS fullname, name, lastname, address, met, notes, contacts.id AS id, alias, email, number, username FROM contacts
                         LEFT JOIN alias ON contacts.id = alias.id_contact
                         LEFT JOIN emails ON contacts.id = emails.id_contact
                         LEFT JOIN numbers ON contacts.id = numbers.id_contact
@@ -51,12 +51,13 @@ class ContactController extends Controller
                         OR REPLACE(name, " ", "") LIKE ?
                         OR REPLACE(lastname, " ", "") LIKE ?
                         OR REPLACE(address, " ", "") LIKE ?
+                        OR REPLACE(met, " ", "") LIKE ?
                         OR REPLACE(notes, " ", "") LIKE ?
                         OR REPLACE(alias, " ", "") LIKE ?
                         OR REPLACE(email, " ", "") LIKE ?
                         OR REPLACE(number, " ", "") LIKE ?
                         OR REPLACE(username, " ", "") LIKE ?)
-                        ORDER BY name ASC', ['%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%']);
+                        ORDER BY name ASC', ['%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%', '%'.$text.'%']);
 
   }
 
@@ -379,5 +380,14 @@ class ContactController extends Controller
       'message' => 'There was an error deleting '.$contact->fullName,
       'contact' => $contact
     ]);
+  }
+
+  public function getStats() {
+    return Contact::where('active', 1)
+                  ->select('met', DB::raw('count(*) as total'))
+                  ->groupBy('met')
+                  ->orderBy('met', 'asc')
+                  ->pluck('total', 'met')
+                  ->all();
   }
 }

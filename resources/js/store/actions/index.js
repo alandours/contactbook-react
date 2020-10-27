@@ -18,8 +18,18 @@ export const setContactList = (data) => ({
   payload: data
 });
 
+export const setYearFilter = (data) => ({
+  type: 'SET_YEAR_FILTER',
+  payload: data
+});
+
 export const setAppData = (data) => ({
   type: 'SET_APP_DATA',
+  payload: data
+});
+
+export const setStats = (data) => ({
+  type: 'SET_STATS',
   payload: data
 });
 
@@ -50,6 +60,12 @@ export const getAppData = () => async (dispatch) => {
   const url = '/api/contacts/setup';
   const response = await axios.get(url);
   dispatch(setAppData(response.data));
+};
+
+export const getStats = () => async (dispatch) => {
+  const url = '/api/contacts/stats';
+  const response = await axios.get(url);
+  dispatch(setStats(response.data));
 };
 
 export const addContact = (data) => async (dispatch) => {

@@ -5,12 +5,13 @@ import { func } from 'prop-types';
 
 import { getContact } from '@store/actions';
 
-import Birthdays from '@pages/Birthdays';
 import Container from '@components/Container';
 import ContactList from '@components/ContactList';
 import Dashboard from './components/Dashboard';
 import Contact from './components/Contact';
 import ContactForm from './components/ContactForm';
+import Birthdays from './components/Birthdays';
+import StatsByYear from './components/StatsByYear';
 
 import styled from './styled';
 
@@ -30,6 +31,9 @@ const Contacts = ({ getContact }) => (
         </Route>
         <Route path="/contacts/birthdays">
           <Birthdays />
+        </Route>
+        <Route path="/contacts/year">
+          <StatsByYear />
         </Route>
         <Route path="/contacts/new">
           <ContactForm />

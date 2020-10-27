@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { bool, arrayOf, any, func } from 'prop-types';
+import { bool, objectOf, any, func } from 'prop-types';
 import { getContactList } from '@store/actions';
 import { getFirstLetter, formatFullName } from '@utils';
 
@@ -10,7 +10,7 @@ import Loader from '@components/Loader';
 
 import styled from './styled';
 
-const buildContactList = (contacts) => {
+const renderContactList = (contacts) => {
   const groups = contacts.reduce((acc, contact) => {
     const { id, name, lastname } = contact;
     const fullName = formatFullName(name, lastname);
@@ -42,7 +42,7 @@ const mapDispatchToProps = {
 };
 
 const ContactList = ({ hasSearch, contactList, getContactList }) => {
-  const [list, setList] = useState([]);
+  const [displayList, setDisplayList] = useState(null);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
 
@@ -51,9 +51,13 @@ const ContactList = ({ hasSearch, contactList, getContactList }) => {
   }, [search]);
 
   useEffect(() => {
-    if ((contactList)) {
+    if (contactList) {
+      const { list, filter } = contactList || {};
+
+      const filteredList = filter ? list.filter((contact) => contact.met && contact.met.toString() === filter) : list;
+
+      setDisplayList(filteredList);
       setLoading(false);
-      setList(buildContactList(contactList));
     }
   }, [contactList]);
 
@@ -64,10 +68,12 @@ const ContactList = ({ hasSearch, contactList, getContactList }) => {
           handleTyping={(e) => setSearch(e.target.value)}
         />
       )}
-      { loading ? <Loader /> : (
+
+      { displayList && (
         <div>
-          { list }
-          <styled.Count>{`${contactList.length} contacts`}</styled.Count>
+          { loading && <Loader /> }
+          { renderContactList(displayList) }
+          <styled.Count>{`${displayList.length} contacts`}</styled.Count>
         </div>
       )}
     </>
@@ -76,13 +82,13 @@ const ContactList = ({ hasSearch, contactList, getContactList }) => {
 
 ContactList.propTypes = {
   hasSearch: bool,
-  contactList: arrayOf(any),
+  contactList: objectOf(any),
   getContactList: func
 };
 
 ContactList.defaultProps = {
   hasSearch: false,
-  contactList: [],
+  contactList: {},
   getContactList: () => {}
 };
 

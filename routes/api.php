@@ -19,6 +19,8 @@ use Illuminate\Http\Request;
 
 Route::get('contacts/setup', 'ContactController@getAppData');
 
+Route::get('contacts/stats', 'ContactController@getStats');
+
 Route::get('contacts/list', 'ContactController@list');
 
 Route::get('contacts/search/{text}', 'ContactController@search');
