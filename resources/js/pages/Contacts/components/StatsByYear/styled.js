@@ -6,7 +6,10 @@ import zindex from '@theme/zindex';
 import Title from '@components/Title';
 
 const StatsByYear = styled.div`
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  justify-content: space-between;
   overflow: auto;
   padding: 1rem;
   width: 100%;
@@ -20,6 +23,7 @@ const Stats = styled.div`
   align-items: flex-end;
   display: flex;
   justify-content: space-between;
+  margin: 3rem 0;
   width: 100%;
 
   ${({ height }) => !!height && `
@@ -39,8 +43,10 @@ const Year = styled.div`
 
 const Quantity = styled.div`
   color: ${getColor('primary', 'dark')};
+  display: flex;
   font-size: ${size.small};
   font-weight: ${weight.regular};
+  justify-content: center;
   opacity: 0;
   position: absolute;
   text-align: center;
