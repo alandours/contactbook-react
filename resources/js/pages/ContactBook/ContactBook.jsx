@@ -8,6 +8,7 @@ import { getAppData } from '@store/actions';
 import Header from '@components/Header';
 import Footer from '@components/Footer';
 import Contacts from '@pages/Contacts';
+import Settings from '@pages/Settings';
 
 import styled from './styled';
 
@@ -33,7 +34,7 @@ const ContactBook = ({ getAppData }) => {
               <Contacts />
             </Route>
             <Route path="/settings">
-              <div>Settings</div>
+              <Settings />
             </Route>
           </Switch>
         </styled.MainContainer>

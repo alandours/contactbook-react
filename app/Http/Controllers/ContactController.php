@@ -107,6 +107,7 @@ class ContactController extends Controller
 
   public function add(Request $request) {
     $request->merge([
+      'birthday' => json_decode($request->birthday, true),
       'aliases' => json_decode($request->aliases, true),
       'numbers' => json_decode($request->numbers, true),
       'emails' => json_decode($request->emails, true),
@@ -175,6 +176,7 @@ class ContactController extends Controller
 
   public function update($id, Request $request) {
     $request->merge([
+      'birthday' => json_decode($request->birthday, true),
       'aliases' => json_decode($request->aliases, true),
       'numbers' => json_decode($request->numbers, true),
       'emails' => json_decode($request->emails, true),

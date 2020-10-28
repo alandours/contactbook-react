@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { objectOf, any, func, bool } from 'prop-types';
 import { yupResolver } from '@hookform/resolvers';
 import * as actions from '@store/actions';
-import { appendFormattedData } from '@utils';
+import { appendFormattedData, setPageTitle } from '@utils';
 
 import FixedInfo from '@components/FixedInfo';
 import ContactMessage from '@components/ContactMessage';
@@ -36,13 +36,16 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
 
   const { handleSubmit, reset } = methods;
 
-  const { id: contactId, message } = contact || {};
+  const { id: contactId, fullName, message } = contact || {};
 
   useEffect(() => {
     if (!message || message.type !== 'error') {
       reset(contact);
       setFormLoading(false);
     }
+
+    if (contact)
+      setPageTitle(edit ? `Edit ${fullName}` : 'Add contact');
   }, [contact]);
 
   useEffect(() => {

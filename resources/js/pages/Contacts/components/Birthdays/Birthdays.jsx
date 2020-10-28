@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import { getNextBirthday } from '@utils';
+import { getNextBirthday, setPageTitle } from '@utils';
 
 import Loader from '@components/Loader';
 import SectionHeader from '@components/SectionHeader';
@@ -52,6 +52,10 @@ const renderBirthdays = (contacts) => {
 
 const Birthdays = () => {
   const contacts = useSelector((state) => state.contactList && state.contactList.list);
+
+  useEffect(() => {
+    setPageTitle('Birthdays');
+  }, []);
 
   return contacts && contacts.length ? (
     <styled.Birthdays>

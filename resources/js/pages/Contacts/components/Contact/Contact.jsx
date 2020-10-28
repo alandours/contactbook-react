@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { objectOf, any } from 'prop-types';
 import { connect } from 'react-redux';
+import { setPageTitle } from '@utils';
 
 import NotFound from '@pages/NotFound';
 import Loader from '@components/Loader';
@@ -15,6 +16,11 @@ const mapStateToProps = (state) => state;
 
 const Contact = ({ contact }) => {
   const [showFixedInfo, setShowFixedInfo] = useState(false);
+
+  useEffect(() => {
+    const { fullName } = contact || {};
+    setPageTitle(fullName);
+  }, [contact]);
 
   const { id, loading } = contact || {};
 

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getStats, setYearFilter } from '@store/actions';
+import { setPageTitle } from '@utils';
 
 import Loader from '@components/Loader';
 
@@ -14,6 +15,7 @@ const StatsByYear = () => {
 
   useEffect(() => {
     dispatch(getStats());
+    setPageTitle('Stats by year');
     return () => dispatch(setYearFilter(null));
   }, []);
 

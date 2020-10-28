@@ -74,3 +74,8 @@ export const appendFormattedData = (formData, data) => {
     formData.append(`${key}`, value);
   });
 };
+
+export const setPageTitle = (title) => {
+  const sitename = process.env.MIX_APP_NAME;
+  document.title = title ? `${sitename} - ${title}` : sitename;
+};

@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-import { func } from 'prop-types';
-
 import { getContact } from '@store/actions';
+import { func } from 'prop-types';
 
 import Container from '@components/Container';
 import ContactList from '@components/ContactList';
