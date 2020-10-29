@@ -31,7 +31,7 @@ const Button = styled.button`
     width: auto;
   `}
 
-  &:hover {
+  &:hover, &:focus {
     background: ${getColor('primary', 'light')};
     transition: all ease 200ms;
 

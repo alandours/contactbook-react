@@ -36,7 +36,7 @@ const DeleteIcon = styled(FontAwesomeIcon)`
   font-size: ${size.small};
   margin-right: 0.5rem;
 
-  &:hover {
+  &:hover, &:focus {
     color: ${getColor('danger', 'main')};
   }
 `;
@@ -44,7 +44,7 @@ const DeleteIcon = styled(FontAwesomeIcon)`
 const DeleteButton = styled(Button)`
   padding: 0.5rem;
 
-  &:hover {
+  &:hover, &:focus {
     color: ${getColor('danger', 'main')};
   }
 `;

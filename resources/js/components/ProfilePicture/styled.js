@@ -12,9 +12,11 @@ const ProfilePicture = styled.img`
   position: relative;
   width: 200px;
 
-  &:hover {
-    cursor: pointer;
-  }
+  ${({ onClick }) => !!onClick && `
+    &:hover {
+      cursor: pointer;
+    }
+  `};
 
   ${({ thumbnail }) => !!thumbnail && `
     border-width: 2px;
