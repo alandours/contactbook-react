@@ -101,3 +101,13 @@ export const deleteContact = (id) => async (dispatch) => {
     dispatch(resetContact());
   dispatch(setContactMessage({ message, type }));
 };
+
+export const toggleFavorite = (id, value) => async (dispatch) => {
+  const url = `/api/contacts/${id}/favorite`;
+  const response = await axios.post(url, { value });
+  const { data: contact } = response || {};
+  if (contact) {
+    dispatch(setContactLoading());
+    dispatch(setContact(contact));
+  }
+};

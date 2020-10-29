@@ -15,8 +15,13 @@ import {
   faBirthdayCake,
   faPen,
   faTimes,
-  faChevronDown
+  faChevronDown,
+  faHeart
 } from '@fortawesome/free-solid-svg-icons';
+
+import {
+  faHeart as faHeartRegular
+} from '@fortawesome/free-regular-svg-icons';
 
 library.add(
   faCog,
@@ -34,7 +39,9 @@ library.add(
   faBirthdayCake,
   faPen,
   faTimes,
-  faChevronDown
+  faChevronDown,
+  faHeart,
+  faHeartRegular
 );
 
 export default library;

@@ -25,6 +25,8 @@ const DataContainer = styled.a`
 const Name = styled.div`
   color: ${getColor('primary', 'dark')};
   font-weight: ${weight.normal};
+  overflow: hidden;
+  text-overflow: ellipsis;
   width: 50%;
 `;
 

@@ -2,13 +2,14 @@ import React from 'react';
 import { objectOf, any } from 'prop-types';
 import { getFullBirthday, calculateAge } from '@utils';
 
-import Icon from '@components/Icon';
 import Title from '@components/Title';
+import FavoriteIcon from '@components/FavoriteIcon';
+import Icon from '@components/Icon';
 
 import styled from './styled';
 
 const ProfileData = ({ contact }) => {
-  const { fullName, birthday, address, met } = contact;
+  const { id, fullName, birthday, address, met, favorite } = contact;
   return (
     <styled.ProfileData>
       <styled.MainDatafield>
@@ -16,6 +17,11 @@ const ProfileData = ({ contact }) => {
           <styled.Name birthday={birthday && calculateAge(birthday)}>
             { fullName }
           </styled.Name>
+          <FavoriteIcon
+            isFavorite={!!favorite}
+            id={id}
+            isButton
+          />
         </Title>
       </styled.MainDatafield>
       { birthday && (

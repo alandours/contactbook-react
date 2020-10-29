@@ -31,7 +31,7 @@ class ContactController extends Controller
 
   public function list() {
     return Contact::where('active', 1)
-                  ->select(['id', 'name', 'lastname', 'birthday', 'address', 'met', 'photo'])
+                  ->select(['id', 'name', 'lastname', 'birthday', 'address', 'met', 'photo', 'favorite'])
                   ->orderBy('name', 'ASC')
                   ->get();
   }
@@ -391,5 +391,13 @@ class ContactController extends Controller
                   ->orderBy('met', 'asc')
                   ->pluck('total', 'met')
                   ->all();
+  }
+
+  public function toggleFavorite($id, Request $request) {
+    Contact::where('id', $id)
+              ->update([
+                  'favorite' => $request->value,
+              ]);
+    return $this->get($id);
   }
 }

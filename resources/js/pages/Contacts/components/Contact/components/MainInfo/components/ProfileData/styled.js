@@ -16,6 +16,7 @@ const MainDatafield = styled.div`
 const Name = styled.span`
   display: flex;
   align-items: center;
+  margin-right: 1rem;
 
   &:after {
     ${({ birthday }) => !!birthday && `
@@ -23,8 +24,8 @@ const Name = styled.span`
       font-size: ${size.large};
       font-weight: ${weight.regular};
       color: ${getColor('grey', 'darker')};
-      margin: 0 1rem;
-      margin-top: 2px;
+      margin-left: 1rem;
+      margin-top: 1px;
     `};
   }
 `;

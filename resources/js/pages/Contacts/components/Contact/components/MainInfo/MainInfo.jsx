@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { objectOf, any } from 'prop-types';
 
 import Gradient from '@components/Gradient';
-import Icon from '@components/Icon';
 import MainProfilePicture from '@components/MainProfilePicture';
+import Icon from '@components/Icon';
 import ProfileData from './components/ProfileData';
 
 import styled from './styled';

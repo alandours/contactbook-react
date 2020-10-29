@@ -31,4 +31,6 @@ Route::post('contacts/{id}/update', 'ContactController@update');
 
 Route::delete('contacts/{id}/delete', 'ContactController@delete');
 
+Route::post('contacts/{id}/favorite', 'ContactController@toggleFavorite');
+
 Route::get('contacts/{id}', 'ContactController@get');
