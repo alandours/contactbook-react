@@ -27,8 +27,8 @@ const ContactMessage = styled.div`
   `};
 
   ${({ type }) => type === 'error' && `
-    background: #EE5555;
-    border: 1px solid #dd4444;
+    background: ${getColor('danger', 'main')};
+    border: 1px solid ${getColor('danger', 'dark')};
     color: ${getColor('common', 'white')};
   `};
 

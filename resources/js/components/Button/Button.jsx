@@ -3,11 +3,12 @@ import { oneOfType, array, string, element, func } from 'prop-types';
 
 import styled from './styled';
 
-const Button = ({ children, type, variant, handleClick }) => (
+const Button = ({ children, type, variant, handleClick, ...rest }) => (
   <styled.Button
     type={type}
     onClick={handleClick}
     variant={variant}
+    {...rest}
   >
     { children }
   </styled.Button>

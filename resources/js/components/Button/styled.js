@@ -11,7 +11,7 @@ const Button = styled.button`
   cursor: pointer;
   font-size: ${size.text};
   font-weight: 500;
-  padding: 0.5rem;
+  padding: 0.5rem 1.5rem;
   transition: all ease 100ms;
 
   ${({ variant }) => variant === 'danger' && `

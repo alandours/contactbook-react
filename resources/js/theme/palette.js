@@ -17,6 +17,11 @@ const palette = {
     light: '#3B3B3B',
     dark: '#2B2B2B'
   },
+  danger: {
+    main: '#d42222',
+    light: '#de2a2a',
+    dark: '#9e1919'
+  },
   grey: {
     lighter: '#f8f8f8',
     light: '#eee',

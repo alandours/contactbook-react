@@ -109,5 +109,6 @@ export const toggleFavorite = (id, value) => async (dispatch) => {
   if (contact) {
     dispatch(setContactLoading());
     dispatch(setContact(contact));
+    dispatch(getContactList());
   }
 };

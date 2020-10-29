@@ -89,14 +89,17 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
         { message && message.type === 'error' && <ContactMessage /> }
         <MainForm />
         <SecondaryForm />
-        <styled.FormActions>
-          <Button
-            type="button"
-            handleClick={() => deleteContact(contactId).then(getContactList)}
-            variant="danger"
-          >
-            Delete contact
-          </Button>
+        <styled.FormActions edit={edit}>
+          { edit && (
+            <styled.DeleteButton
+              type="button"
+              handleClick={() => deleteContact(contactId).then(getContactList)}
+              variant="text"
+            >
+              <styled.DeleteIcon icon="trash" />
+              Delete contact
+            </styled.DeleteButton>
+          )}
           <Button type="submit">
             Save contact
           </Button>
