@@ -40,7 +40,7 @@ const ProfilePicture = ({ thumbnail, contact, setContactPalette, handleClick }) 
       thumbnail={thumbnail}
       ref={imageRef}
       onLoad={handlePalette}
-      onClick={handleClick}
+      onClick={photo && photo !== 'contact.jpg' ? handleClick : undefined}
     />
   );
 };
