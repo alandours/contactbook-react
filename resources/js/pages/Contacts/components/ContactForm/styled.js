@@ -19,7 +19,7 @@ const InputContainer = styled.div`
 const FormActions = styled.div`
   background: ${getColor('common', 'white')};
   bottom: 0;
-  box-shadow: 0 0 8px 1px #eee;
+  box-shadow: 0 0 8px 2px ${getColor('grey', 'light')};
   display: flex;
   justify-content: flex-end;
   padding: 0.75rem;

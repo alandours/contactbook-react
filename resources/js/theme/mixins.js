@@ -28,42 +28,12 @@ export const flexCenter = css`
   justify-content: center;
 `;
 
-export const absoluteCenter = css`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-`;
-
-export const removeButtonStyle = css`
+export const nonStyledButton = css`
   appearance: none;
   padding: 0;
   border: 0;
   outline: 0;
   background-color: transparent;
-`;
-
-export const removeAutocomplete = css`
-  &:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 30px white inset;
-    box-shadow: 0 0 0 30px white inset;
-  }
-`;
-
-export const removeInputOutline = css`
-  &:active,
-  &:focus {
-    outline: none;
-  }
-`;
-
-export const removeAfterBefore = css`
-  &:before,
-  &:after {
-    content: normal;
-  }
 `;
 
 export const responsive = {
