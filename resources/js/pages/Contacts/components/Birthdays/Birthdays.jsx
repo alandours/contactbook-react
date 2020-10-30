@@ -1,50 +1,26 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-
-import { getNextBirthday, setPageTitle } from '@utils';
+import { setPageTitle } from '@utils';
+import { getBirthdays, getBirthdaysByMonth } from '@utils/date';
 
 import Loader from '@components/Loader';
+import PageHeader from '@components/PageHeader';
 import SectionHeader from '@components/SectionHeader';
-import Birthday from './components/Birthday';
+import Birthday from '@components/Birthday';
 
 import styled from './styled';
 
-const getBirthdays = (contacts) => {
-  const withBirthdays = contacts.filter((contact) => contact.birthday);
-
-  if (!withBirthdays.length) return null;
-
-  const withNextBirthday = withBirthdays.map((contact) => ({
-    ...contact,
-    nextBirthday: getNextBirthday(contact.birthday)
-  }));
-
-  const sortedByBirthday = withNextBirthday.sort((c1, c2) => c1.nextBirthday - c2.nextBirthday);
-
-  const groupedByBirthdayMonth = sortedByBirthday.reduce((acc, curr) => {
-    const group = acc;
-    const { nextBirthday } = curr || {};
-
-    const monthYear = `${nextBirthday.toLocaleString('en', { month: 'long' })} ${nextBirthday.getFullYear()}`;
-
-    group[monthYear] = group[monthYear] ? [...group[monthYear], curr] : [curr];
-
-    return group;
-  }, {});
-
-  return groupedByBirthdayMonth;
-};
-
 const renderBirthdays = (contacts) => {
   const birthdays = getBirthdays(contacts);
+  const birthdaysByMonth = getBirthdaysByMonth(birthdays);
 
-  if (!birthdays) return null;
+  if (!birthdaysByMonth) return null;
 
-  return Object.entries(birthdays).map(([month, contacts]) => (
+  return Object.entries(birthdaysByMonth).map(([month, contacts]) => (
     <styled.Month key={month}>
       <SectionHeader title={month} />
       <styled.BirthdaysContainer>
-        { contacts.map((contact) => <Birthday contact={contact} key={contact.id} />) }
+        { contacts.map((contact) => <Birthday contact={contact} key={contact.id} displayMonth />) }
       </styled.BirthdaysContainer>
     </styled.Month>
   ));
@@ -57,12 +33,18 @@ const Birthdays = () => {
     setPageTitle('Birthdays');
   }, []);
 
-  return contacts && contacts.length ? (
+  return (
     <styled.Birthdays>
-      <styled.Title>Birthdays</styled.Title>
-      { renderBirthdays(contacts) }
+      <PageHeader>
+        <styled.Title>Birthdays</styled.Title>
+      </PageHeader>
+      { contacts && contacts.length ? (
+        <styled.BirthdayList>
+          { renderBirthdays(contacts) }
+        </styled.BirthdayList>
+      ) : <Loader /> }
     </styled.Birthdays>
-  ) : <Loader />;
+  );
 };
 
 export default Birthdays;

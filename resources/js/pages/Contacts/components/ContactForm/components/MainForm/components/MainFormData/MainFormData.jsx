@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
+import PageHeader from '@components/PageHeader';
 import BigInput from '@components/BigInput';
 import TextInput from '@components/TextInput';
 
@@ -18,7 +19,7 @@ const MainFormData = () => {
   } = errors || {};
 
   return (
-    <styled.MainFormData>
+    <PageHeader>
       <styled.FieldContainer>
         <BigInput
           name="name"
@@ -53,8 +54,8 @@ const MainFormData = () => {
           error={met.message}
         />
       </styled.FieldContainer>
-    </styled.MainFormData>
+    </PageHeader>
   );
-}
+};
 
 export default MainFormData;

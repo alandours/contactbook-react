@@ -1,6 +1,6 @@
 import React from 'react';
 import { objectOf, any } from 'prop-types';
-import { getFullBirthday, calculateAge } from '@utils';
+import { getBirthdayText, calculateAge } from '@utils/date';
 
 import Title from '@components/Title';
 import FavoriteIcon from '@components/FavoriteIcon';
@@ -27,7 +27,7 @@ const ProfileData = ({ contact }) => {
       { birthday && (
         <styled.MainDatafield>
           <Icon icon="birthday-cake" inline />
-          <styled.Text>{getFullBirthday(birthday)}</styled.Text>
+          <styled.Text>{getBirthdayText(birthday)}</styled.Text>
         </styled.MainDatafield>
       )}
       { address && (

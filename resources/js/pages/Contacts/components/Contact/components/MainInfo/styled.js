@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 
+import PageHeader from '@components/PageHeader';
 import RoundLink from '@components/RoundLink';
 
-const MainInfo = styled.div`
+const MainInfo = styled(PageHeader)`
   align-items: center;
   display: flex;
-  padding: 1rem;
-  width: 100%;
-  z-index: 1000;
 `;
 
 const EditLink = styled(RoundLink)`

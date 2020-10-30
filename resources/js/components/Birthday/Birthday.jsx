@@ -1,18 +1,10 @@
 import React from 'react';
 import { objectOf, any } from 'prop-types';
-import { calculateAge } from '@utils';
+import { calculateNextBirthdayAge } from '@utils/date';
 
 import ProfilePicture from '@components/ProfilePicture';
 
 import styled from './styled';
-
-const calculateNextBirthdayAge = (birthday, nextBirthday) => {
-  const currentMonth = new Date().getMonth();
-  const nextBirthdayMonth = nextBirthday.getMonth();
-  const isNextYearBirthday = (currentMonth - nextBirthdayMonth) > 0;
-  const age = calculateAge(birthday);
-  return isNextYearBirthday ? age + 1 : age;
-};
 
 const Birthday = ({ contact }) => {
   const { id, name, lastname, birthday, nextBirthday } = contact || {};

@@ -10,6 +10,9 @@ const Birthdays = styled.div`
   width: 100%;
 `;
 
+const BirthdayList = styled.div`
+`;
+
 const Title = styled.h2`
   font-size: ${size.max};
   font-weight: ${weight.bold};
@@ -27,4 +30,4 @@ const BirthdaysContainer = styled.div`
   margin: 0.5rem 1.25rem;
 `;
 
-export default { Birthdays, Title, Month, MonthName, BirthdaysContainer };
+export default { Birthdays, BirthdayList, Title, Month, MonthName, BirthdaysContainer };

@@ -13,7 +13,7 @@ const Gradient = styled.div`
   width: 100%;
   z-index: ${zindex.normal};
 
-  ${({ palette }) => palette && palette.length && `
+  ${({ palette }) => !!palette && palette.length && `
     background: linear-gradient(90deg,
       ${palette[0]} 0%, ${palette[0]} 20%,
       ${palette[1]} 20%, ${palette[1]} 40%,

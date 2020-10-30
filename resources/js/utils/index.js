@@ -28,45 +28,6 @@ export const sanitizeString = (str, rp) => {
 
 export const getFirstLetter = (name) => name.toUpperCase()[0];
 
-export const calculateAge = (birthdayDate) => {
-  const today = new Date();
-  const birthday = new Date(birthdayDate);
-  const month = today.getMonth() - birthday.getMonth();
-  let age = today.getFullYear() - birthday.getFullYear();
-
-  if (month < 0 || (month === 0 && today.getDate() < birthday.getDate())) age -= 1;
-
-  return (age < 100) ? age : null;
-};
-
-const formatDate = (birthdayDate) => {
-  const parts = birthdayDate.split('-');
-  return new Date(parts[0], (parts[1] - 1), parts[2], 12, 0o0, 0o0);
-};
-
-export const getFullBirthday = (birthday) => {
-  const birthdayDate = formatDate(birthday);
-  const options = { month: 'long' };
-
-  if (calculateAge(birthdayDate))
-    return `${birthdayDate.getUTCDate()} de ${birthdayDate.toLocaleDateString('es-AR', options)} de ${birthdayDate.getUTCFullYear()}`;
-
-  return `${birthdayDate.getUTCDate()} de ${birthdayDate.toLocaleDateString('es-AR', options)}`;
-};
-
-export const getNextBirthday = (birthday) => {
-  const todayDate = new Date();
-  const birthdayDate = formatDate(birthday);
-
-  const currentYear = todayDate.getFullYear();
-  birthdayDate.setFullYear(currentYear);
-
-  const isBirthdayInCurrentYear = (birthdayDate - todayDate) > 0;
-  const isBirthdayToday = birthdayDate.toDateString() === todayDate.toDateString();
-
-  return (isBirthdayInCurrentYear || isBirthdayToday) ? birthdayDate : birthdayDate.setFullYear(currentYear + 1) && birthdayDate;
-};
-
 export const appendFormattedData = (formData, data) => {
   Object.keys(data).forEach((key) => {
     const parsedData = data[key] === null ? '' : data[key];
