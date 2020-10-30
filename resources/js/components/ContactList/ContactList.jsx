@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bool, objectOf, any, func } from 'prop-types';
 import { getContactList } from '@store/actions';
-import { getFirstLetter, formatFullName } from '@utils';
+import { getFirstLetter } from '@utils/contacts';
 
 import SearchInput from '@components/SearchInput';
 import ListItem from '@components/ListItem';
@@ -12,20 +12,21 @@ import FavoriteIcon from '@components/FavoriteIcon';
 import styled from './styled';
 
 const renderContactList = (contacts) => {
+  const showFavoriteIcon = localStorage.getItem('showFavoriteIcon');
+
   const groups = contacts.reduce((acc, contact) => {
-    const { id, name, lastname, favorite } = contact;
-    const fullName = formatFullName(name, lastname);
+    const { id, fullName, favorite } = contact;
     const letter = getFirstLetter(fullName);
 
-    const listItem = (
+    const Contact = (
       <ListItem id={id} key={id}>
         <>
           {fullName}
-          {!!favorite && <FavoriteIcon isFavorite={!!favorite} />}
+          {!!favorite && !!showFavoriteIcon && <FavoriteIcon isFavorite={!!favorite} />}
         </>
       </ListItem>
     );
-    acc[letter] = acc[letter] ? [...acc[letter], listItem] : [listItem];
+    acc[letter] = acc[letter] ? [...acc[letter], Contact] : [Contact];
 
     return acc;
   }, {});

@@ -5,7 +5,8 @@ import { useHistory } from 'react-router-dom';
 import { objectOf, any, func, bool } from 'prop-types';
 import { yupResolver } from '@hookform/resolvers';
 import * as actions from '@store/actions';
-import { appendFormattedData, setPageTitle } from '@utils';
+import { setPageTitle } from '@utils';
+import { appendParsedData } from '@utils/contacts';
 
 import FixedInfo from '@components/FixedInfo';
 import ContactMessage from '@components/ContactMessage';
@@ -67,7 +68,7 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
 
   const onSubmit = (data) => {
     const formData = new FormData();
-    appendFormattedData(formData, data);
+    appendParsedData(formData, data);
     formData.append('image', data.image[0]);
 
     if (edit)

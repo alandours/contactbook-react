@@ -76,7 +76,7 @@ export const getBirthdaysByMonth = (birthdays) => {
  * @function calculateAge
  * @description Calculate the age for a given birthday
  * @param {string} birthdayDate - A birthday string in YYYY-MM-DD format
- * @returns {number} The current age
+ * @returns {number|null} The current age
  * @example
  * // returns 27
  * calculateAge('1993-01-01')
@@ -99,7 +99,7 @@ export const calculateAge = (birthdayDate) => {
  * @description Calculate the age for the next birthday
  * @param {string} birthday - A birthday string in YYYY-MM-DD format
  * @param {date} nextBirthday - A birthday date with the updated year
- * @returns {number} The age for the next birthday
+ * @returns {number|null} The age for the next birthday
 */
 
 export const calculateNextBirthdayAge = (birthday, nextBirthday) => {
@@ -107,6 +107,7 @@ export const calculateNextBirthdayAge = (birthday, nextBirthday) => {
   const nextBirthdayMonth = nextBirthday.getMonth();
   const isNextYearBirthday = (currentMonth - nextBirthdayMonth) > 0;
   const age = calculateAge(birthday);
+  if (!age) return null;
   return isNextYearBirthday ? age + 1 : age;
 };
 

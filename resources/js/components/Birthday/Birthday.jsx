@@ -7,7 +7,7 @@ import ProfilePicture from '@components/ProfilePicture';
 import styled from './styled';
 
 const Birthday = ({ contact }) => {
-  const { id, name, lastname, birthday, nextBirthday } = contact || {};
+  const { id, fullName, birthday, nextBirthday } = contact || {};
 
   const age = calculateNextBirthdayAge(birthday, nextBirthday);
 
@@ -15,7 +15,7 @@ const Birthday = ({ contact }) => {
     <styled.Birthday to={`/contacts/${id}`}>
       <styled.Day>{ `${nextBirthday.getUTCDate()}`}</styled.Day>
       <ProfilePicture contact={contact} thumbnail />
-      <styled.Name>{`${name} ${lastname || ''}`}</styled.Name>
+      <styled.Name>{ fullName }</styled.Name>
       { age && <styled.Age>{age}</styled.Age> }
     </styled.Birthday>
   );

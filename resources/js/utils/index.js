@@ -1,13 +1,31 @@
-export const formatFullName = (name, lastname, lastnameFirst, comma) => {
-  if (!lastname) return name;
-  const fullName = lastnameFirst ? [lastname, name] : [name, lastname];
-  const joinStr = comma ? ', ' : ' ';
-  return fullName.join(joinStr);
-};
+/**
+ * @function isArrayNotEmpty
+ * @description Validates if the parameter is an array that it's not empty
+ * @param {any} arr - A parameter to validate
+ * @returns {boolean}
+*/
 
 export const isArrayNotEmpty = (arr) => !!(arr instanceof Array && arr.length);
 
+/**
+ * @function isObjectNotEmpty
+ * @description Validates if the parameter is an object that it's not empty
+ * @param {any} obj - A parameter to validate
+ * @returns {boolean}
+*/
+
 export const isObjectNotEmpty = (obj) => !obj || !!(obj.constructor === Object && Object.keys(obj).length);
+
+/**
+ * @function sanitizeString
+ * @description Sanitize string
+ * @param {string} str - A string to sanitize
+ * @param {string} rp - A string with a whitespace replacement
+ * @returns {string} The sanitized string
+ * @example
+ * // returns 'population_51201'
+ * sanitizeString('Population 51,201', '_')
+*/
 
 export const sanitizeString = (str, rp) => {
   const wsReplace = typeof rp === 'string' ? rp : '-';
@@ -26,15 +44,11 @@ export const sanitizeString = (str, rp) => {
   return string;
 };
 
-export const getFirstLetter = (name) => name.toUpperCase()[0];
-
-export const appendFormattedData = (formData, data) => {
-  Object.keys(data).forEach((key) => {
-    const parsedData = data[key] === null ? '' : data[key];
-    const value = typeof parsedData === 'string' ? parsedData : JSON.stringify(parsedData);
-    formData.append(`${key}`, value);
-  });
-};
+/**
+ * @function setPageTitle
+ * @description Set page title for each page
+ * @param {string} title - A string with the page title
+*/
 
 export const setPageTitle = (title) => {
   const sitename = process.env.MIX_APP_NAME;
