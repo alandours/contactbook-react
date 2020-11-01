@@ -54,6 +54,7 @@ const MainFormData = () => {
           error={met.message}
         />
       </styled.FieldContainer>
+      <styled.RemoveImageCheckbox name="removeImage" label="Delete photo" />
     </PageHeader>
   );
 };

@@ -6,7 +6,7 @@ const sections = [
     order: 1
   },
   {
-    title: 'Numbers',
+    title: 'Phone numbers',
     icon: 'phone',
     key: 'numbers',
     order: 2,

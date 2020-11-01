@@ -196,7 +196,7 @@ const SecondaryForm = ({ contact, appData }) => {
           Add a new alias
         </Button>
       </ProfileSection>
-      <ProfileSection title="Numbers" icon="phone" sticky>
+      <ProfileSection title="Phone numbers" icon="phone" sticky>
         { numbers.length ? numbers.map(renderNumberFields) : appendNumber({}) }
         <Button
           type="button"

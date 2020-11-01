@@ -25,7 +25,6 @@ const MainForm = ({ contact }) => {
           <ProfilePicture contact={contact} />
           <styled.ImageInput type="file" name="image" ref={register} />
         </styled.PhotoLabel>
-        <input type="checkbox" name="removeImage" ref={register} />
         <MainFormData />
       </styled.MainForm>
     </>

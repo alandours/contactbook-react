@@ -17,10 +17,12 @@ import {
   faTimes,
   faChevronDown,
   faHeart,
-  faTrash
+  faTrash,
+  faCheckSquare
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
+  faSquare,
   faHeart as faHeartRegular
 } from '@fortawesome/free-regular-svg-icons';
 
@@ -43,7 +45,9 @@ library.add(
   faChevronDown,
   faHeart,
   faHeartRegular,
-  faTrash
+  faTrash,
+  faSquare,
+  faCheckSquare
 );
 
 export default library;
