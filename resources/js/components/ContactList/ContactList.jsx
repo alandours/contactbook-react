@@ -60,10 +60,17 @@ const ContactList = ({ hasSearch, contactList, getContactList }) => {
   }, [search]);
 
   useEffect(() => {
+    setLoading(true);
     if (contactList) {
       const { list, filter } = contactList || {};
 
-      const filteredList = filter ? list.filter((contact) => contact.met && contact.met.toString() === filter) : list;
+      let filteredList = list;
+
+      if (localStorage.getItem('favoritesOnly'))
+        filteredList = filteredList.filter((contact) => contact.favorite);
+
+      if (filter)
+        filteredList = filteredList.filter((contact) => contact.met && contact.met.toString() === filter);
 
       setDisplayList(filteredList);
       setLoading(false);
@@ -77,10 +84,8 @@ const ContactList = ({ hasSearch, contactList, getContactList }) => {
           handleTyping={(e) => setSearch(e.target.value)}
         />
       )}
-
-      { displayList && (
+      { loading ? <Loader /> : (
         <div>
-          { loading && <Loader /> }
           { renderContactList(displayList) }
           <styled.Count>{`${displayList.length} contacts`}</styled.Count>
         </div>

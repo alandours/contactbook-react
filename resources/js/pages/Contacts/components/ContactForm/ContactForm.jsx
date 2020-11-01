@@ -66,6 +66,11 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
       history.push(`/contacts/${contactId}`);
   };
 
+  const handleDelete = () => {
+    deleteContact(contactId).then(getContactList);
+    history.push('/contacts');
+  };
+
   const onSubmit = (data) => {
     const formData = new FormData();
     appendParsedData(formData, data);
@@ -94,7 +99,7 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
           { edit && (
             <styled.DeleteButton
               type="button"
-              handleClick={() => deleteContact(contactId).then(getContactList)}
+              handleClick={handleDelete}
               variant="text"
             >
               <styled.DeleteIcon icon="trash" />
