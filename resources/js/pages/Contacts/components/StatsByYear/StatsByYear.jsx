@@ -30,6 +30,8 @@ const StatsByYear = () => {
     const max = Math.max(...values);
 
     return data.map(([year, quantity]) => {
+      if (!year) return null;
+
       const height = (statsHeight / max) * quantity;
 
       return (
