@@ -40,7 +40,7 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
   const { id: contactId, fullName, message } = contact || {};
 
   useEffect(() => {
-    if (!message || message.type !== 'error') {
+    if (formLoading && (!message || message.type !== 'error')) {
       reset(contact);
       setFormLoading(false);
     }

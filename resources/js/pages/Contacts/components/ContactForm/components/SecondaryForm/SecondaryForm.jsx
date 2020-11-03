@@ -187,7 +187,7 @@ const SecondaryForm = ({ contact, appData }) => {
   return (
     <styled.SecondaryForm>
       <ProfileSection title="Aliases" icon="id-card" sticky>
-        { aliases.length ? aliases.map(renderAliasField) : appendAlias({ alias: '' }) }
+        { aliases.length ? aliases.map(renderAliasField) : appendAlias({ alias: '' }, false) }
         <Button
           type="button"
           variant="text"
@@ -197,7 +197,7 @@ const SecondaryForm = ({ contact, appData }) => {
         </Button>
       </ProfileSection>
       <ProfileSection title="Phone numbers" icon="phone" sticky>
-        { numbers.length ? numbers.map(renderNumberFields) : appendNumber({}) }
+        { numbers.length ? numbers.map(renderNumberFields) : appendNumber({}, false) }
         <Button
           type="button"
           variant="text"
@@ -212,7 +212,7 @@ const SecondaryForm = ({ contact, appData }) => {
         </Button>
       </ProfileSection>
       <ProfileSection title="Emails" icon="envelope" sticky>
-        { emails.length ? emails.map(renderEmailFields) : appendEmail({}) }
+        { emails.length ? emails.map(renderEmailFields) : appendEmail({}, false) }
         <Button
           type="button"
           variant="text"
@@ -227,7 +227,7 @@ const SecondaryForm = ({ contact, appData }) => {
         </Button>
       </ProfileSection>
       <ProfileSection title="Social networks" icon="share-alt" sticky>
-        { social.length ? social.map(renderSocialFields) : appendSocial({}) }
+        { social.length ? social.map(renderSocialFields) : appendSocial({}, false) }
         <Button
           type="button"
           variant="text"
