@@ -1,8 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { getColor } from '@theme/mixins';
-import { weight, size } from '@theme/typography';
-import zindex from '@theme/zindex';
+import { weight } from '@theme/typography';
 
 const Birthdays = styled.div`
   height: 100%;
@@ -11,12 +8,6 @@ const Birthdays = styled.div`
 `;
 
 const BirthdayList = styled.div`
-`;
-
-const Title = styled.h2`
-  font-size: ${size.max};
-  font-weight: ${weight.bold};
-  text-align: center;
 `;
 
 const Month = styled.div`
@@ -30,4 +21,4 @@ const BirthdaysContainer = styled.div`
   margin: 0.5rem 1.25rem;
 `;
 
-export default { Birthdays, BirthdayList, Title, Month, MonthName, BirthdaysContainer };
+export default { Birthdays, BirthdayList, Month, MonthName, BirthdaysContainer };

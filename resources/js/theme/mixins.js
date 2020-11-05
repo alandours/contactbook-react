@@ -1,4 +1,5 @@
 import { css } from 'styled-components';
+import store from '@store';
 import breakpoints from './breakpoints';
 import palette from './palette';
 import { size, fontFamily } from './typography';
@@ -9,7 +10,10 @@ const getMinLandscape = key => `@media screen and (min-width: ${breakpoints[key]
 
 const getMinCustom = size => `@media screen and (min-width: ${size}px)`;
 
-export const getColor = (color = 'common', type = 'black') => palette[color][type];
+export const getColor = (color = 'main', type = 1) => {
+  const state = store.getState();
+  return palette[state.theme][color][type];
+};
 
 export const devices = {
   mobileXs: getMin('viewport320'),
@@ -89,23 +93,11 @@ export const backgroundImg = (url) => css`
   background-position: center;
 `;
 
-export const scrollbar = css`
-  &::-webkit-scrollbar {
-    width: 9px;
-  }
-  &::-webkit-scrollbar-track {
-    background-color: ${getColor('grey', 'grey3')};
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: ${getColor('grey', 'grey6')};
-  }
-  scrollbar-color: ${getColor('grey', 'grey6')} ${getColor('grey', 'grey3')};
-  scrollbar-width: 9px;
-`;
-
 export const formStyles = css`
+  background: transparent;
   border: 0;
-  border-bottom: 1px solid ${getColor('grey', 'dark')};
+  border-bottom: 1px solid ${getColor('contrast', 4)};
+  color: ${getColor('contrast', 1)};
   ${fontFamily}
   font-size: ${size.text};
   outline: none;
@@ -120,5 +112,9 @@ export const formStyles = css`
   &:hover, &:focus {
     border: 0;
     border-bottom: 1px solid ${getColor('primary', 'main')};
+  }
+
+  &::placeholder {
+    color: ${getColor('contrast', 1)};
   }
 `;

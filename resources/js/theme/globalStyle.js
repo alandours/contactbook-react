@@ -19,11 +19,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: ${getColor('grey', 'lighter')};
+    background: ${getColor('main', 2)};
     height: 100%;
     ${fontFamily};
     font-size: ${size.text};
     font-weight: ${weight.regular};
+    color: ${getColor('contrast', 1)};
   }
 
   #contact-book {

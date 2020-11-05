@@ -35,3 +35,16 @@ export const getDominantColor = (img, quality = 10) => {
   const [red, green, blue] = color;
   return `rgb(${red}, ${green}, ${blue})`;
 };
+
+/**
+ * @function getTheme
+ * @description Get the theme
+ * @returns {string} The 'light' or 'dark' theme
+ * @example
+ * // returns 'dark'
+ * getTheme()
+*/
+
+export const getTheme = () => {
+  return localStorage.getItem('darkTheme') ? 'dark' : 'light';
+};

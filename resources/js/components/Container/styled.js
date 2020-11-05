@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components';
 import { getColor } from '@theme/mixins';
 
 const Container = styled.div`
-  background: ${getColor('common', 'white')};
+  background: ${getColor('main', 1)};
   border-radius: 8px; 
-  box-shadow: 0 2px 6px 0 ${getColor('grey', 'normal')};
+  box-shadow: 0 2px 6px 0 ${getColor('main', 'shadow')};
   position: relative;
 
   ${({ type }) => type === 'main' && css`

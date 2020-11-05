@@ -1,34 +1,51 @@
+import { lighten, darken } from 'polished';
+
+const primary = {
+  main: '#12c450',
+  light: lighten('0.02', '#12c450'),
+  dark: darken('0.1', '#12c450')
+};
+
+const danger = {
+  main: '#d42222',
+  light: lighten('0.02', '#d42222'),
+  dark: darken('0.1', '#d42222')
+};
+
 const palette = {
-  common: {
-    black: '#000',
-    lightBlack: '#0f0f0f',
-    white: '#fff',
-    lightWhite: '#f0f0f0',
-    success: '#8adc2e',
-    error: '#dc2f3b'
+  light: {
+    main: {
+      1: '#ffffff',
+      2: darken('0.02', '#ffffff'),
+      3: darken('0.06', '#ffffff'),
+      4: darken('0.15', '#ffffff'),
+      shadow: darken('0.15', '#ffffff')
+    },
+    contrast: {
+      1: '#000000',
+      2: lighten('0.45', '#000000'),
+      3: lighten('0.6', '#000000'),
+      4: lighten('0.78', '#000000')
+    },
+    primary,
+    danger
   },
-  primary: {
-    main: '#12c450',
-    light: '#1Acc58',
-    dark: '#199f48'
-  },
-  secondary: {
-    main: '#333333',
-    light: '#3B3B3B',
-    dark: '#2B2B2B'
-  },
-  danger: {
-    main: '#d42222',
-    light: '#de2a2a',
-    dark: '#9e1919'
-  },
-  grey: {
-    lighter: '#f8f8f8',
-    light: '#eee',
-    normal: '#ddd',
-    dark: '#c8c8c8',
-    darker: '#aaa',
-    darkest: '#777'
+  dark: {
+    main: {
+      1: '#111111',
+      2: lighten('0.04', '#111111'),
+      3: lighten('0.07', '#111111'),
+      4: lighten('0.09', '#111111'),
+      shadow: darken('0.02', '#111111')
+    },
+    contrast: {
+      1: '#e9e9e9',
+      2: darken('0.4', '#e9e9e9'),
+      3: darken('0.5', '#e9e9e9'),
+      4: darken('0.75', '#e9e9e9')
+    },
+    primary,
+    danger
   }
 };
 

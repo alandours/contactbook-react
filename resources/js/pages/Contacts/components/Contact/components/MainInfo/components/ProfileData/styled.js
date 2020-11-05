@@ -9,6 +9,7 @@ const ProfileData = styled.div`
 
 const MainDatafield = styled.div`
   align-items: center;
+  color: ${getColor('contrast', 1)};
   display: flex;
   margin: 0.25rem 0;
 `;
@@ -23,7 +24,7 @@ const Name = styled.span`
       content: '${birthday}';
       font-size: ${size.large};
       font-weight: ${weight.regular};
-      color: ${getColor('grey', 'darker')};
+      color: ${getColor('contrast', 3)};
       margin-left: 1rem;
       margin-top: 1px;
     `};

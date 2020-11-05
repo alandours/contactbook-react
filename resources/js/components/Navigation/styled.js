@@ -10,7 +10,7 @@ const Navigation = styled.div`
 
 const HeaderLink = styled(Link)`
   align-items: center;
-  color: ${getColor('common', 'black')};
+  color: ${getColor('contrast', 1)};
   display: flex;
   font-size: ${size.normal};
   & + & {

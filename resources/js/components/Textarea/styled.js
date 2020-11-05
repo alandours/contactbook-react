@@ -3,7 +3,7 @@ import { getColor, formStyles } from '@theme/mixins';
 
 const Textarea = styled.textarea`
   ${formStyles};
-  border: 1px solid ${getColor('grey', 'dark')};
+  border: 1px solid ${getColor('contrast', 4)};
   min-height: 150px;
   padding: 0.25rem;
 

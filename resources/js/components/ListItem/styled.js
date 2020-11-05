@@ -5,7 +5,7 @@ import { weight } from '@theme/typography';
 
 const ListItem = styled.li`
   & + & {
-    border-top: 1px solid ${getColor('grey', 'light')};
+    border-top: 1px solid ${getColor('main', 3)};
   }
 
   ${({ type }) => type === 'contact' && css`
@@ -13,7 +13,7 @@ const ListItem = styled.li`
     transition: 400ms ease;
 
     &:hover{
-      background: ${getColor('common', 'lightWhite')};
+      background: ${getColor('main', 2)};
       transition: 200ms ease;
     }
   `};
@@ -21,7 +21,7 @@ const ListItem = styled.li`
   ${({ type }) => type === 'letter' && css`
     background: ${getColor('primary', 'main')};
     border-bottom: 2px solid ${getColor('primary', 'dark')};
-    color: ${getColor('common', 'white')};
+    color: ${getColor('main', 1)};
     font-weight: ${weight.semiBold};
     padding: 0.45rem 0.75rem;
   `};
@@ -33,7 +33,7 @@ const ListItem = styled.li`
 `;
 
 const ListLink = styled(Link)`
-  color: ${getColor('common', 'black')};
+  color: ${getColor('contrast', 1)};
   display: block;
   overflow: hidden;
   padding: 0.45rem 0.75rem;

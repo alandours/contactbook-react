@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
+import { getTheme } from '@utils/color';
 import { contactReducer, contactListReducer, appDataReducer, statsReducer, themeReducer } from './reducers';
 
 const reducer = combineReducers({
@@ -18,7 +19,7 @@ export const initialState = {
   },
   appData: {},
   stats: {},
-  theme: 'light'
+  theme: getTheme()
 };
 
 const store = createStore(

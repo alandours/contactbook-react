@@ -71,7 +71,7 @@ const SecondaryForm = ({ contact, appData }) => {
           {
             numberTypes.map((type) => {
               const { id, name } = type;
-              return <option key={id} value={id}>{name}</option>;
+              return <styled.Option key={id} value={id}>{name}</styled.Option>;
             })
           }
         </Select>
@@ -115,7 +115,7 @@ const SecondaryForm = ({ contact, appData }) => {
           {
             emailTypes.map((type) => {
               const { id, name } = type;
-              return <option key={id} value={id}>{name}</option>;
+              return <styled.Option key={id} value={id}>{name}</styled.Option>;
             })
           }
         </Select>
@@ -159,7 +159,7 @@ const SecondaryForm = ({ contact, appData }) => {
           {
             socialNetworks.map((type) => {
               const { id, name } = type;
-              return <option key={id} value={id}>{name}</option>;
+              return <styled.Option key={id} value={id}>{name}</styled.Option>;
             })
           }
         </Select>

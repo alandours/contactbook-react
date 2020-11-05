@@ -43,6 +43,11 @@ export const setContactPalette = (data) => ({
   payload: data
 });
 
+export const setTheme = (data) => ({
+  type: 'SET_THEME',
+  payload: data
+});
+
 export const getContact = (id) => async (dispatch) => {
   dispatch(setContactLoading());
   const url = `/api/contacts/${id}`;

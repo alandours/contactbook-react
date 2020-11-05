@@ -23,13 +23,13 @@ const ContactMessage = styled.div`
   ${({ type }) => type === 'success' && `
     background: ${getColor('primary', 'main')};
     border: 1px solid ${getColor('primary', 'dark')};
-    color: ${getColor('common', 'white')};
+    color: ${getColor('main', 1)};
   `};
 
   ${({ type }) => type === 'error' && `
     background: ${getColor('danger', 'main')};
     border: 1px solid ${getColor('danger', 'dark')};
-    color: ${getColor('common', 'white')};
+    color: ${getColor('main', 1)};
   `};
 
   ${({ visible }) => visible && `

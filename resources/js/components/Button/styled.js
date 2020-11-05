@@ -7,7 +7,7 @@ const Button = styled.button`
   border: 0;
   border-bottom: 2px solid ${getColor('primary', 'dark')};
   border-radius: 2px;
-  color: ${getColor('common', 'white')};
+  color: ${getColor('main', 1)};
   cursor: pointer;
   font-size: ${size.text};
   font-weight: 500;
@@ -23,7 +23,7 @@ const Button = styled.button`
     align-self: flex-end;
     background: none;
     border: 0;
-    color: ${getColor('grey', 'darkest')};
+    color: ${getColor('contrast', 2)};
     font-size: ${size.text};
     font-weight: ${weight.regular};
     padding: 0;

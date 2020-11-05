@@ -3,7 +3,7 @@ import { getColor, formStyles } from '@theme/mixins';
 import { size, weight } from '@theme/typography';
 
 const Label = styled.label`
-  background: ${getColor('common', 'white')};
+  background: ${getColor('main', 1)};
   display: flex;
   flex-direction: column;
   position: relative;
@@ -16,7 +16,7 @@ const Label = styled.label`
 `;
 
 const LabelText = styled.span`
-  color: ${getColor('grey', 'darkest')};
+  color: ${getColor('contrast', 2)};
   font-size: ${size.small};
   font-weight: ${weight.light};
   left: 0;

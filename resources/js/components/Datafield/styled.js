@@ -4,12 +4,13 @@ import { weight } from '@theme/typography';
 
 const Datafield = styled.div`
   border-radius: 2px; 
+  color: ${getColor('contrast', 1)};
   padding: 0.25rem 1.75rem;
   position: relative;
   transition: all ease 200ms;
 
   &:hover {
-    background: ${getColor('grey', 'lighter')};;
+    background: ${getColor('main', 2)};;
     transition: all ease 100ms;
   }
 `;
@@ -31,7 +32,7 @@ const Name = styled.div`
 `;
 
 const Label = styled.div`
-  color: ${getColor('grey', 'darker')};
+  color: ${getColor('contrast', 3)};
   word-wrap: break-word;
   width: 50%;
 `;

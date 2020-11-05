@@ -15,6 +15,7 @@ const CheckboxIcon = styled(FontAwesomeIcon)`
 `;
 
 const CheckboxText = styled.span`
+  color: ${getColor('contrast', 1)};
   margin-left: 0.5rem;
   font-size: ${size.small};
 `;

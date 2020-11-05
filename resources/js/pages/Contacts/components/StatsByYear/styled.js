@@ -33,7 +33,7 @@ const Stats = styled.div`
 
 const Year = styled.div`
   bottom: -40px;
-  color: ${getColor('grey', 'darkest')};
+  color: ${getColor('contrast', 2)};
   font-size: ${size.small};
   font-weight: ${weight.light};
   transform: rotate(90deg);

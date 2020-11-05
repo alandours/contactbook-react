@@ -7,7 +7,7 @@ const SelectWrapper = styled.div`
 `;
 
 const Selector = styled(FontAwesomeIcon)`
-  color: ${getColor('grey', 'darker')};
+  color: ${getColor('contrast', 3)};
   font-size: 0.8rem;
   right: 2rem;
   position: absolute;
@@ -17,7 +17,7 @@ const Selector = styled(FontAwesomeIcon)`
 const Select = styled.select`
   ${formStyles};
   appearance: none;
-  border: 1px solid ${getColor('grey', 'dark')};
+  border: 1px solid ${getColor('contrast', 4)};
   border-radius: 3px;
   cursor: pointer;
   display: grid;

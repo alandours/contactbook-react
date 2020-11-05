@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { getColor } from '@theme/mixins';
 
 import CloseButton from '@components/CloseButton';
 
@@ -24,4 +25,8 @@ const FormField = styled.div`
   }
 `;
 
-export default { SecondaryForm, FormField, RemoveButton };
+const Option = styled.option`
+  color: #000;
+`;
+
+export default { SecondaryForm, FormField, RemoveButton, Option };

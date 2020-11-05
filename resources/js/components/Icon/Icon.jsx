@@ -1,5 +1,5 @@
 import React from 'react';
-import { oneOfType, string, bool, arrayOf } from 'prop-types';
+import { oneOfType, string, number, bool, arrayOf } from 'prop-types';
 
 import styled from './styled';
 
@@ -13,7 +13,7 @@ const Icon = ({ icon, color, inline }) => (
 
 Icon.propTypes = {
   icon: oneOfType([string, arrayOf(string)]).isRequired,
-  color: arrayOf(string),
+  color: arrayOf(oneOfType([string, number])),
   inline: bool
 };
 

@@ -6,8 +6,8 @@ const ContactGroup = styled.ul`
 `;
 
 const Count = styled.div`
-  border-top: 1px solid ${getColor('grey', 'normal')};
-  color: ${getColor('grey', 'darkest')};
+  border-top: 1px solid ${getColor('main', 3)};
+  color: ${getColor('contrast', 2)};
   padding: 1rem !important;
   text-align: center;
 `;

@@ -11,7 +11,7 @@ const Container = styled.div`
 `;
 
 const Icon = styled(FontAwesomeIcon)`
-  color: ${getColor('grey', 'darker')};
+  color: ${getColor('contrast', 3)};
   font-size: 0.8rem;
   left: 6px;
   position: absolute;
@@ -20,11 +20,12 @@ const Icon = styled(FontAwesomeIcon)`
 
 const SearchInput = styled.input`
   ${formStyles};
-  border-color: ${getColor('grey', 'lighter')};
+  background: ${getColor('main', 1)};
+  border-color: ${getColor('main', 2)};
   border-radius: 4px 0 0 0;
 
   &:hover, &:focus {
-    border-color: ${getColor('grey', 'lighter')};
+    border-color: ${getColor('main', 2)};
   }
 `;
 

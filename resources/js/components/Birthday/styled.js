@@ -12,13 +12,13 @@ const Birthday = styled(Link)`
   transition: all ease 200ms;
 
   &:hover {
-    background: ${getColor('grey', 'lighter')};;
+    background: ${getColor('main', 2)};;
     transition: all ease 100ms;
   }
 `;
 
 const Day = styled.div`
-  color: ${getColor('danger', 'light')};
+  color: ${getColor('danger', 'dark')};
   font-weight: ${weight.semiBold};
   margin-right: 1rem;
   text-align: center;
@@ -26,13 +26,13 @@ const Day = styled.div`
 `;
 
 const Name = styled.div`
-  color: ${getColor('common', 'black')};
+  color: ${getColor('contrast', 1)};
   margin-left: 0.25rem;
   margin-right: 0.5rem;
 `;
 
 const Age = styled.div`
-  color: ${getColor('grey', 'darker')};;
+  color: ${getColor('contrast', 3)};;
 `;
 
 export default { Birthday, Day, Name, Age };

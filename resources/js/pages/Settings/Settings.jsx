@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setTheme } from '@store/actions';
 import { setPageTitle } from '@utils';
+import { getTheme } from '@utils/color';
 
 import Container from '@components/Container';
 import Title from '@components/Title';
@@ -11,6 +14,8 @@ const Settings = () => {
   useEffect(() => {
     setPageTitle('Settings');
   }, []);
+
+  const dispatch = useDispatch();
 
   const toggleLastnameFirst = (active) => {
     if (active)
@@ -31,6 +36,15 @@ const Settings = () => {
       localStorage.setItem('favoritesOnly', active);
     else
       localStorage.removeItem('favoritesOnly');
+  };
+
+  const toggleDarkTheme = (active) => {
+    if (active)
+      localStorage.setItem('darkTheme', active);
+    else
+      localStorage.removeItem('darkTheme');
+
+    dispatch(setTheme(getTheme()));
   };
 
   return (
@@ -58,6 +72,13 @@ const Settings = () => {
               handleClick={toggleFavoritesOnly}
             />
             <styled.SettingName>Show only favorite contacts</styled.SettingName>
+          </styled.Setting>
+          <styled.Setting>
+            <ToggleButton
+              initialState={!!localStorage.getItem('darkTheme')}
+              handleClick={toggleDarkTheme}
+            />
+            <styled.SettingName>Use dark theme</styled.SettingName>
           </styled.Setting>
         </styled.SettingsList>
       </Container>

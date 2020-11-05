@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { setPageTitle } from '@utils';
 import { getBirthdays, getBirthdaysByMonth } from '@utils/date';
 
+import Title from '@components/Title';
 import Loader from '@components/Loader';
 import PageHeader from '@components/PageHeader';
 import SectionHeader from '@components/SectionHeader';
@@ -36,7 +37,7 @@ const Birthdays = () => {
   return (
     <styled.Birthdays>
       <PageHeader>
-        <styled.Title>Birthdays</styled.Title>
+        <Title>Birthdays</Title>
       </PageHeader>
       { contacts && contacts.length ? (
         <styled.BirthdayList>

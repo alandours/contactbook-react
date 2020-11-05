@@ -4,8 +4,9 @@ import { weight, size } from '@theme/typography';
 import zindex from '@theme/zindex';
 
 const SectionHeader = styled.h2`
-  background: ${getColor('grey', 'light')};
-  border-bottom: 2px solid ${getColor('grey', 'normal')};
+  background: ${getColor('main', 3)};
+  border-bottom: 2px solid ${getColor('main', 'shadow')};
+  color: ${getColor('contrast', 1)};
   font-size: ${size.info};
   font-weight: ${weight.semiBold};
   padding: 0.5rem 1.5rem;

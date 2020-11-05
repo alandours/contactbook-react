@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import { getColor } from '@theme/mixins';
 
 const ProfilePicture = styled.img`
-  border: 6px solid ${getColor('common', 'white')};
+  border: 6px solid ${getColor('main', 1)};
   border-radius: 100%;
-  box-shadow: 0 0 5px rgba(0,0,0,0.25);
+  box-shadow: 0 0 5px ${getColor('contrast', 4)};
   height: 200px;
   min-height: 200px;
   min-width: 200px;

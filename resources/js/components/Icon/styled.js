@@ -4,7 +4,7 @@ import { getColor } from '@theme/mixins';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Icon = styled(FontAwesomeIcon)`
-  color: ${getColor('grey', 'darkest')};
+  color: ${getColor('contrast', 2)};
 
   ${({ color }) => !!color && !!color.length && `
     color: ${getColor(...color)};

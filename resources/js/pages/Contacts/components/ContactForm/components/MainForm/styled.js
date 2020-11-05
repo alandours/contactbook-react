@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { getColor } from '@theme/mixins';
 import { weight } from '@theme/typography';
 import zindex from '@theme/zindex';
 
@@ -20,7 +19,7 @@ const PhotoLabel = styled.label`
     align-items: center;
     background: rgba(0, 0, 0, 0.75);
     border-radius: 50%;
-    color: ${getColor('common', 'white')};
+    color: #eee;
     display: flex;
     font-weight: ${weight.semiBold};
     justify-content: center;
