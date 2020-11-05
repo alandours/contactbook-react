@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import { getColor } from '@theme/mixins';
 import { weight, size } from '@theme/typography';
 
 const Title = styled.h1`
-  color: ${getColor('contrast', 1)};
+  color: ${({ theme }) => theme.selected.contrast[1]};
   display: flex;
   font-size: ${size.max};
   font-weight: ${weight.bold};

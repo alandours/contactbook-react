@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import { getColor } from '@theme/mixins';
 import { fontFace, fontFamily, size, weight } from '@theme/typography';
 
 const GlobalStyle = createGlobalStyle`
@@ -19,12 +18,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: ${getColor('main', 2)};
+    background: ${({ theme }) => theme.selected.main[2]};
     height: 100%;
     ${fontFamily};
     font-size: ${size.text};
     font-weight: ${weight.regular};
-    color: ${getColor('contrast', 1)};
+    color: ${({ theme }) => theme.selected.contrast[1]};
   }
 
   #contact-book {

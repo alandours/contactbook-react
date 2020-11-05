@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import { getColor } from '@theme/mixins';
 import zindex from '@theme/zindex';
 
 const Gradient = styled.div`
-  background: ${getColor('primary', 'main')};
+  background: ${({ theme }) => theme.selected.primary.main};
   height: 5px;
   min-height: 5px;
   opacity: 0;

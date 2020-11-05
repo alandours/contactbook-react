@@ -1,10 +1,9 @@
 import styled, { css } from 'styled-components';
-import { getColor } from '@theme/mixins';
 
 const Container = styled.div`
-  background: ${getColor('main', 1)};
+  background: ${({ theme }) => theme.selected.main[1]};
   border-radius: 8px; 
-  box-shadow: 0 2px 6px 0 ${getColor('main', 'shadow')};
+  box-shadow: 0 2px 6px 0 ${({ theme }) => theme.selected.main.shadow};
   position: relative;
 
   ${({ type }) => type === 'main' && css`

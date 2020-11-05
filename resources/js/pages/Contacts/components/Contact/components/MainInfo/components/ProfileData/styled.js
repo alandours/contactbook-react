@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { getColor } from '@theme/mixins';
 import { size, weight } from '@theme/typography';
 
 const ProfileData = styled.div`
@@ -9,7 +8,7 @@ const ProfileData = styled.div`
 
 const MainDatafield = styled.div`
   align-items: center;
-  color: ${getColor('contrast', 1)};
+  color: ${({ theme }) => theme.selected.contrast[1]};
   display: flex;
   margin: 0.25rem 0;
 `;
@@ -24,7 +23,7 @@ const Name = styled.span`
       content: '${birthday}';
       font-size: ${size.large};
       font-weight: ${weight.regular};
-      color: ${getColor('contrast', 3)};
+      color: ${({ theme }) => theme.selected.contrast[3]};
       margin-left: 1rem;
       margin-top: 1px;
     `};
@@ -32,7 +31,7 @@ const Name = styled.span`
 `;
 
 const Link = styled.a`
-  color: ${getColor('primary', 'dark')};
+  color: ${({ theme }) => theme.selected.primary.dark};
   font-weight: ${weight.normal};
 `;
 

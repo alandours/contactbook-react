@@ -1,7 +1,5 @@
 import { css } from 'styled-components';
-import store from '@store';
 import breakpoints from './breakpoints';
-import palette from './palette';
 import { size, fontFamily } from './typography';
 
 const getMin = key => `@media screen and (min-width: ${breakpoints[key]}px)`;
@@ -9,11 +7,6 @@ const getMin = key => `@media screen and (min-width: ${breakpoints[key]}px)`;
 const getMinLandscape = key => `@media screen and (min-width: ${breakpoints[key]}px) and (orientation: landscape)`;
 
 const getMinCustom = size => `@media screen and (min-width: ${size}px)`;
-
-export const getColor = (color = 'main', type = 1) => {
-  const state = store.getState();
-  return palette[state.theme][color][type];
-};
 
 export const devices = {
   mobileXs: getMin('viewport320'),
@@ -96,8 +89,8 @@ export const backgroundImg = (url) => css`
 export const formStyles = css`
   background: transparent;
   border: 0;
-  border-bottom: 1px solid ${getColor('contrast', 4)};
-  color: ${getColor('contrast', 1)};
+  border-bottom: 1px solid ${({ theme }) => theme.selected.contrast[4]};
+  color: ${({ theme }) => theme.selected.contrast[1]};
   ${fontFamily}
   font-size: ${size.text};
   outline: none;
@@ -111,10 +104,10 @@ export const formStyles = css`
 
   &:hover, &:focus {
     border: 0;
-    border-bottom: 1px solid ${getColor('primary', 'main')};
+    border-bottom: 1px solid ${({ theme }) => theme.selected.primary.main};
   }
 
   &::placeholder {
-    color: ${getColor('contrast', 1)};
+    color: ${({ theme }) => theme.selected.contrast[1]};
   }
 `;

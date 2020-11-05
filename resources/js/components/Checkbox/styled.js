@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { getColor } from '@theme/mixins';
 import { size } from '@theme/typography';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,11 +10,11 @@ const Checkbox = styled.label`
 `;
 
 const CheckboxIcon = styled(FontAwesomeIcon)`
-  color: ${getColor('primary', 'main')};
+  color: ${({ theme }) => theme.selected.primary.main};
 `;
 
 const CheckboxText = styled.span`
-  color: ${getColor('contrast', 1)};
+  color: ${({ theme }) => theme.selected.contrast[1]};
   margin-left: 0.5rem;
   font-size: ${size.small};
 `;

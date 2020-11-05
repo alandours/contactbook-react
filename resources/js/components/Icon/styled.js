@@ -1,13 +1,12 @@
-import styled from 'styled-components';
-import { getColor } from '@theme/mixins';
+import styled, { css } from 'styled-components';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Icon = styled(FontAwesomeIcon)`
-  color: ${getColor('contrast', 2)};
+  color: ${({ theme }) => theme.selected.contrast[2]};
 
-  ${({ color }) => !!color && !!color.length && `
-    color: ${getColor(...color)};
+  ${({ theme, color, colortype }) => !!color && !!colortype && css`
+    color: ${theme.selected[color][colortype]};
   `}
 
   ${({ inline }) => !!inline && `

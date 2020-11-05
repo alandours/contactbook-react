@@ -19,11 +19,11 @@ const FavoriteIcon = ({ isFavorite, isButton, id }) => {
       title={title}
       onClick={() => dispatch(toggleFavorite(id, !isFavorite))}
     >
-      <Icon icon={icon} color={['primary', 'main']} />
+      <Icon icon={icon} color="primary" colortype="main" />
     </styled.FavoriteButton>
   ) : (
     <styled.FavoriteIcon>
-      <Icon icon={icon} color={['primary', 'main']} />
+      <Icon icon={icon} color="primary" colortype="main" />
     </styled.FavoriteIcon>
   );
 };

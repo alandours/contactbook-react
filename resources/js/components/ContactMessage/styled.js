@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { getColor } from '@theme/mixins';
 
 import CloseButton from '@components/CloseButton';
 
@@ -21,15 +20,15 @@ const ContactMessage = styled.div`
   z-index: 1000;
 
   ${({ type }) => type === 'success' && `
-    background: ${getColor('primary', 'main')};
-    border: 1px solid ${getColor('primary', 'dark')};
-    color: ${getColor('main', 1)};
+    background: ${({ theme }) => theme.selected.primary.main};
+    border: 1px solid ${({ theme }) => theme.selected.primary.dark};
+    color: ${({ theme }) => theme.selected.main[1]};
   `};
 
   ${({ type }) => type === 'error' && `
-    background: ${getColor('danger', 'main')};
-    border: 1px solid ${getColor('danger', 'dark')};
-    color: ${getColor('main', 1)};
+    background: ${({ theme }) => theme.selected.danger.main};
+    border: 1px solid ${({ theme }) => theme.selected.danger.dark};
+    color: ${({ theme }) => theme.selected.main[1]};
   `};
 
   ${({ visible }) => visible && `

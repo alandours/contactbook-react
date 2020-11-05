@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import { getColor } from '@theme/mixins';
 
 const Loader = styled.div`
   align-items: center;
-  color: ${getColor('primary', 'main')};
+  color: ${({ theme }) => theme.selected.primary.main};
   display: flex;
   justify-content: center;
   height: calc(100% - 32px);

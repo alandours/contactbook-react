@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { getColor } from '@theme/mixins';
 
 import CloseButton from '@components/CloseButton';
 

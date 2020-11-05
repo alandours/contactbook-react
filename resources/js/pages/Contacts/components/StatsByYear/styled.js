@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import { getColor } from '@theme/mixins';
 import { weight, size } from '@theme/typography';
-import zindex from '@theme/zindex';
 
 import Title from '@components/Title';
 
@@ -33,7 +31,7 @@ const Stats = styled.div`
 
 const Year = styled.div`
   bottom: -40px;
-  color: ${getColor('contrast', 2)};
+  color: ${({ theme }) => theme.selected.contrast[2]};
   font-size: ${size.small};
   font-weight: ${weight.light};
   transform: rotate(90deg);
@@ -42,7 +40,7 @@ const Year = styled.div`
 `;
 
 const Quantity = styled.div`
-  color: ${getColor('primary', 'dark')};
+  color: ${({ theme }) => theme.selected.primary.dark};
   display: flex;
   font-size: ${size.small};
   font-weight: ${weight.regular};
@@ -55,7 +53,7 @@ const Quantity = styled.div`
 `;
 
 const Stat = styled.div`
-  background: ${getColor('primary', 'dark')};
+  background: ${({ theme }) => theme.selected.primary.dark};
   cursor: pointer;
   min-width: 5px;
   width: 100%;
@@ -66,7 +64,7 @@ const Stat = styled.div`
   }
 
   &:hover {
-    background: ${getColor('primary', 'light')};
+    background: ${({ theme }) => theme.selected.primary.light};
     transition: 200ms;
   }
 
@@ -80,7 +78,7 @@ const Stat = styled.div`
   `};
 
   ${({ isActive }) => !!isActive && `
-    background: ${getColor('primary', 'light')};
+    background: ${({ theme }) => theme.selected.primary.light};
 
     & ${Quantity} {
       opacity: 1;

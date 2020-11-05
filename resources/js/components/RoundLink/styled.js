@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-import { getColor } from '@theme/mixins';
 
 import { Link } from 'react-router-dom';
 
 const RoundLink = styled(Link)`
   align-items: center;
-  background: ${getColor('primary', 'main')};
-  border-bottom: 2px solid ${getColor('primary', 'dark')};
+  background: ${({ theme }) => theme.selected.primary.main};
+  border-bottom: 2px solid ${({ theme }) => theme.selected.primary.dark};
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -15,7 +14,7 @@ const RoundLink = styled(Link)`
   transition: all ease 200ms;
 
   &:hover {
-    background: ${getColor('primary', 'light')};
+    background: ${({ theme }) => theme.selected.primary.light};
     transition: all ease 100ms;
   }
 `;

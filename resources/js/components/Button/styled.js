@@ -1,13 +1,12 @@
 import styled from 'styled-components';
-import { getColor } from '@theme/mixins';
 import { size, weight } from '@theme/typography';
 
 const Button = styled.button`
-  background: ${getColor('primary', 'main')};
+  background: ${({ theme }) => theme.selected.primary.main};
   border: 0;
-  border-bottom: 2px solid ${getColor('primary', 'dark')};
+  border-bottom: 2px solid ${({ theme }) => theme.selected.primary.dark};
   border-radius: 2px;
-  color: ${getColor('main', 1)};
+  color: ${({ theme }) => theme.selected.main[1]};
   cursor: pointer;
   font-size: ${size.text};
   font-weight: 500;
@@ -23,7 +22,7 @@ const Button = styled.button`
     align-self: flex-end;
     background: none;
     border: 0;
-    color: ${getColor('contrast', 2)};
+    color: ${({ theme }) => theme.selected.contrast[2]};
     font-size: ${size.text};
     font-weight: ${weight.regular};
     padding: 0;
@@ -32,7 +31,7 @@ const Button = styled.button`
   `}
 
   &:hover, &:focus {
-    background: ${getColor('primary', 'light')};
+    background: ${({ theme }) => theme.selected.primary.light};
     transition: all ease 200ms;
 
     ${({ variant }) => variant === 'danger' && `
@@ -41,7 +40,7 @@ const Button = styled.button`
 
     ${({ variant }) => variant === 'text' && `
       background: none;
-      color: ${getColor('primary', 'dark')};
+      color: ${({ theme }) => theme.selected.primary.dark};
     `}
   }
 

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { getColor } from '@theme/mixins';
 import { size } from '@theme/typography';
 import zindex from '@theme/zindex';
 
@@ -17,9 +16,9 @@ const InputContainer = styled.div`
 `;
 
 const FormActions = styled.div`
-  background: ${getColor('main', 1)};
+  background: ${({ theme }) => theme.selected.main[1]};
   bottom: 0;
-  box-shadow: 0 0 8px 2px ${getColor('main', 'shadow')};
+  box-shadow: 0 0 8px 2px ${({ theme }) => theme.selected.main.shadow};
   display: flex;
   justify-content: flex-end;
   padding: 0.75rem;
@@ -37,7 +36,7 @@ const DeleteIcon = styled(FontAwesomeIcon)`
   margin-right: 0.5rem;
 
   &:hover, &:focus {
-    color: ${getColor('danger', 'main')};
+    color: ${({ theme }) => theme.selected.danger.main};
   }
 `;
 
@@ -45,7 +44,7 @@ const DeleteButton = styled(Button)`
   padding: 0.5rem;
 
   &:hover, &:focus {
-    color: ${getColor('danger', 'main')};
+    color: ${({ theme }) => theme.selected.danger.main};
   }
 `;
 

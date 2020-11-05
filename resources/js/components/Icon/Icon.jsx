@@ -1,24 +1,27 @@
 import React from 'react';
-import { oneOfType, string, number, bool, arrayOf } from 'prop-types';
+import { oneOfType, string, bool, arrayOf } from 'prop-types';
 
 import styled from './styled';
 
-const Icon = ({ icon, color, inline }) => (
+const Icon = ({ icon, color, colortype, inline }) => (
   <styled.Icon
     icon={icon}
     color={color}
+    colortype={colortype}
     inline={inline ? 1 : 0}
   />
 );
 
 Icon.propTypes = {
   icon: oneOfType([string, arrayOf(string)]).isRequired,
-  color: arrayOf(oneOfType([string, number])),
+  color: string,
+  colortype: string,
   inline: bool
 };
 
 Icon.defaultProps = {
-  color: [],
+  color: '',
+  colortype: '',
   inline: false
 };
 

@@ -1,16 +1,15 @@
 import styled from 'styled-components';
-import { getColor } from '@theme/mixins';
 import { weight } from '@theme/typography';
 
 const Datafield = styled.div`
   border-radius: 2px; 
-  color: ${getColor('contrast', 1)};
+  color: ${({ theme }) => theme.selected.contrast[1]};
   padding: 0.25rem 1.75rem;
   position: relative;
   transition: all ease 200ms;
 
   &:hover {
-    background: ${getColor('main', 2)};;
+    background: ${({ theme }) => theme.selected.main[2]};;
     transition: all ease 100ms;
   }
 `;
@@ -24,7 +23,7 @@ const DataContainer = styled.a`
 `;
 
 const Name = styled.div`
-  color: ${getColor('primary', 'dark')};
+  color: ${({ theme }) => theme.selected.primary.dark};
   font-weight: ${weight.normal};
   overflow: hidden;
   text-overflow: ellipsis;
@@ -32,7 +31,7 @@ const Name = styled.div`
 `;
 
 const Label = styled.div`
-  color: ${getColor('contrast', 3)};
+  color: ${({ theme }) => theme.selected.contrast[3]};
   word-wrap: break-word;
   width: 50%;
 `;

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { getColor } from '@theme/mixins';
 import { size, weight } from '@theme/typography';
 
 const Navigation = styled.div`
@@ -10,7 +9,7 @@ const Navigation = styled.div`
 
 const HeaderLink = styled(Link)`
   align-items: center;
-  color: ${getColor('contrast', 1)};
+  color: ${({ theme }) => theme.selected.contrast[1]};
   display: flex;
   font-size: ${size.normal};
   & + & {
