@@ -35,12 +35,14 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
     resolver: yupResolver(schema)
   });
 
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit, reset, formState } = methods;
 
   const { id: contactId, fullName, message } = contact || {};
 
   useEffect(() => {
-    if (formLoading && (!message || message.type !== 'error')) {
+    const { isSubmitting } = formState || {};
+
+    if (!isSubmitting && (!message || message.type !== 'error')) {
       reset(contact);
       setFormLoading(false);
     }
