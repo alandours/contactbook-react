@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="{{ asset('img/site/favicon.ico') }}">
     <link rel="icon" href="{{ asset('img/site/favicon.ico') }}">
 </head>
-<body>
+<body class="preload">
   <div id="contact-book"></div>
   <script src="/js/app.js"></script>
 </body>

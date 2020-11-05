@@ -17,7 +17,7 @@ const Birthday = styled(Link)`
 `;
 
 const Day = styled.div`
-  color: ${({ theme }) => theme.selected.danger.dark};
+  color: ${({ theme }) => theme.selected.danger.main};
   font-weight: ${weight.semiBold};
   margin-right: 1rem;
   text-align: center;

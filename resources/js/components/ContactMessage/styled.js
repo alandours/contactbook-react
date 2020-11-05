@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import CloseButton from '@components/CloseButton';
 
@@ -19,13 +19,13 @@ const ContactMessage = styled.div`
   width: 96%;
   z-index: 1000;
 
-  ${({ type }) => type === 'success' && `
+  ${({ type }) => type === 'success' && css`
     background: ${({ theme }) => theme.selected.primary.main};
     border: 1px solid ${({ theme }) => theme.selected.primary.dark};
     color: ${({ theme }) => theme.selected.main[1]};
   `};
 
-  ${({ type }) => type === 'error' && `
+  ${({ type }) => type === 'error' && css`
     background: ${({ theme }) => theme.selected.danger.main};
     border: 1px solid ${({ theme }) => theme.selected.danger.dark};
     color: ${({ theme }) => theme.selected.main[1]};

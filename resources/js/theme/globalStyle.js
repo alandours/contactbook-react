@@ -26,6 +26,15 @@ const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.selected.contrast[1]};
   }
 
+  body, body * {
+    transition: all 500ms ease;
+    transition-property: background, color, box-shadow, border-color;
+  }
+
+  body.preload, body.preload * {
+    transition: none !important;
+  }
+
   #contact-book {
     height: 100%;
   }

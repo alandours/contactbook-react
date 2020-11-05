@@ -19,6 +19,7 @@ const ContactBook = () => {
   const theme = useSelector((state) => state.theme);
 
   useEffect(() => {
+    document.body.classList.remove('preload');
     dispatch(getAppData());
   }, []);
 
