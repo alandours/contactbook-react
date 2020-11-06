@@ -11,4 +11,7 @@ const Count = styled.div`
   text-align: center;
 `;
 
-export default { ContactGroup, Count };
+const List = styled.div`
+`;
+
+export default { ContactGroup, Count, List };

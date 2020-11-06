@@ -10,7 +10,7 @@ import Loader from '@components/Loader';
 
 import styled from './styled';
 
-const renderContactList = (contacts) => {
+const renderContactGroups = (contacts) => {
   const groups = contacts.reduce((acc, contact) => {
     const { id, fullName } = contact;
     const letter = getFirstLetter(fullName);
@@ -77,10 +77,10 @@ const ContactList = ({ hasSearch, contactList, getContactList }) => {
         />
       )}
       { loading ? <Loader /> : (
-        <div>
-          { renderContactList(displayList) }
+        <styled.List>
+          { renderContactGroups(displayList) }
           <styled.Count>{`${displayList.length} contacts`}</styled.Count>
-        </div>
+        </styled.List>
       )}
     </>
   );
