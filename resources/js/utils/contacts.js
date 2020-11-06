@@ -1,3 +1,5 @@
+import { getMainColor } from '@utils/color';
+
 /**
  * @function formatFullName
  * @description Format the contacts name according to the orderLastnameFirst setting
@@ -87,3 +89,14 @@ export const appendParsedData = (formData, data) => {
     formData.append(`${key}`, value);
   });
 };
+
+/**
+ * @function getDefaultPhoto
+ * @description Get the default profile picture name
+ * @returns {string} A string of the default profile picture name
+ * @example
+ * // returns 'contact-orange.jpg'
+ * getDefaultPhoto()
+*/
+
+export const getDefaultPhoto = () => `contact-${getMainColor()}.jpg`;

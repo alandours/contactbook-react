@@ -1,3 +1,5 @@
+import { getDefaultPhoto } from '@utils/contacts';
+
 const contactReducer = (state = {}, { type, payload }) => {
   switch (type) {
     case 'SET_CONTACT':
@@ -23,7 +25,7 @@ const contactReducer = (state = {}, { type, payload }) => {
       };
     case 'RESET_CONTACT':
       return {
-        photo: 'contact.jpg',
+        photo: getDefaultPhoto(),
         loading: true
       };
     default:

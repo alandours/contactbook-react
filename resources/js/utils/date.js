@@ -141,7 +141,7 @@ export const getBirthdayText = (birthday) => {
  * @param {boolean} showMonth - A boolean to show the month
  * @returns {string} A string with the formatted date
  * @example
- * return 06/09
+ * return '06/09'
  * getListDate(birthday, showMonth)
 */
 

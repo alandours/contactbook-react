@@ -21,7 +21,9 @@ const ContactBook = () => {
   const { theme, mainColor } = themeData || {};
 
   useEffect(() => {
-    document.body.classList.remove('preload');
+    window.addEventListener('load', () => {
+      document.body.classList.remove('preload');
+    });
     dispatch(getAppData());
   }, []);
 

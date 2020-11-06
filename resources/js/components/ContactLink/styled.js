@@ -17,7 +17,7 @@ const ContactLink = styled(Link)`
 `;
 
 const Date = styled.div`
-  color: ${({ theme }) => theme.selected.danger.main};
+  color: ${({ theme }) => theme.mainColor.main};
   font-weight: ${weight.semiBold};
   margin-right: 1rem;
   text-align: center;

@@ -73,7 +73,6 @@ class ContactController extends Controller
     }
 
     $contact->fullName = $this->getFullName($contact->name, $contact->lastname);
-    $contact->photo = $contact->photo ?? 'contact.jpg';
 
     return $contact;
   }

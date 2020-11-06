@@ -4,6 +4,7 @@ import { useFormContext } from 'react-hook-form';
 import { func, objectOf, any, bool } from 'prop-types';
 import { setContactPalette } from '@store/actions';
 import { getPalette } from '@utils/color';
+import { getDefaultPhoto } from '@utils/contacts';
 
 import styled from './styled';
 
@@ -35,12 +36,12 @@ const ProfilePicture = ({ thumbnail, contact, setContactPalette, handleClick }) 
 
   return (
     <styled.ProfilePicture
-      src={uploaded || `/img/contacts/${photo || 'contact.jpg'}`}
+      src={uploaded || `/img/contacts/${photo || getDefaultPhoto()}`}
       alt={`${fullName}'s profile picture`}
       thumbnail={thumbnail}
       ref={imageRef}
       onLoad={handlePalette}
-      onClick={photo && photo !== 'contact.jpg' ? handleClick : undefined}
+      onClick={photo && !/contact/.test(photo) ? handleClick : undefined}
     />
   );
 };
