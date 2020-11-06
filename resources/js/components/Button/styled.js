@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { size, weight } from '@theme/typography';
 
 const Button = styled.button`
@@ -18,7 +18,7 @@ const Button = styled.button`
     border-bottom: 2px solid #dd4444;
   `}
 
-  ${({ variant }) => variant === 'text' && `
+  ${({ variant }) => variant === 'text' && css`
     align-self: flex-end;
     background: none;
     border: 0;
@@ -34,11 +34,11 @@ const Button = styled.button`
     background: ${({ theme }) => theme.mainColor.light};
     transition: all ease 200ms;
 
-    ${({ variant }) => variant === 'danger' && `
+    ${({ variant }) => variant === 'danger' && css`
       background: #ff6666;
     `}
 
-    ${({ variant }) => variant === 'text' && `
+    ${({ variant }) => variant === 'text' && css`
       background: none;
       color: ${({ theme }) => theme.mainColor.dark};
     `}

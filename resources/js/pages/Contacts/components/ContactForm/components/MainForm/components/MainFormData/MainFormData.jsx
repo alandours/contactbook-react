@@ -1,8 +1,7 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import BigInput from '@components/BigInput';
-import TextInput from '@components/TextInput';
+import Input from '@components/Form/Input';
 
 import styled from './styled';
 
@@ -20,19 +19,21 @@ const MainFormData = () => {
   return (
     <styled.MainInfo>
       <styled.FieldContainer>
-        <BigInput
+        <Input
           name="name"
           placeholder="Name"
           error={name.message}
+          size="big"
         />
-        <BigInput
+        <Input
           name="lastname"
           placeholder="Last name"
           error={lastname.message}
+          size="big"
         />
       </styled.FieldContainer>
       <styled.FieldContainer>
-        <TextInput
+        <Input
           type="date"
           name="birthday"
           placeholder="Birthday"
@@ -40,14 +41,14 @@ const MainFormData = () => {
         />
       </styled.FieldContainer>
       <styled.FieldContainer>
-        <TextInput
+        <Input
           name="address"
           placeholder="Address"
           error={address.message}
         />
       </styled.FieldContainer>
       <styled.FieldContainer>
-        <TextInput
+        <Input
           name="met"
           placeholder="Met in"
           error={met.message}

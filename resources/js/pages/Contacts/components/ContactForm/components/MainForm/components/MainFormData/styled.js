@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import PageHeader from '@components/PageHeader';
-import Checkbox from '@components/Checkbox';
+import Checkbox from '@components/Form/Checkbox';
 
 const MainInfo = styled(PageHeader)`
   padding: 1rem;

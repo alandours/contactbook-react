@@ -5,9 +5,9 @@ import { objectOf, any } from 'prop-types';
 
 import ProfileSection from '@components/ProfileSection';
 import Button from '@components/Button';
-import TextInput from '@components/TextInput';
-import Select from '@components/Select';
-import Textarea from '@components/Textarea';
+import Input from '@components/Form/Input';
+import Select from '@components/Form/Select';
+import Textarea from '@components/Form/Textarea';
 
 import styled from './styled';
 
@@ -30,13 +30,13 @@ const SecondaryForm = ({ contact, appData }) => {
 
     return (
       <styled.FormField key={alias.id}>
-        <TextInput
+        <Input
           name={`aliases[${index}].alias`}
           defaultValue={alias.alias}
           label="Alias"
           error={message}
         />
-        <input
+        <Input
           type="hidden"
           name={`aliases[${index}].id`}
           ref={register()}
@@ -58,7 +58,7 @@ const SecondaryForm = ({ contact, appData }) => {
 
     return (
       <styled.FormField key={number.id}>
-        <TextInput
+        <Input
           name={`numbers[${index}].number`}
           defaultValue={number.number}
           label="Phone number"
@@ -75,13 +75,13 @@ const SecondaryForm = ({ contact, appData }) => {
             })
           }
         </Select>
-        <TextInput
+        <Input
           name={`numbers[${index}].custom_label`}
           disabled={numberType !== '999'}
           defaultValue={numberType === '999' && number.custom_label ? number.custom_label : ''}
           label="Custom name"
         />
-        <input
+        <Input
           type="hidden"
           name={`numbers[${index}].id`}
           ref={register()}
@@ -102,7 +102,7 @@ const SecondaryForm = ({ contact, appData }) => {
 
     return (
       <styled.FormField key={email.id}>
-        <TextInput
+        <Input
           name={`emails[${index}].email`}
           defaultValue={email.email}
           label="E-mail"
@@ -119,13 +119,13 @@ const SecondaryForm = ({ contact, appData }) => {
             })
           }
         </Select>
-        <TextInput
+        <Input
           name={`emails[${index}].custom_label`}
           disabled={emailType !== '999'}
           defaultValue={emailType === '999' && email.custom_label ? email.custom_label : ''}
           label="Custom name"
         />
-        <input
+        <Input
           type="hidden"
           name={`emails[${index}].id`}
           ref={register()}
@@ -146,7 +146,7 @@ const SecondaryForm = ({ contact, appData }) => {
 
     return (
       <styled.FormField key={username.id}>
-        <TextInput
+        <Input
           name={`social[${index}].username`}
           defaultValue={username.username}
           label="Username"
@@ -163,13 +163,13 @@ const SecondaryForm = ({ contact, appData }) => {
             })
           }
         </Select>
-        <TextInput
+        <Input
           name={`social[${index}].custom_label`}
           disabled={network !== '999'}
           defaultValue={network === '999' && username.custom_label ? username.custom_label : ''}
           label="Custom name"
         />
-        <input
+        <Input
           type="hidden"
           name={`social[${index}].id`}
           ref={register()}

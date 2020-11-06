@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { weight, size } from '@theme/typography';
 
-const FormError = styled.div`
+const ErrorMessage = styled.div`
   color: ${({ theme }) => theme.selected.danger.light};
   font-size: ${size.small};
   font-weight: ${weight.regular};
@@ -9,4 +9,4 @@ const FormError = styled.div`
   white-space: nowrap;
 `;
 
-export default { FormError };
+export default { ErrorMessage };
