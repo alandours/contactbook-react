@@ -6,8 +6,7 @@ const Title = styled.h1`
   display: flex;
   font-size: ${size.max};
   font-weight: ${weight.bold};
-  justify-content: center;
-  margin-bottom: 0.5rem;
+  margin: 0.5rem 0;
 `;
 
 export default { Title };

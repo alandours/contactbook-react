@@ -83,6 +83,8 @@ export const getBirthdaysByMonth = (birthdays) => {
 */
 
 export const calculateAge = (birthdayDate) => {
+  if (!birthdayDate) return null;
+
   const today = new Date();
   const birthday = new Date(birthdayDate);
 
@@ -130,4 +132,24 @@ export const getBirthdayText = (birthday) => {
     return `${birthdayDate.toLocaleDateString(locale, options)} ${birthdayDate.getUTCDate()}, ${birthdayDate.getUTCFullYear()}`;
 
   return `${birthdayDate.toLocaleDateString(locale, options)} ${birthdayDate.getUTCDate()}`;
+};
+
+/**
+ * @function getListDate
+ * @description Get the date in DD or DD/MM format
+ * @param {string} birthday - A birthday date
+ * @param {boolean} showMonth - A boolean to show the month
+ * @returns {string} A string with the formatted date
+ * @example
+ * return 06/09
+ * getListDate(birthday, showMonth)
+*/
+
+export const getListDate = (birthday, showMonth) => {
+  const day = `${birthday.getUTCDate()}`;
+
+  if (showMonth)
+    return `${day}/${birthday.getUTCMonth()}`;
+
+  return day;
 };

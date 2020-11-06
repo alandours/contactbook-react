@@ -1,28 +1,20 @@
 import styled from 'styled-components';
 import { weight, size } from '@theme/typography';
 
-import Title from '@components/Title';
-
 const StatsByYear = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  justify-content: space-between;
   overflow: auto;
-  padding: 1rem;
   width: 100%;
-`;
-
-const StatsByYearTitle = styled(Title)`
-  justify-content: center;
 `;
 
 const Stats = styled.div`
   align-items: flex-end;
   display: flex;
   justify-content: space-between;
-  margin: 3rem 0;
-  width: 100%;
+  margin: 4rem 2rem;
+  max-width: 100%;
 
   ${({ height }) => !!height && `
     height: ${height}px
@@ -40,7 +32,7 @@ const Year = styled.div`
 `;
 
 const Quantity = styled.div`
-  color: ${({ theme }) => theme.selected.primary.dark};
+  color: ${({ theme }) => theme.mainColor.dark};
   display: flex;
   font-size: ${size.small};
   font-weight: ${weight.regular};
@@ -53,7 +45,7 @@ const Quantity = styled.div`
 `;
 
 const Stat = styled.div`
-  background: ${({ theme }) => theme.selected.primary.dark};
+  background: ${({ theme }) => theme.mainColor.dark};
   cursor: pointer;
   min-width: 5px;
   width: 100%;
@@ -64,7 +56,7 @@ const Stat = styled.div`
   }
 
   &:hover {
-    background: ${({ theme }) => theme.selected.primary.light};
+    background: ${({ theme }) => theme.mainColor.light};
     transition: 200ms;
   }
 
@@ -78,7 +70,7 @@ const Stat = styled.div`
   `};
 
   ${({ isActive }) => !!isActive && `
-    background: ${({ theme }) => theme.selected.primary.light};
+    background: ${({ theme }) => theme.mainColor.light};
 
     & ${Quantity} {
       opacity: 1;
@@ -87,4 +79,4 @@ const Stat = styled.div`
   `};
 `;
 
-export default { StatsByYear, StatsByYearTitle, Stats, Stat, Year, Quantity };
+export default { StatsByYear, Stats, Stat, Year, Quantity };

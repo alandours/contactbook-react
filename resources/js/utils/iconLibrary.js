@@ -18,7 +18,8 @@ import {
   faChevronDown,
   faHeart,
   faTrash,
-  faCheckSquare
+  faCheckSquare,
+  faUserFriends
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -47,7 +48,8 @@ library.add(
   faHeartRegular,
   faTrash,
   faSquare,
-  faCheckSquare
+  faCheckSquare,
+  faUserFriends
 );
 
 export default library;

@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
+import PageHeader from '@components/PageHeader';
 import Checkbox from '@components/Checkbox';
+
+const MainInfo = styled(PageHeader)`
+  padding: 1rem;
+`;
 
 const FieldContainer = styled.div`
   display: flex;
@@ -12,4 +17,4 @@ const RemoveImageCheckbox = styled(Checkbox)`
   position: absolute;
 `;
 
-export default { FieldContainer, RemoveImageCheckbox };
+export default { MainInfo, FieldContainer, RemoveImageCheckbox };

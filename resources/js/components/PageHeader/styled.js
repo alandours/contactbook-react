@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const PageHeader = styled.div`
   display: block;
-  padding: 1rem;
+  padding: 2rem;
   position: relative;
   width: 100%;
 `;

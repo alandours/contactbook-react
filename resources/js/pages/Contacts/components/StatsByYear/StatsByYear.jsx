@@ -3,19 +3,24 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getStats, setYearFilter } from '@store/actions';
 import { setPageTitle } from '@utils';
 
+import PageHeader from '@components/PageHeader';
+import Title from '@components/Title';
+import Subtitle from '@components/Subtitle';
+import SectionHeader from '@components/SectionHeader';
 import Loader from '@components/Loader';
 
 import styled from './styled';
 
 const StatsByYear = () => {
   const stats = useSelector((state) => state.stats);
+  const years = Object.keys(stats);
   const yearFilter = useSelector((state) => state.contactList && state.contactList.filter);
   const dispatch = useDispatch();
-  const statsHeight = 250;
+  const statsHeight = 400;
 
   useEffect(() => {
     dispatch(getStats());
-    setPageTitle('Stats by year');
+    setPageTitle('Contacts by year');
     return () => dispatch(setYearFilter(null));
   }, []);
 
@@ -51,7 +56,11 @@ const StatsByYear = () => {
 
   return stats ? (
     <styled.StatsByYear onClick={clearFilter}>
-      <styled.StatsByYearTitle>By Year</styled.StatsByYearTitle>
+      <PageHeader>
+        <Title>Contacts by year</Title>
+        { !!years.length && <Subtitle>{`From ${years[0]} to ${years[years.length - 1]}`}</Subtitle> }
+      </PageHeader>
+      <SectionHeader title="Contacts by year" />
       <styled.Stats height={statsHeight}>
         { renderStats() }
       </styled.Stats>

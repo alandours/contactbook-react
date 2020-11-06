@@ -6,6 +6,7 @@ import RoundLink from '@components/RoundLink';
 const MainInfo = styled(PageHeader)`
   align-items: center;
   display: flex;
+  padding: 1rem;
 `;
 
 const EditLink = styled(RoundLink)`

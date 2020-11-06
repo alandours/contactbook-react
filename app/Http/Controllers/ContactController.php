@@ -31,7 +31,7 @@ class ContactController extends Controller
 
   public function list() {
     return Contact::where('active', 1)
-                  ->select(['id', 'name', 'lastname', 'birthday', 'address', 'met', 'photo', 'favorite'])
+                  ->select(['id', 'name', 'lastname', 'birthday', 'address', 'met', 'photo', 'favorite', 'created_at'])
                   ->orderBy('name', 'ASC')
                   ->get();
   }

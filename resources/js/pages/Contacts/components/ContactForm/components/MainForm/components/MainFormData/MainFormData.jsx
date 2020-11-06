@@ -1,7 +1,6 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import PageHeader from '@components/PageHeader';
 import BigInput from '@components/BigInput';
 import TextInput from '@components/TextInput';
 
@@ -19,7 +18,7 @@ const MainFormData = () => {
   } = errors || {};
 
   return (
-    <PageHeader>
+    <styled.MainInfo>
       <styled.FieldContainer>
         <BigInput
           name="name"
@@ -55,7 +54,7 @@ const MainFormData = () => {
         />
       </styled.FieldContainer>
       <styled.RemoveImageCheckbox name="removeImage" label="Delete photo" />
-    </PageHeader>
+    </styled.MainInfo>
   );
 };
 

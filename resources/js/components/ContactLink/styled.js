@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { weight } from '@theme/typography';
 
-const Birthday = styled(Link)`
+const ContactLink = styled(Link)`
   align-items: center;
   border-radius: 2px; 
   display: flex;
@@ -16,12 +16,12 @@ const Birthday = styled(Link)`
   }
 `;
 
-const Day = styled.div`
+const Date = styled.div`
   color: ${({ theme }) => theme.selected.danger.main};
   font-weight: ${weight.semiBold};
   margin-right: 1rem;
   text-align: center;
-  width: 22px;
+  width: 35px;
 `;
 
 const Name = styled.div`
@@ -34,4 +34,4 @@ const Age = styled.div`
   color: ${({ theme }) => theme.selected.contrast[3]};;
 `;
 
-export default { Birthday, Day, Name, Age };
+export default { ContactLink, Date, Name, Age };
