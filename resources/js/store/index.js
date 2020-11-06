@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import { getTheme } from '@utils/color';
+import { getTheme, getMainColor } from '@utils/color';
 import { contactReducer, contactListReducer, appDataReducer, statsReducer, themeReducer } from './reducers';
 
 const reducer = combineReducers({
@@ -9,7 +9,7 @@ const reducer = combineReducers({
   contactList: contactListReducer,
   appData: appDataReducer,
   stats: statsReducer,
-  theme: themeReducer
+  themeData: themeReducer
 });
 
 export const initialState = {
@@ -19,7 +19,10 @@ export const initialState = {
   },
   appData: {},
   stats: {},
-  theme: getTheme()
+  themeData: {
+    theme: getTheme(),
+    mainColor: getMainColor()
+  }
 };
 
 const store = createStore(

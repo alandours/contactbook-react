@@ -20,8 +20,8 @@ const ContactMessage = styled.div`
   z-index: 1000;
 
   ${({ type }) => type === 'success' && css`
-    background: ${({ theme }) => theme.selected.primary.main};
-    border: 1px solid ${({ theme }) => theme.selected.primary.dark};
+    background: ${({ theme }) => theme.mainColor.main};
+    border: 1px solid ${({ theme }) => theme.mainColor.dark};
     color: ${({ theme }) => theme.selected.main[1]};
   `};
 

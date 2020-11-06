@@ -10,7 +10,7 @@ const Checkbox = styled.label`
 `;
 
 const CheckboxIcon = styled(FontAwesomeIcon)`
-  color: ${({ theme }) => theme.selected.primary.main};
+  color: ${({ theme }) => theme.mainColor.main};
 `;
 
 const CheckboxText = styled.span`

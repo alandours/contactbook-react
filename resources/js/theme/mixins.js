@@ -8,6 +8,12 @@ const getMinLandscape = key => `@media screen and (min-width: ${breakpoints[key]
 
 const getMinCustom = size => `@media screen and (min-width: ${size}px)`;
 
+export const getColor = (theme, color) => {
+  return color.reduce((themeAcc, currentColor) => {
+    return themeAcc ? themeAcc[currentColor] : null;
+  }, theme);
+};
+
 export const devices = {
   mobileXs: getMin('viewport320'),
   mobileXsLandscape: getMinLandscape('viewport320'),
@@ -104,7 +110,7 @@ export const formStyles = css`
 
   &:hover, &:focus {
     border: 0;
-    border-bottom: 1px solid ${({ theme }) => theme.selected.primary.main};
+    border-bottom: 1px solid ${({ theme }) => theme.mainColor.main};
   }
 
   &::placeholder {

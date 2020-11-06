@@ -9,7 +9,7 @@ const Textarea = styled.textarea`
 
   &:hover,
   &:focus {
-    border: 1px solid ${({ theme }) => theme.selected.primary.main};
+    border: 1px solid ${({ theme }) => theme.mainColor.main};
   }
 `;
 

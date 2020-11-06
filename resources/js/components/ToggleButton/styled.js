@@ -10,7 +10,7 @@ const ToggleContainer = styled.div`
   width: 30px;
 
   ${({ active }) => !!active && css`
-    background: ${({ theme }) => theme.selected.primary.main};
+    background: ${({ theme }) => theme.mainColor.main};
     justify-content: flex-end;
   `}
 `;

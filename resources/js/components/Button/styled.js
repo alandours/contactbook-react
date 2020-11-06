@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import { size, weight } from '@theme/typography';
 
 const Button = styled.button`
-  background: ${({ theme }) => theme.selected.primary.main};
+  background: ${({ theme }) => theme.mainColor.main};
   border: 0;
-  border-bottom: 2px solid ${({ theme }) => theme.selected.primary.dark};
+  border-bottom: 2px solid ${({ theme }) => theme.mainColor.dark};
   border-radius: 2px;
   color: ${({ theme }) => theme.selected.main[1]};
   cursor: pointer;
@@ -31,7 +31,7 @@ const Button = styled.button`
   `}
 
   &:hover, &:focus {
-    background: ${({ theme }) => theme.selected.primary.light};
+    background: ${({ theme }) => theme.mainColor.light};
     transition: all ease 200ms;
 
     ${({ variant }) => variant === 'danger' && `
@@ -40,7 +40,7 @@ const Button = styled.button`
 
     ${({ variant }) => variant === 'text' && `
       background: none;
-      color: ${({ theme }) => theme.selected.primary.dark};
+      color: ${({ theme }) => theme.mainColor.dark};
     `}
   }
 

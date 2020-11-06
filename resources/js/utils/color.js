@@ -48,3 +48,18 @@ export const getDominantColor = (img, quality = 10) => {
 export const getTheme = () => {
   return localStorage.getItem('darkTheme') ? 'dark' : 'light';
 };
+
+/**
+ * @function getMainColor
+ * @description Get the main color
+ * @returns {string} The main color: 'green', 'orange' or 'violet'
+ * @example
+ * // returns 'orange'
+ * getMainColor()
+*/
+
+export const getMainColor = () => {
+  const defaultColor = 'green';
+  const mainColor = localStorage.getItem('mainColor');
+  return mainColor || defaultColor;
+};

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import zindex from '@theme/zindex';
 
 const Gradient = styled.div`
-  background: ${({ theme }) => theme.selected.primary.main};
+  background: ${({ theme }) => theme.mainColor.main};
   height: 5px;
   min-height: 5px;
   opacity: 0;

@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { getAppData } from '@store/actions';
 import GlobalStyle from '@theme/globalStyle';
-import palette from '@theme/palette';
+import { palette, color } from '@theme/palette';
 
 import Header from '@components/Header';
 import Footer from '@components/Footer';
@@ -16,7 +16,9 @@ import styled from './styled';
 
 const ContactBook = () => {
   const dispatch = useDispatch();
-  const theme = useSelector((state) => state.theme);
+
+  const themeData = useSelector((state) => state.themeData);
+  const { theme, mainColor } = themeData || {};
 
   useEffect(() => {
     document.body.classList.remove('preload');
@@ -25,7 +27,7 @@ const ContactBook = () => {
 
   return (
     <BrowserRouter>
-      <ThemeProvider theme={{ selected: palette[theme] }}>
+      <ThemeProvider theme={{ selected: palette[theme], mainColor: color[mainColor] }}>
         <GlobalStyle />
         <styled.ContactBook>
           <Header />

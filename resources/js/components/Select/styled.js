@@ -26,12 +26,12 @@ const Select = styled.select`
   width: 200px;
 
   &:hover, &:focus {
-    border: 1px solid ${({ theme }) => theme.selected.primary.main};
+    border: 1px solid ${({ theme }) => theme.mainColor.main};
   }
 
   &:hover + ${Selector},
   &:focus + ${Selector} {
-    color: ${({ theme }) => theme.selected.primary.main};
+    color: ${({ theme }) => theme.mainColor.main};
   }
 `;
 

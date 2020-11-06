@@ -48,6 +48,11 @@ export const setTheme = (data) => ({
   payload: data
 });
 
+export const setMainColor = (data) => ({
+  type: 'SET_MAIN_COLOR',
+  payload: data
+});
+
 export const getContact = (id) => async (dispatch) => {
   dispatch(setContactLoading());
   const url = `/api/contacts/${id}`;

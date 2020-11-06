@@ -23,7 +23,7 @@ const DataContainer = styled.a`
 `;
 
 const Name = styled.div`
-  color: ${({ theme }) => theme.selected.primary.dark};
+  color: ${({ theme }) => theme.mainColor.dark};
   font-weight: ${weight.normal};
   overflow: hidden;
   text-overflow: ellipsis;

@@ -18,8 +18,8 @@ const ListItem = styled.li`
   `};
 
   ${({ type }) => type === 'letter' && css`
-    background: ${({ theme }) => theme.selected.primary.main};
-    border-bottom: 2px solid ${({ theme }) => theme.selected.primary.dark};
+    background: ${({ theme }) => theme.mainColor.main};
+    border-bottom: 2px solid ${({ theme }) => theme.mainColor.dark};
     color: ${({ theme }) => theme.selected.main[1]};
     font-weight: ${weight.semiBold};
     padding: 0.45rem 0.75rem;

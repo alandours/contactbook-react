@@ -31,7 +31,7 @@ const Name = styled.span`
 `;
 
 const Link = styled.a`
-  color: ${({ theme }) => theme.selected.primary.dark};
+  color: ${({ theme }) => theme.mainColor.dark};
   font-weight: ${weight.normal};
 `;
 

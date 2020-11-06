@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setTheme } from '@store/actions';
+import { setTheme, setMainColor } from '@store/actions';
 import { setPageTitle } from '@utils';
 import { getTheme } from '@utils/color';
 
 import Container from '@components/Container';
 import Title from '@components/Title';
 import ToggleButton from '@components/ToggleButton';
+import ColorSelector from '@components/ColorSelector';
 
 import styled from './styled';
 
@@ -47,6 +48,11 @@ const Settings = () => {
     dispatch(setTheme(getTheme()));
   };
 
+  const changeMainColor = (color) => {
+    localStorage.setItem('mainColor', color);
+    dispatch(setMainColor(color));
+  };
+
   return (
     <styled.Settings>
       <Container type="main">
@@ -79,6 +85,24 @@ const Settings = () => {
               handleClick={toggleDarkTheme}
             />
             <styled.SettingName>Use dark theme</styled.SettingName>
+          </styled.Setting>
+          <styled.Setting>
+            <ColorSelector
+              color="green"
+              handleClick={changeMainColor}
+              label="Green"
+            />
+            <ColorSelector
+              color="orange"
+              handleClick={changeMainColor}
+              label="Orange"
+            />
+            <ColorSelector
+              color="purple"
+              handleClick={changeMainColor}
+              label="Purple"
+            />
+            <styled.SettingName>Test main color</styled.SettingName>
           </styled.Setting>
         </styled.SettingsList>
       </Container>
