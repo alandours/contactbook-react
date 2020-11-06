@@ -1,16 +1,18 @@
 import React from 'react';
-import { node } from 'prop-types';
+import { node, string } from 'prop-types';
 
 import styled from './styled';
 
-const Title = ({ children, ...rest }) => <styled.Title {...rest}>{ children }</styled.Title>;
+const Title = ({ children, className }) => <styled.Title className={className}>{ children }</styled.Title>;
 
 Title.propTypes = {
-  children: node
+  children: node,
+  className: string
 };
 
 Title.defaultProps = {
-  children: ''
+  children: '',
+  className: ''
 };
 
 export default Title;

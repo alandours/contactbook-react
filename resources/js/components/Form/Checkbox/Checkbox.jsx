@@ -4,7 +4,7 @@ import { string } from 'prop-types';
 
 import styled from './styled';
 
-const Checkbox = ({ name, label, ...props }) => {
+const Checkbox = ({ name, label, className }) => {
   const { register, watch } = useFormContext();
 
   const isChecked = watch(name);
@@ -15,7 +15,7 @@ const Checkbox = ({ name, label, ...props }) => {
   };
 
   return (
-    <styled.Checkbox {...props}>
+    <styled.Checkbox className={className}>
       <styled.CheckboxIcon icon={isChecked ? icon.active : icon.inactive} />
       <styled.CheckboxText>{label}</styled.CheckboxText>
       <styled.OriginalCheckbox type="checkbox" name={name} ref={register} />
@@ -25,11 +25,13 @@ const Checkbox = ({ name, label, ...props }) => {
 
 Checkbox.propTypes = {
   name: string.isRequired,
-  label: string
+  label: string,
+  className: string
 };
 
 Checkbox.defaultProps = {
-  label: ''
+  label: '',
+  className: ''
 };
 
 export default Checkbox;

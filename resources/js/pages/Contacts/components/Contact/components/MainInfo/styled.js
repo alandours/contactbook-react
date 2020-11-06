@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import PageHeader from '@components/PageHeader';
-import RoundLink from '@components/RoundLink';
+import ContactBookLink from '@components/ContactBookLink';
 
 const MainInfo = styled(PageHeader)`
   align-items: center;
@@ -9,7 +9,7 @@ const MainInfo = styled(PageHeader)`
   padding: 1rem;
 `;
 
-const EditLink = styled(RoundLink)`
+const EditLink = styled(ContactBookLink)`
   align-self: flex-start !important;
 `;
 

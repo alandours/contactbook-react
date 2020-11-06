@@ -3,7 +3,7 @@ import { objectOf, any } from 'prop-types';
 import { getBirthdayText, calculateAge } from '@utils/date';
 
 import Title from '@components/Title';
-import FavoriteIcon from '@components/FavoriteIcon';
+import FavoriteButton from '@components/FavoriteButton';
 import Icon from '@components/Icon';
 
 import styled from './styled';
@@ -17,10 +17,9 @@ const ProfileData = ({ contact }) => {
           <styled.Name birthday={birthday && calculateAge(birthday)}>
             { fullName }
           </styled.Name>
-          <FavoriteIcon
+          <FavoriteButton
             isFavorite={!!favorite}
             id={id}
-            isButton
           />
         </Title>
       </styled.MainDatafield>

@@ -7,13 +7,13 @@ import Icon from '@components/Icon';
 
 import styled from './styled';
 
-const FavoriteIcon = ({ isFavorite, isButton, id }) => {
+const FavoriteButton = ({ isFavorite, id }) => {
   const icon = isFavorite ? ['fas', 'heart'] : ['far', 'heart'];
   const title = isFavorite ? 'Remove from favorites' : 'Add to favorites';
 
   const dispatch = useDispatch();
 
-  return isButton ? (
+  return (
     <styled.FavoriteButton
       type="button"
       title={title}
@@ -21,23 +21,17 @@ const FavoriteIcon = ({ isFavorite, isButton, id }) => {
     >
       <Icon icon={icon} color={['mainColor', 'main']} />
     </styled.FavoriteButton>
-  ) : (
-    <styled.FavoriteIcon>
-      <Icon icon={icon} color={['mainColor', 'main']} />
-    </styled.FavoriteIcon>
   );
 };
 
-FavoriteIcon.propTypes = {
+FavoriteButton.propTypes = {
   isFavorite: bool,
-  isButton: bool,
   id: number
 };
 
-FavoriteIcon.defaultProps = {
+FavoriteButton.defaultProps = {
   isFavorite: false,
-  isButton: false,
   id: 0
 };
 
-export default FavoriteIcon;
+export default FavoriteButton;

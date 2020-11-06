@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 import { size } from '@theme/typography';
 
-import Icon from '@components/Icon';
+import Button from '@components/Button';
 
-const CloseButton = styled.button`
+const XButton = styled(Button)`
   background: none;
   border: 0;
   cursor: pointer;
   font-size: ${size.medium};
+  padding: 0;
+
+  &:hover, &:focus {
+    background: none;
+  }
 `;
 
-const RemoveIcon = styled(Icon)`
-  color: red;
-`;
-
-export default { CloseButton, RemoveIcon };
+export default { XButton };

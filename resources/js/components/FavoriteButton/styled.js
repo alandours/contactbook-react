@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 import { size } from '@theme/typography';
 
-const FavoriteIcon = styled.span`
-  font-size: ${size.small};
-  margin: 0 0.5rem;
-`;
-
 const FavoriteButton = styled.button`
   align-self: flex-start;
   background: none;
@@ -16,4 +11,4 @@ const FavoriteButton = styled.button`
   padding: 0.25rem;
 `;
 
-export default { FavoriteIcon, FavoriteButton };
+export default { FavoriteButton };

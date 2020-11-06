@@ -3,12 +3,12 @@ import { oneOfType, array, string, element, func } from 'prop-types';
 
 import styled from './styled';
 
-const Button = ({ children, type, variant, handleClick, ...rest }) => (
+const Button = ({ children, type, variant, handleClick, className }) => (
   <styled.Button
     type={type}
     onClick={handleClick}
     variant={variant}
-    {...rest}
+    className={className}
   >
     { children }
   </styled.Button>
@@ -18,13 +18,15 @@ Button.propTypes = {
   children: oneOfType([array, string, element]),
   type: string.isRequired,
   variant: string,
-  handleClick: func
+  handleClick: func,
+  className: string
 };
 
 Button.defaultProps = {
   children: '',
   variant: '',
-  handleClick: () => {}
+  handleClick: () => {},
+  className: ''
 };
 
 export default Button;

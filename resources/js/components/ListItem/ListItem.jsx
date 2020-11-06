@@ -1,15 +1,15 @@
 import React from 'react';
-import { string, bool, number, oneOfType, element } from 'prop-types';
+import { string, bool, oneOfType, element, objectOf, any } from 'prop-types';
+
+import ContactLink from '@components/ContactLink';
 
 import styled from './styled';
 
-const ListItem = ({ type = 'contact', sticky, id, children }) => (
+const ListItem = ({ type = 'contact', contact, sticky, children }) => (
   <styled.ListItem type={type} sticky={sticky}>
     {
-      id ? (
-        <styled.ListLink to={`/contacts/${id}`}>
-          { children }
-        </styled.ListLink>
+      contact && contact.id ? (
+        <ContactLink contact={contact} />
       ) : children
     }
   </styled.ListItem>
@@ -17,15 +17,15 @@ const ListItem = ({ type = 'contact', sticky, id, children }) => (
 
 ListItem.propTypes = {
   type: string,
+  contact: objectOf(any),
   sticky: bool,
-  id: number,
   children: oneOfType([string, element])
 };
 
 ListItem.defaultProps = {
   type: 'contact',
+  contact: {},
   sticky: false,
-  id: 0,
   children: ''
 };
 

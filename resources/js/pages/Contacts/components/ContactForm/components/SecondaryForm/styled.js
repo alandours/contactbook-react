@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-import CloseButton from '@components/CloseButton';
+import XButton from '@components/XButton';
 
 const SecondaryForm = styled.div`
 `;
 
-const RemoveButton = styled(CloseButton)`
+const RemoveButton = styled(XButton)`
   margin-left: 1.5rem;
   opacity: 0;
   transition: all ease 200ms;

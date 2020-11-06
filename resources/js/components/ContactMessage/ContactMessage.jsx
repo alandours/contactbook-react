@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { setContactMessage } from '@store/actions';
 import { string, func } from 'prop-types';
 
+import Icon from '@components/Icon';
+
 import styled from './styled';
 
 const mapStateToProps = (state) => {
@@ -43,7 +45,12 @@ const ContactMessage = ({ text, type, setContactMessage }) => {
   return !!text && (
     <styled.ContactMessage type={type} visible={visible}>
       { text }
-      <styled.Button type="button" onClick={closeMessage} />
+      <styled.CloseButton
+        type="button"
+        handleClick={closeMessage}
+      >
+        <Icon icon="times" />
+      </styled.CloseButton>
     </styled.ContactMessage>
   );
 };

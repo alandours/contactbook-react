@@ -11,7 +11,7 @@ import styled from './styled';
 const Input = ({ name, type, label, disabled, placeholder, icon, defaultValue, error, size }) => {
   const { register } = useFormContext();
 
-  return type !== 'hidden' && (
+  return (
     <Label label={label} disabled={disabled}>
       <styled.Container>
         { icon && <Icon icon={icon} title={label || ''} inline /> }

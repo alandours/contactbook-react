@@ -20,7 +20,11 @@ const MainInfo = ({ contact }) => {
       <styled.MainInfo>
         <MainProfilePicture />
         <ProfileData contact={contact} />
-        <styled.EditLink to={`/contacts/${id}/edit`} title="Edit contact">
+        <styled.EditLink
+          url={`/contacts/${id}/edit`}
+          title="Edit contact"
+          variant="round"
+        >
           <Icon icon="pen" color={['selected', 'main', '1']} />
         </styled.EditLink>
       </styled.MainInfo>

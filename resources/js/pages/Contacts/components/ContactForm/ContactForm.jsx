@@ -99,14 +99,14 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
         <SecondaryForm />
         <styled.FormActions edit={edit}>
           { edit && (
-            <styled.DeleteButton
+            <Button
               type="button"
               handleClick={handleDelete}
-              variant="text"
+              variant="textDanger"
             >
               <styled.DeleteIcon icon="trash" />
               Delete contact
-            </styled.DeleteButton>
+            </Button>
           )}
           <Button type="submit">
             Save contact

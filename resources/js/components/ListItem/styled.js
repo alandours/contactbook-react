@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
 import { weight } from '@theme/typography';
+import zindex from '@theme/zindex';
 
 const ListItem = styled.li`
   & + & {
@@ -23,6 +23,7 @@ const ListItem = styled.li`
     color: ${({ theme }) => theme.selected.main[1]};
     font-weight: ${weight.semiBold};
     padding: 0.45rem 0.75rem;
+    z-index: ${zindex.tooltip};
   `};
 
   ${({ sticky }) => sticky && css`
@@ -31,13 +32,4 @@ const ListItem = styled.li`
   `};
 `;
 
-const ListLink = styled(Link)`
-  color: ${({ theme }) => theme.selected.contrast[1]};
-  display: block;
-  overflow: hidden;
-  padding: 0.45rem 0.75rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`;
-
-export default { ListItem, ListLink };
+export default { ListItem };

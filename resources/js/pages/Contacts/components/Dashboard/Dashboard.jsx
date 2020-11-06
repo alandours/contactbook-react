@@ -9,7 +9,7 @@ import Subtitle from '@components/Subtitle';
 import SectionHeader from '@components/SectionHeader';
 import ContactMessage from '@components/ContactMessage';
 import ContactLink from '@components/ContactLink';
-import TextLink from '@components/TextLink';
+import ContactBookLink from '@components/ContactBookLink';
 
 import styled from './styled';
 
@@ -73,14 +73,14 @@ const Dashboard = () => {
         <styled.DashboardContainer>
           { upcomingBirthdays }
         </styled.DashboardContainer>
-        <TextLink url="/contacts/birthdays" highlight>See all birthdays</TextLink>
+        <ContactBookLink url="/contacts/birthdays" highlight>See all birthdays</ContactBookLink>
       </styled.DashboardSection>
       <styled.DashboardSection>
         <SectionHeader title="Last contacts" icon="user-friends" />
         <styled.DashboardContainer>
           { lastAdded }
         </styled.DashboardContainer>
-        <TextLink url="/contacts/year" highlight>See contacts by year</TextLink>
+        <ContactBookLink url="/contacts/year" highlight>See contacts by year</ContactBookLink>
       </styled.DashboardSection>
     </styled.Dashboard>
   );

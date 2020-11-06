@@ -36,7 +36,7 @@ const SecondaryForm = ({ contact, appData }) => {
           label="Alias"
           error={message}
         />
-        <Input
+        <input
           type="hidden"
           name={`aliases[${index}].id`}
           ref={register()}
@@ -81,7 +81,7 @@ const SecondaryForm = ({ contact, appData }) => {
           defaultValue={numberType === '999' && number.custom_label ? number.custom_label : ''}
           label="Custom name"
         />
-        <Input
+        <input
           type="hidden"
           name={`numbers[${index}].id`}
           ref={register()}
@@ -125,7 +125,7 @@ const SecondaryForm = ({ contact, appData }) => {
           defaultValue={emailType === '999' && email.custom_label ? email.custom_label : ''}
           label="Custom name"
         />
-        <Input
+        <input
           type="hidden"
           name={`emails[${index}].id`}
           ref={register()}
@@ -169,7 +169,7 @@ const SecondaryForm = ({ contact, appData }) => {
           defaultValue={network === '999' && username.custom_label ? username.custom_label : ''}
           label="Custom name"
         />
-        <Input
+        <input
           type="hidden"
           name={`social[${index}].id`}
           ref={register()}

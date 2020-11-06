@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 import breakpoints from './breakpoints';
-import { size, fontFamily } from './typography';
+import { size, weight, fontFamily } from './typography';
 
 const getMin = key => `@media screen and (min-width: ${breakpoints[key]}px)`;
 
@@ -115,5 +115,64 @@ export const formStyles = css`
 
   &::placeholder {
     color: ${({ theme }) => theme.selected.contrast[1]};
+  }
+`;
+
+export const buttonStyles = css`
+  align-items: center;
+  background: ${({ theme }) => theme.mainColor.main};
+  border: 0;
+  border-bottom: 2px solid ${({ theme }) => theme.mainColor.dark};
+  border-radius: 2px;
+  color: ${({ theme }) => theme.selected.main[1]};
+  cursor: pointer;
+  display: flex;
+  font-size: ${size.text};
+  font-weight: 500;
+  justify-content: center;
+  transition: all ease 200ms;
+  padding: 0.5rem 1.5rem;
+
+  ${({ variant }) => variant === 'danger' && `
+    background: #ee5555;
+    border-bottom: 2px solid #dd4444;
+  `}
+
+  &:hover, &:focus {
+    background: ${({ theme }) => theme.mainColor.light};
+    transition: all ease 100ms;
+
+    ${({ variant }) => variant === 'danger' && css`
+      background: #ff6666;
+    `}
+  }
+`;
+
+export const linkStyles = css`
+  align-self: flex-end;
+  background: none;
+  border: 0;
+  color: ${({ theme }) => theme.selected.contrast[2]};
+  font-size: ${size.text};
+  font-weight: ${weight.regular};
+  padding: 0.5rem;
+  text-align: right;
+  width: auto;
+
+  ${({ highlight }) => !!highlight && css`
+    color: ${({ theme }) => theme.mainColor.dark};
+
+    ${({ variant }) => variant === 'textDanger' && css`
+      color: ${({ theme }) => theme.selected.danger.main};
+    `}
+  `};
+
+  &:hover {
+    background: none;
+    color: ${({ theme }) => theme.mainColor.main};
+
+    ${({ variant }) => variant === 'textDanger' && css`
+      color: ${({ theme }) => theme.selected.danger.main};
+    `}
   }
 `;

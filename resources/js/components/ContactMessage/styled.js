@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
-import CloseButton from '@components/CloseButton';
+import XButton from '@components/XButton';
 
-const Button = styled(CloseButton)`
+const CloseButton = styled(XButton)`
   position: absolute;
   top: 0.6rem;
   right: 1rem;
@@ -36,4 +36,4 @@ const ContactMessage = styled.div`
   `};
 `;
 
-export default { ContactMessage, Button };
+export default { ContactMessage, CloseButton };

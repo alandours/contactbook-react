@@ -3,12 +3,13 @@ import { objectOf, any, bool } from 'prop-types';
 import { calculateAge, calculateNextBirthdayAge, getListDate } from '@utils/date';
 
 import ProfilePicture from '@components/ProfilePicture';
+import Icon from '@components/Icon';
 
 import styled from './styled';
 
 const ContactLink = ({ contact, showPhoto, showAge, showMonth }) => {
-  const { id, fullName, birthday, nextBirthday } = contact || {};
-
+  const { id, fullName, birthday, nextBirthday, favorite } = contact || {};
+  const showFavoriteIcon = localStorage.getItem('showFavoriteIcon');
   const age = nextBirthday ? calculateNextBirthdayAge(birthday, nextBirthday) : calculateAge(birthday);
 
   return (
@@ -21,6 +22,11 @@ const ContactLink = ({ contact, showPhoto, showAge, showMonth }) => {
       { showPhoto && <ProfilePicture contact={contact} thumbnail /> }
       <styled.Name>{ fullName }</styled.Name>
       { showAge && !!age && <styled.Age>{age}</styled.Age> }
+      {!!favorite && !!showFavoriteIcon && (
+        <styled.FavoriteIcon isFavorite={!!favorite}>
+          <Icon icon={['fas', 'heart']} color={['mainColor', 'main']} />
+        </styled.FavoriteIcon>
+      )}
     </styled.ContactLink>
   );
 };

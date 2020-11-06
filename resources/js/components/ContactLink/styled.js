@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { weight } from '@theme/typography';
+import { size, weight } from '@theme/typography';
 
 const ContactLink = styled(Link)`
   align-items: center;
@@ -34,4 +34,9 @@ const Age = styled.div`
   color: ${({ theme }) => theme.selected.contrast[3]};;
 `;
 
-export default { ContactLink, Date, Name, Age };
+const FavoriteIcon = styled.span`
+  font-size: ${size.small};
+  margin: 0 0.5rem;
+`;
+
+export default { ContactLink, Date, Name, Age, FavoriteIcon };

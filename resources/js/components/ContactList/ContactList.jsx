@@ -7,24 +7,16 @@ import { getFirstLetter } from '@utils/contacts';
 import SearchInput from '@components/SearchInput';
 import ListItem from '@components/ListItem';
 import Loader from '@components/Loader';
-import FavoriteIcon from '@components/FavoriteIcon';
 
 import styled from './styled';
 
 const renderContactList = (contacts) => {
-  const showFavoriteIcon = localStorage.getItem('showFavoriteIcon');
-
   const groups = contacts.reduce((acc, contact) => {
-    const { id, fullName, favorite } = contact;
+    const { id, fullName } = contact;
     const letter = getFirstLetter(fullName);
 
     const Contact = (
-      <ListItem id={id} key={id}>
-        <>
-          {fullName}
-          {!!favorite && !!showFavoriteIcon && <FavoriteIcon isFavorite={!!favorite} />}
-        </>
-      </ListItem>
+      <ListItem contact={contact} key={id} />
     );
     acc[letter] = acc[letter] ? [...acc[letter], Contact] : [Contact];
 

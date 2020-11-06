@@ -3,7 +3,6 @@ import { size } from '@theme/typography';
 import zindex from '@theme/zindex';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Button from '@components/Button';
 
 const ContactForm = styled.form`
   overflow: scroll;
@@ -40,12 +39,4 @@ const DeleteIcon = styled(FontAwesomeIcon)`
   }
 `;
 
-const DeleteButton = styled(Button)`
-  padding: 0.5rem;
-
-  &:hover, &:focus {
-    color: ${({ theme }) => theme.selected.danger.main};
-  }
-`;
-
-export default { ContactForm, InputContainer, FormActions, DeleteButton, DeleteIcon };
+export default { ContactForm, InputContainer, FormActions, DeleteIcon };
