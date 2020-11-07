@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setTheme, setMainColor } from '@store/actions';
+import { setTheme, setMainColor, getContactList } from '@store/actions';
 import { setPageTitle } from '@utils';
 import { getTheme } from '@utils/color';
 
@@ -23,6 +23,8 @@ const Settings = () => {
       localStorage.setItem('orderLastnameFirst', active);
     else
       localStorage.removeItem('orderLastnameFirst');
+
+    dispatch(getContactList());
   };
 
   const toggleFavoriteIcon = (active) => {
@@ -30,6 +32,8 @@ const Settings = () => {
       localStorage.setItem('showFavoriteIcon', active);
     else
       localStorage.removeItem('showFavoriteIcon');
+
+    dispatch(getContactList());
   };
 
   const toggleFavoritesOnly = (active) => {
@@ -37,6 +41,8 @@ const Settings = () => {
       localStorage.setItem('favoritesOnly', active);
     else
       localStorage.removeItem('favoritesOnly');
+
+    dispatch(getContactList());
   };
 
   const toggleDarkTheme = (active) => {

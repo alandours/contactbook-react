@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 const Settings = styled.div`
   width: 100%;
-  margin: auto;
+  position: absolute;
+  top: 0;
 `;
 
 const Setting = styled.li`
