@@ -4,8 +4,10 @@ import { setTheme, setMainColor } from '@store/actions';
 import { setPageTitle } from '@utils';
 import { getTheme } from '@utils/color';
 
-import Container from '@components/Container';
-import Title from '@components/Title';
+
+import MainContainer from '@components/MainContainer';
+import PageHeader from '@components/PageHeader';
+import Section from '@components/Section';
 import ToggleButton from '@components/ToggleButton';
 import ColorSelector from '@components/ColorSelector';
 
@@ -55,9 +57,11 @@ const Settings = () => {
 
   return (
     <styled.Settings>
-      <Container type="main">
-        <Title>Settings</Title>
-        <styled.SettingsList>
+      <MainContainer>
+        <PageHeader
+          title="Settings"
+        />
+        <Section title="Contacts">
           <styled.Setting>
             <ToggleButton
               initialState={!!localStorage.getItem('orderLastnameFirst')}
@@ -79,6 +83,8 @@ const Settings = () => {
             />
             <styled.SettingName>Show only favorite contacts</styled.SettingName>
           </styled.Setting>
+        </Section>
+        <Section title="Colors">
           <styled.Setting>
             <ToggleButton
               initialState={!!localStorage.getItem('darkTheme')}
@@ -104,8 +110,8 @@ const Settings = () => {
             />
             <styled.SettingName>Test main color</styled.SettingName>
           </styled.Setting>
-        </styled.SettingsList>
-      </Container>
+        </Section>
+      </MainContainer>
     </styled.Settings>
   );
 };

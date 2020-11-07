@@ -4,12 +4,10 @@ import { setPageTitle } from '@utils';
 import { getBirthdays } from '@utils/date';
 
 import PageHeader from '@components/PageHeader';
-import Title from '@components/Title';
-import Subtitle from '@components/Subtitle';
-import SectionHeader from '@components/SectionHeader';
 import ContactMessage from '@components/ContactMessage';
 import ContactLink from '@components/ContactLink';
 import ContactBookLink from '@components/ContactBookLink';
+import Section from '@components/Section';
 
 import styled from './styled';
 
@@ -61,27 +59,23 @@ const Dashboard = () => {
     }
   }, [contacts]);
 
+  const subtitle = contacts && contacts.length && `${contacts.length} contacts`;
+
   return (
     <styled.Dashboard>
       <ContactMessage />
-      <PageHeader>
-        <Title>{ process.env.MIX_APP_NAME }</Title>
-        { contacts && contacts.length && <Subtitle>{`${contacts.length} contacts`}</Subtitle> }
-      </PageHeader>
-      <styled.DashboardSection>
-        <SectionHeader title="Upcoming birthdays" icon="birthday-cake" />
-        <styled.DashboardContainer>
-          { upcomingBirthdays }
-        </styled.DashboardContainer>
+      <PageHeader
+        title={process.env.MIX_APP_NAME}
+        subtitle={subtitle}
+      />
+      <Section title="Upcoming birthdays" icon="birthday-cake">
+        { upcomingBirthdays }
         <ContactBookLink url="/contacts/birthdays" highlight>See all birthdays</ContactBookLink>
-      </styled.DashboardSection>
-      <styled.DashboardSection>
-        <SectionHeader title="Last contacts" icon="user-friends" />
-        <styled.DashboardContainer>
-          { lastAdded }
-        </styled.DashboardContainer>
+      </Section>
+      <Section title="Last contacts" icon="user-friends">
+        { lastAdded }
         <ContactBookLink url="/contacts/year" highlight>See contacts by year</ContactBookLink>
-      </styled.DashboardSection>
+      </Section>
     </styled.Dashboard>
   );
 };

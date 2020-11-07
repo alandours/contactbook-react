@@ -5,16 +5,16 @@ import SectionHeader from '@components/SectionHeader';
 
 import styled from './styled';
 
-const ProfileSection = ({ icon, order, sticky, title, children }) => (
-  <styled.ProfileSection order={order}>
+const Section = ({ icon, order, sticky, title, children }) => (
+  <styled.Section order={order}>
     <SectionHeader sticky={sticky} icon={icon} title={title} />
     <styled.Content>
       { children }
     </styled.Content>
-  </styled.ProfileSection>
+  </styled.Section>
 );
 
-ProfileSection.propTypes = {
+Section.propTypes = {
   order: number,
   icon: string,
   title: string,
@@ -22,11 +22,11 @@ ProfileSection.propTypes = {
   children: oneOfType([array, element]).isRequired
 };
 
-ProfileSection.defaultProps = {
+Section.defaultProps = {
   order: 0,
   icon: '',
   title: '',
   sticky: false
 };
 
-export default ProfileSection;
+export default Section;

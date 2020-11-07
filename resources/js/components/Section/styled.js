@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
-const ProfileSection = styled.section`
+const Section = styled.section`
   position: relative;
+  width: 100%;
 
   ${({ order }) => order && `
     order: ${order};
@@ -14,4 +15,4 @@ const Content = styled.div`
   flex-direction: column;
 `;
 
-export default { ProfileSection, Content };
+export default { Section, Content };

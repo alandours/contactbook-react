@@ -1,5 +1,4 @@
-import styled, { css } from 'styled-components';
-import { weight, size } from '@theme/typography';
+import styled from 'styled-components';
 
 const Dashboard = styled.div`
   height: 100%;
@@ -12,7 +11,7 @@ const DashboardSection = styled.div`
 `;
 
 const DashboardContainer = styled.div`
-  margin: 0.5rem 1.25rem;
+  margin: 0.5rem 0;
 `;
 
 export default { Dashboard, DashboardSection, DashboardContainer };

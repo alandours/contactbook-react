@@ -4,7 +4,7 @@ import { objectOf, any } from 'prop-types';
 import sections from '@utils/sections';
 
 import Datafield from '@components/Datafield';
-import ProfileSection from '@components/ProfileSection';
+import Section from '@components/Section';
 
 import styled from './styled';
 
@@ -85,7 +85,7 @@ const renderSecondaryInfo = (contact) => {
     const data = contact[key];
 
     return !!data && !!data.length && (
-      <ProfileSection
+      <Section
         icon={icon}
         key={key}
         order={order}
@@ -95,7 +95,7 @@ const renderSecondaryInfo = (contact) => {
         <>
           { renderSection(key, data, urlStart) }
         </>
-      </ProfileSection>
+      </Section>
     );
   });
 };

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { objectOf, any } from 'prop-types';
 
-import ProfileSection from '@components/ProfileSection';
+import Section from '@components/Section';
 import Button from '@components/Button';
 import Input from '@components/Form/Input';
 import Select from '@components/Form/Select';
@@ -186,7 +186,7 @@ const SecondaryForm = ({ contact, appData }) => {
 
   return (
     <styled.SecondaryForm>
-      <ProfileSection title="Aliases" icon="id-card" sticky>
+      <Section title="Aliases" icon="id-card" sticky>
         { aliases.length ? aliases.map(renderAliasField) : appendAlias({ alias: '' }, false) }
         <Button
           type="button"
@@ -195,8 +195,8 @@ const SecondaryForm = ({ contact, appData }) => {
         >
           Add a new alias
         </Button>
-      </ProfileSection>
-      <ProfileSection title="Phone numbers" icon="phone" sticky>
+      </Section>
+      <Section title="Phone numbers" icon="phone" sticky>
         { numbers.length ? numbers.map(renderNumberFields) : appendNumber({}, false) }
         <Button
           type="button"
@@ -210,8 +210,8 @@ const SecondaryForm = ({ contact, appData }) => {
         >
           Add a new phone number
         </Button>
-      </ProfileSection>
-      <ProfileSection title="Emails" icon="envelope" sticky>
+      </Section>
+      <Section title="Emails" icon="envelope" sticky>
         { emails.length ? emails.map(renderEmailFields) : appendEmail({}, false) }
         <Button
           type="button"
@@ -225,8 +225,8 @@ const SecondaryForm = ({ contact, appData }) => {
         >
           Add a new e-mail
         </Button>
-      </ProfileSection>
-      <ProfileSection title="Social networks" icon="share-alt" sticky>
+      </Section>
+      <Section title="Social networks" icon="share-alt" sticky>
         { social.length ? social.map(renderSocialFields) : appendSocial({}, false) }
         <Button
           type="button"
@@ -240,12 +240,12 @@ const SecondaryForm = ({ contact, appData }) => {
         >
           Add a new social network
         </Button>
-      </ProfileSection>
-      <ProfileSection title="Notes" icon="sticky-note" sticky>
+      </Section>
+      <Section title="Notes" icon="sticky-note" sticky>
         <Textarea
           name="notes"
         />
-      </ProfileSection>
+      </Section>
     </styled.SecondaryForm>
   );
 };

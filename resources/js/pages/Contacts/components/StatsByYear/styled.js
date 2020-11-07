@@ -13,7 +13,7 @@ const Stats = styled.div`
   align-items: flex-end;
   display: flex;
   justify-content: space-between;
-  margin: 4rem 2rem;
+  margin: 3rem 2rem;
   max-width: 100%;
 
   ${({ height }) => !!height && `

@@ -10,9 +10,6 @@ const Birthdays = styled.div`
 const BirthdayList = styled.div`
 `;
 
-const Month = styled.div`
-`;
-
 const MonthName = styled.h3`
   font-weight: ${weight.semiBold};
 `;
@@ -21,4 +18,4 @@ const BirthdaysContainer = styled.div`
   margin: 0.5rem 1.25rem;
 `;
 
-export default { Birthdays, BirthdayList, Month, MonthName, BirthdaysContainer };
+export default { Birthdays, BirthdayList, MonthName, BirthdaysContainer };

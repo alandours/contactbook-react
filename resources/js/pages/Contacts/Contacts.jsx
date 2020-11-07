@@ -4,7 +4,8 @@ import { Switch, Route } from 'react-router-dom';
 import { getContact } from '@store/actions';
 import { func } from 'prop-types';
 
-import Container from '@components/Container';
+import Sidebar from '@components/Sidebar';
+import MainContainer from '@components/MainContainer';
 import ContactList from '@components/ContactList';
 import Dashboard from './components/Dashboard';
 import Contact from './components/Contact';
@@ -20,10 +21,10 @@ const mapDispatchToProps = {
 
 const Contacts = ({ getContact }) => (
   <styled.Contacts>
-    <Container type="sidebar">
+    <Sidebar>
       <ContactList hasSearch />
-    </Container>
-    <Container type="main">
+    </Sidebar>
+    <MainContainer>
       <Switch>
         <Route path="/contacts" exact>
           <Dashboard />
@@ -54,7 +55,7 @@ const Contacts = ({ getContact }) => (
           }}
         />
       </Switch>
-    </Container>
+    </MainContainer>
   </styled.Contacts>
 );
 

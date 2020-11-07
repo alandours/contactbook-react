@@ -3,12 +3,10 @@ import { useSelector } from 'react-redux';
 import { setPageTitle } from '@utils';
 import { getBirthdays, getBirthdaysByMonth } from '@utils/date';
 
-import Title from '@components/Title';
-import Subtitle from '@components/Subtitle';
-import Loader from '@components/Loader';
 import PageHeader from '@components/PageHeader';
-import SectionHeader from '@components/SectionHeader';
+import Section from '@components/Section';
 import ContactLink from '@components/ContactLink';
+import Loader from '@components/Loader';
 
 import styled from './styled';
 
@@ -19,14 +17,11 @@ const renderBirthdays = (contacts) => {
   if (!birthdaysByMonth) return null;
 
   return Object.entries(birthdaysByMonth).map(([month, contacts]) => (
-    <styled.Month key={month}>
-      <SectionHeader title={month} />
-      <styled.BirthdaysContainer>
-        { contacts.map((contact) => (
-          <ContactLink contact={contact} key={contact.id} showAge showPhoto />
-        ))}
-      </styled.BirthdaysContainer>
-    </styled.Month>
+    <Section title={month} key={month}>
+      { contacts.map((contact) => (
+        <ContactLink contact={contact} key={contact.id} showAge showPhoto />
+      ))}
+    </Section>
   ));
 };
 
@@ -37,17 +32,15 @@ const Birthdays = () => {
     setPageTitle('Birthdays');
   }, []);
 
+  const subtitle = contacts && `${getBirthdays(contacts).length} birthdays`;
+
   return (
     <styled.Birthdays>
-      <PageHeader>
-        <Title>Birthdays</Title>
-        { contacts && <Subtitle>{`${getBirthdays(contacts).length} birthdays`}</Subtitle> }
-      </PageHeader>
-      { contacts && contacts.length ? (
-        <styled.BirthdayList>
-          { renderBirthdays(contacts) }
-        </styled.BirthdayList>
-      ) : <Loader /> }
+      <PageHeader
+        title="Birthdays"
+        subtitle={subtitle}
+      />
+      { contacts && contacts.length ? renderBirthdays(contacts) : <Loader /> }
     </styled.Birthdays>
   );
 };
