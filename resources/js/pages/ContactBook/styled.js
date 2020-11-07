@@ -6,8 +6,10 @@ const ContactBook = styled.div`
   height: 100%;
 `;
 
-const MainContainer = styled.div`
+const Main = styled.main`
+  display: flex;
   margin: auto;
+  width: 1000px;
 `;
 
-export default { ContactBook, MainContainer };
+export default { ContactBook, Main };

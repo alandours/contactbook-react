@@ -3,13 +3,20 @@ import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
-import { getAppData } from '@store/actions';
+import { getAppData, getContact } from '@store/actions';
 import GlobalStyle from '@theme/globalStyle';
 import { palette, color } from '@theme/palette';
 
 import Header from '@components/Header';
 import Footer from '@components/Footer';
-import Contacts from '@pages/Contacts';
+import Sidebar from '@components/Sidebar';
+import ContactList from '@components/ContactList';
+import MainContainer from '@components/MainContainer';
+import Dashboard from '@pages/Dashboard';
+import Contact from '@pages/Contact';
+import ContactForm from '@pages/ContactForm';
+import StatsByYear from '@pages/StatsByYear';
+import Birthdays from '@pages/Birthdays';
 import Settings from '@pages/Settings';
 
 import styled from './styled';
@@ -33,19 +40,49 @@ const ContactBook = () => {
         <GlobalStyle />
         <styled.ContactBook>
           <Header />
-          <styled.MainContainer>
-            <Switch>
-              <Route exact path="/">
-                <Redirect to="/contacts" />
-              </Route>
-              <Route path="/contacts">
-                <Contacts />
-              </Route>
-              <Route path="/settings">
-                <Settings />
-              </Route>
-            </Switch>
-          </styled.MainContainer>
+          <styled.Main>
+            <Sidebar>
+              <ContactList hasSearch />
+            </Sidebar>
+            <MainContainer>
+              <Switch>
+                <Route exact path="/">
+                  <Redirect to="/contacts" />
+                </Route>
+                <Route path="/contacts" exact>
+                  <Dashboard />
+                </Route>
+                <Route path="/contacts/year">
+                  <StatsByYear />
+                </Route>
+                <Route path="/contacts/new">
+                  <ContactForm />
+                </Route>
+                <Route
+                  path="/contacts/:id/edit"
+                  render={({ match }) => {
+                    const { id } = match.params || {};
+                    dispatch(getContact(id));
+                    return <ContactForm edit />;
+                  }}
+                />
+                <Route
+                  path="/contacts/:id?"
+                  render={({ match }) => {
+                    const { id } = match.params || {};
+                    dispatch(getContact(id));
+                    return <Contact />;
+                  }}
+                />
+                <Route path="/birthdays">
+                  <Birthdays />
+                </Route>
+                <Route path="/settings">
+                  <Settings />
+                </Route>
+              </Switch>
+            </MainContainer>
+          </styled.Main>
           <Footer />
         </styled.ContactBook>
       </ThemeProvider>

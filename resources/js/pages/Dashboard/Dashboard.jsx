@@ -70,7 +70,7 @@ const Dashboard = () => {
       />
       <Section title="Upcoming birthdays" icon="birthday-cake">
         { upcomingBirthdays }
-        <ContactBookLink url="/contacts/birthdays" highlight>See all birthdays</ContactBookLink>
+        <ContactBookLink url="/birthdays" highlight>See all birthdays</ContactBookLink>
       </Section>
       <Section title="Last contacts" icon="user-friends">
         { lastAdded }

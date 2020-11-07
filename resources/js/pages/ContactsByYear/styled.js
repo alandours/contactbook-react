@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { weight, size } from '@theme/typography';
 
-const StatsByYear = styled.div`
+const ContactsByYear = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -79,4 +79,4 @@ const Stat = styled.div`
   `};
 `;
 
-export default { StatsByYear, Stats, Stat, Year, Quantity };
+export default { ContactsByYear, Stats, Stat, Year, Quantity };

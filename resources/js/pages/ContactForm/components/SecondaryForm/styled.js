@@ -12,7 +12,7 @@ const RemoveButton = styled(XButton)`
   visibility: hidden;
 
   ${({ variant }) => variant === 'alias' && `
-    margin-right: -2rem;
+    margin-right: -0.5rem;
   `}
 `;
 

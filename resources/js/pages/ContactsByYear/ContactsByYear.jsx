@@ -9,7 +9,7 @@ import Loader from '@components/Loader';
 
 import styled from './styled';
 
-const StatsByYear = () => {
+const ContactsByYear = () => {
   const stats = useSelector((state) => state.stats);
   const years = Object.keys(stats);
   const yearFilter = useSelector((state) => state.contactList && state.contactList.filter);
@@ -55,7 +55,7 @@ const StatsByYear = () => {
   const subtitle = !!years.length && `From ${years[0]} to ${years[years.length - 1]}`;
 
   return stats ? (
-    <styled.StatsByYear onClick={clearFilter}>
+    <styled.ContactsByYear onClick={clearFilter}>
       <PageHeader
         title="Contacts by year"
         subtitle={subtitle}
@@ -65,8 +65,8 @@ const StatsByYear = () => {
           { renderStats() }
         </styled.Stats>
       </Section>
-    </styled.StatsByYear>
+    </styled.ContactsByYear>
   ) : <Loader />;
 };
 
-export default StatsByYear;
+export default ContactsByYear;
