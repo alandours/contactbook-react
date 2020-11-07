@@ -44,6 +44,7 @@ const SecondaryForm = ({ contact, appData }) => {
         />
         <styled.RemoveButton
           type="button"
+          variant="alias"
           handleClick={() => removeAlias(index)}
         />
       </styled.FormField>

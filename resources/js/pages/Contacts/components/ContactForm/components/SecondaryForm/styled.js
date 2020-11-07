@@ -10,6 +10,10 @@ const RemoveButton = styled(XButton)`
   opacity: 0;
   transition: all ease 200ms;
   visibility: hidden;
+
+  ${({ variant }) => variant === 'alias' && `
+    margin-right: -2rem;
+  `}
 `;
 
 const FormField = styled.div`
