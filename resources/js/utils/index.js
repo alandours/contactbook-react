@@ -54,3 +54,14 @@ export const setPageTitle = (title) => {
   const sitename = process.env.MIX_APP_NAME;
   document.title = title ? `${sitename} - ${title}` : sitename;
 };
+
+/**
+ * @function getRandomInt
+ * @description Get a random integer between two values
+ * @returns {number} The random integer
+ * @example
+ * // returns 8
+ * getRandomInt(4, 15)
+*/
+
+export const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min) + min);

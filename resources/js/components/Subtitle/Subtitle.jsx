@@ -1,16 +1,18 @@
 import React from 'react';
-import { string } from 'prop-types';
+import { node, string } from 'prop-types';
 
 import styled from './styled';
 
-const Subtitle = ({ children }) => <styled.Subtitle>{ children }</styled.Subtitle>;
+const Subtitle = ({ children, className }) => <styled.Subtitle className={className}>{ children }</styled.Subtitle>;
 
 Subtitle.propTypes = {
-  children: string
+  children: node,
+  className: string
 };
 
 Subtitle.defaultProps = {
-  children: ''
+  children: '',
+  className: ''
 };
 
 export default Subtitle;

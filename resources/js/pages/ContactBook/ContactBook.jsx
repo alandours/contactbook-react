@@ -15,9 +15,10 @@ import MainContainer from '@components/MainContainer';
 import Dashboard from '@pages/Dashboard';
 import Contact from '@pages/Contact';
 import ContactForm from '@pages/ContactForm';
-import StatsByYear from '@pages/StatsByYear';
+import ContactsByYear from '@pages/ContactsByYear';
 import Birthdays from '@pages/Birthdays';
 import Settings from '@pages/Settings';
+import NotFound from '@pages/NotFound';
 
 import styled from './styled';
 
@@ -53,7 +54,7 @@ const ContactBook = () => {
                   <Dashboard />
                 </Route>
                 <Route path="/contacts/year">
-                  <StatsByYear />
+                  <ContactsByYear />
                 </Route>
                 <Route path="/contacts/new">
                   <ContactForm />
@@ -79,6 +80,9 @@ const ContactBook = () => {
                 </Route>
                 <Route path="/settings">
                   <Settings />
+                </Route>
+                <Route>
+                  <NotFound />
                 </Route>
               </Switch>
             </MainContainer>

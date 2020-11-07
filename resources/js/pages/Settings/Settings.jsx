@@ -4,8 +4,6 @@ import { setTheme, setMainColor } from '@store/actions';
 import { setPageTitle } from '@utils';
 import { getTheme } from '@utils/color';
 
-
-import MainContainer from '@components/MainContainer';
 import PageHeader from '@components/PageHeader';
 import Section from '@components/Section';
 import ToggleButton from '@components/ToggleButton';
@@ -57,61 +55,59 @@ const Settings = () => {
 
   return (
     <styled.Settings>
-      <MainContainer>
-        <PageHeader
-          title="Settings"
-        />
-        <Section title="Contacts">
-          <styled.Setting>
-            <ToggleButton
-              initialState={!!localStorage.getItem('orderLastnameFirst')}
-              handleClick={toggleLastnameFirst}
-            />
-            <styled.SettingName>Order contacts by last name</styled.SettingName>
-          </styled.Setting>
-          <styled.Setting>
-            <ToggleButton
-              initialState={!!localStorage.getItem('showFavoriteIcon')}
-              handleClick={toggleFavoriteIcon}
-            />
-            <styled.SettingName>Show favorite icon next to contacts</styled.SettingName>
-          </styled.Setting>
-          <styled.Setting>
-            <ToggleButton
-              initialState={!!localStorage.getItem('favoritesOnly')}
-              handleClick={toggleFavoritesOnly}
-            />
-            <styled.SettingName>Show only favorite contacts</styled.SettingName>
-          </styled.Setting>
-        </Section>
-        <Section title="Colors">
-          <styled.Setting>
-            <ToggleButton
-              initialState={!!localStorage.getItem('darkTheme')}
-              handleClick={toggleDarkTheme}
-            />
-            <styled.SettingName>Use dark theme</styled.SettingName>
-          </styled.Setting>
-          <styled.Setting>
-            <ColorSelector
-              color="green"
-              handleClick={changeMainColor}
-              label="Green"
-            />
-            <ColorSelector
-              color="orange"
-              handleClick={changeMainColor}
-              label="Orange"
-            />
-            <ColorSelector
-              color="purple"
-              handleClick={changeMainColor}
-              label="Purple"
-            />
-            <styled.SettingName>Test main color</styled.SettingName>
-          </styled.Setting>
-        </Section>
-      </MainContainer>
+      <PageHeader
+        title="Settings"
+      />
+      <Section title="Contacts">
+        <styled.Setting>
+          <ToggleButton
+            initialState={!!localStorage.getItem('orderLastnameFirst')}
+            handleClick={toggleLastnameFirst}
+          />
+          <styled.SettingName>Order contacts by last name</styled.SettingName>
+        </styled.Setting>
+        <styled.Setting>
+          <ToggleButton
+            initialState={!!localStorage.getItem('showFavoriteIcon')}
+            handleClick={toggleFavoriteIcon}
+          />
+          <styled.SettingName>Show favorite icon next to contacts</styled.SettingName>
+        </styled.Setting>
+        <styled.Setting>
+          <ToggleButton
+            initialState={!!localStorage.getItem('favoritesOnly')}
+            handleClick={toggleFavoritesOnly}
+          />
+          <styled.SettingName>Show only favorite contacts</styled.SettingName>
+        </styled.Setting>
+      </Section>
+      <Section title="Colors">
+        <styled.Setting>
+          <ToggleButton
+            initialState={!!localStorage.getItem('darkTheme')}
+            handleClick={toggleDarkTheme}
+          />
+          <styled.SettingName>Use dark theme</styled.SettingName>
+        </styled.Setting>
+        <styled.Setting>
+          <ColorSelector
+            color="green"
+            handleClick={changeMainColor}
+            label="Green"
+          />
+          <ColorSelector
+            color="orange"
+            handleClick={changeMainColor}
+            label="Orange"
+          />
+          <ColorSelector
+            color="purple"
+            handleClick={changeMainColor}
+            label="Purple"
+          />
+          <styled.SettingName>Test main color</styled.SettingName>
+        </styled.Setting>
+      </Section>
     </styled.Settings>
   );
 };

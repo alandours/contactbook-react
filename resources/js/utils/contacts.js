@@ -1,3 +1,4 @@
+import { getRandomInt } from '@utils';
 import { getMainColor } from '@utils/color';
 
 /**
@@ -100,3 +101,15 @@ export const appendParsedData = (formData, data) => {
 */
 
 export const getDefaultPhoto = () => `contact-${getMainColor()}.jpg`;
+
+/**
+ * @function getRandomContact
+ * @description Get a random contact
+ * @returns {object} The random contact
+*/
+
+export const getRandomContact = (contacts) => {
+  const randomId = getRandomInt(1, contacts.length);
+  const randomContact = contacts.find((contact) => contact.id === randomId);
+  return randomContact || getRandomContact(contacts);
+};
