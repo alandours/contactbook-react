@@ -70,6 +70,13 @@ export const getContactList = (search) => async (dispatch) => {
   dispatch(setContactList(response.data));
 };
 
+export const getContactListByYear = (year) => async (dispatch) => {
+  const url = `/api/contacts/listByYear/${year}`;
+  const response = await axios.get(url);
+  dispatch(setContactList(response.data));
+  dispatch(setYearFilter(year));
+};
+
 export const getAppData = () => async (dispatch) => {
   const url = '/api/contacts/setup';
   const response = await axios.get(url);

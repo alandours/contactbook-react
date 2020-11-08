@@ -6,7 +6,8 @@ const contactListReducer = (state = {}, { type, payload }) => {
       sortContacts(payload);
       return {
         ...state,
-        list: addFullNames(payload)
+        list: addFullNames(payload),
+        filter: null
       };
     case 'SET_YEAR_FILTER':
       return {

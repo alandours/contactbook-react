@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getStats, setYearFilter, toggleContactList } from '@store/actions';
-import { setPageTitle } from '@utils';
+import { getStats, getContactList, getContactListByYear, toggleContactList } from '@store/actions';
+import { setPageTitle, isMedia } from '@utils';
 
 import PageHeader from '@components/PageHeader';
 import Section from '@components/Section';
@@ -19,17 +19,18 @@ const ContactsByYear = () => {
   useEffect(() => {
     dispatch(getStats());
     setPageTitle('Contacts by year');
-    return () => dispatch(setYearFilter(null));
   }, []);
 
   const clearFilter = (e) => {
     if (!e.target.dataset.stat)
-      dispatch(setYearFilter(null));
+      dispatch(getContactList());
   };
 
   const handleStatClick = (year) => {
-    dispatch(setYearFilter(year));
-    dispatch(toggleContactList());
+    dispatch(getContactListByYear(year));
+
+    if (isMedia('tablet'))
+      dispatch(toggleContactList());
   };
 
   const renderStats = () => {

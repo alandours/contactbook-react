@@ -23,6 +23,8 @@ Route::get('contacts/stats', 'ContactController@getStats');
 
 Route::get('contacts/list', 'ContactController@list');
 
+Route::get('contacts/listByYear/{year}', 'ContactController@listByYear');
+
 Route::get('contacts/search/{text}', 'ContactController@search');
 
 Route::post('contacts/add', 'ContactController@add');

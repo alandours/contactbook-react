@@ -16,7 +16,7 @@ const Stats = styled.div`
   justify-content: space-between;
   margin: 0.5rem 0rem 3.6rem;
 
-  ${({ height }) => !!height && `
+  ${({ height }) => !!height && css`
     height: ${height * 0.8}px;
   `};
 
@@ -74,11 +74,11 @@ const Stat = styled.div`
     transition: 200ms;
   }
 
-  ${({ height }) => !!height && `
+  ${({ height }) => !!height && css`
     height: ${height * 0.8}px;
   `}
 
-  ${({ isActive }) => !!isActive && `
+  ${({ isActive }) => !!isActive && css`
     background: ${({ theme }) => theme.mainColor.light};
 
     & ${Quantity} {
