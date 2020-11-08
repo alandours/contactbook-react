@@ -5,8 +5,7 @@ import zindex from '@theme/zindex';
 const SideBar = styled.div`
   background: ${({ theme }) => theme.selected.main[1]};
   left: -100%;
-  min-height: 100%;
-  max-height: 80vh;
+  max-height: calc(100% - 61px);
   opacity: 0;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -17,7 +16,10 @@ const SideBar = styled.div`
   z-index: ${zindex.fixed};
 
   ${({ open }) => !!open && css`
+    min-height: calc(100% - 61px);
     opacity: 1;
+    position: fixed;
+    top: 61px;
     transform: translateX(100%);
     transition: transform 250ms, opacity 500ms;
   `};
@@ -28,8 +30,9 @@ const SideBar = styled.div`
     display: block;
     left: 0;
     min-width: 25%;
+    max-height: 80vh;
     opacity: 1;
-    position: relative;
+    position: initial;
     transform: none;
     width: 25%;
   `}

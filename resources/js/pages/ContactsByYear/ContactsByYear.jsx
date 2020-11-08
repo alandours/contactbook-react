@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getStats, setYearFilter } from '@store/actions';
+import { getStats, setYearFilter, toggleContactList } from '@store/actions';
 import { setPageTitle } from '@utils';
 
 import PageHeader from '@components/PageHeader';
@@ -27,6 +27,11 @@ const ContactsByYear = () => {
       dispatch(setYearFilter(null));
   };
 
+  const handleStatClick = (year) => {
+    dispatch(setYearFilter(year));
+    dispatch(toggleContactList());
+  };
+
   const renderStats = () => {
     const data = Object.entries(stats);
     const values = Object.values(stats);
@@ -39,7 +44,7 @@ const ContactsByYear = () => {
 
       return (
         <styled.Stat
-          onClick={() => dispatch(setYearFilter(year))}
+          onClick={() => handleStatClick(year)}
           height={height}
           isActive={yearFilter === year}
           data-stat={year}
@@ -58,7 +63,7 @@ const ContactsByYear = () => {
     <styled.ContactsByYear onClick={clearFilter}>
       <PageHeader
         title="Contacts by year"
-        subtitle={subtitle}
+        subtitle={subtitle || null}
       />
       <Section title="Contacts by year">
         <styled.Stats height={statsHeight}>

@@ -14,6 +14,7 @@ const RemoveButton = styled(XButton)`
   top: -2rem;
 
   ${responsive.tablet`
+    margin-left: 0.75rem;
     opacity: 0;
     position: initial;
     visibility: hidden;

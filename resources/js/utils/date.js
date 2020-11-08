@@ -60,6 +60,8 @@ export const getBirthdays = (contacts) => {
 */
 
 export const getBirthdaysByMonth = (birthdays) => {
+  if (!birthdays) return [];
+
   return birthdays.reduce((acc, curr) => {
     const group = acc;
     const { nextBirthday } = curr || {};

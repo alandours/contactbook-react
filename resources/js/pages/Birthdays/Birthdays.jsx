@@ -10,19 +10,21 @@ import Loader from '@components/Loader';
 
 import styled from './styled';
 
-const renderBirthdays = (contacts) => {
+const getBirthdayGroups = (contacts) => {
   const birthdays = getBirthdays(contacts);
+  if (!birthdays) return { birthdays: null, quantity: 0 };
+
   const birthdaysByMonth = getBirthdaysByMonth(birthdays);
 
-  if (!birthdaysByMonth) return null;
-
-  return Object.entries(birthdaysByMonth).map(([month, contacts]) => (
+  const birthdayGroups = Object.entries(birthdaysByMonth).map(([month, contacts]) => (
     <Section title={month} key={month}>
       { contacts.map((contact) => (
         <ContactLink contact={contact} key={contact.id} showAge showPhoto />
       ))}
     </Section>
   ));
+
+  return { birthdays: birthdayGroups, quantity: birthdays.length };
 };
 
 const Birthdays = () => {
@@ -32,7 +34,9 @@ const Birthdays = () => {
     setPageTitle('Birthdays');
   }, []);
 
-  const subtitle = contacts && `${getBirthdays(contacts).length} birthdays`;
+  const birthdayGroups = contacts && contacts.length && getBirthdayGroups(contacts);
+  const { birthdays, quantity } = birthdayGroups || {};
+  const subtitle = birthdayGroups && `${quantity} birthdays`;
 
   return (
     <styled.Birthdays>
@@ -40,7 +44,8 @@ const Birthdays = () => {
         title="Birthdays"
         subtitle={subtitle}
       />
-      { contacts && contacts.length ? renderBirthdays(contacts) : <Loader /> }
+      { !birthdayGroups && <Loader /> }
+      { quantity !== 0 && birthdays }
     </styled.Birthdays>
   );
 };

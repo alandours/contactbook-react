@@ -11,10 +11,13 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   padding: 1rem 1.5rem;
+  position: fixed;
+  width: 100%;
   z-index: ${zindex.fixed};
 
   ${responsive.tablet`
     background: ${({ theme }) => theme.selected.main[1]};
+    position: initial;
   `}
 `;
 

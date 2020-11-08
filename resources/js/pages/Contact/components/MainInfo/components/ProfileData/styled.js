@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { size, weight } from '@theme/typography';
 import { responsive } from '@theme/mixins';
 
@@ -28,7 +28,7 @@ const Name = styled.span`
   `}
 
   &:after {
-    ${({ birthday }) => !!birthday && `
+    ${({ birthday }) => !!birthday && css`
       content: '${birthday}';
       font-size: ${size.normal};
       font-weight: ${weight.regular};

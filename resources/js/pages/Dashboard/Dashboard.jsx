@@ -66,15 +66,15 @@ const Dashboard = () => {
       <ContactMessage />
       <PageHeader
         title={process.env.MIX_APP_NAME}
-        subtitle={subtitle}
+        subtitle={subtitle || null}
       />
       <Section title="Upcoming birthdays" icon="birthday-cake">
-        { upcomingBirthdays }
-        <ContactBookLink url="/birthdays" highlight>See all birthdays</ContactBookLink>
+        { upcomingBirthdays || 'There are no upcoming birthdays' }
+        { upcomingBirthdays && <ContactBookLink url="/birthdays" highlight>See all birthdays</ContactBookLink> }
       </Section>
       <Section title="Last contacts" icon="user-friends">
-        { lastAdded }
-        <ContactBookLink url="/contacts/year" highlight>See contacts by year</ContactBookLink>
+        { lastAdded && lastAdded.length ? lastAdded : 'There are no contacts' }
+        { lastAdded && !!lastAdded.length && <ContactBookLink url="/contacts/year" highlight>See contacts by year</ContactBookLink> }
       </Section>
     </styled.Dashboard>
   );

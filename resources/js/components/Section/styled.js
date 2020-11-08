@@ -10,9 +10,10 @@ const Section = styled.section`
 `;
 
 const Content = styled.div`
-  padding: 1rem 1.5rem;
+  margin: 1rem 1.5rem;
   display: flex;
   flex-direction: column;
+  overflow-x: scroll;
 `;
 
 export default { Section, Content };
