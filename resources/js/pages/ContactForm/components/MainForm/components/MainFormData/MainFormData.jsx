@@ -18,7 +18,7 @@ const MainFormData = () => {
 
   return (
     <styled.MainInfo>
-      <styled.FieldContainer>
+      <styled.FieldContainer type="multiline">
         <Input
           name="name"
           placeholder="Name"

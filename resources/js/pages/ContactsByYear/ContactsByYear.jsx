@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getStats, setYearFilter } from '@store/actions';
-import { setPageTitle } from '@utils';
+import { getStats, getContactList, getContactListByYear, toggleContactList } from '@store/actions';
+import { setPageTitle, isMedia } from '@utils';
 
 import PageHeader from '@components/PageHeader';
 import Section from '@components/Section';
@@ -19,12 +19,18 @@ const ContactsByYear = () => {
   useEffect(() => {
     dispatch(getStats());
     setPageTitle('Contacts by year');
-    return () => dispatch(setYearFilter(null));
   }, []);
 
   const clearFilter = (e) => {
     if (!e.target.dataset.stat)
-      dispatch(setYearFilter(null));
+      dispatch(getContactList());
+  };
+
+  const handleStatClick = (year) => {
+    dispatch(getContactListByYear(year));
+
+    if (isMedia('tablet'))
+      dispatch(toggleContactList());
   };
 
   const renderStats = () => {
@@ -39,7 +45,7 @@ const ContactsByYear = () => {
 
       return (
         <styled.Stat
-          onClick={() => dispatch(setYearFilter(year))}
+          onClick={() => handleStatClick(year)}
           height={height}
           isActive={yearFilter === year}
           data-stat={year}
@@ -58,7 +64,7 @@ const ContactsByYear = () => {
     <styled.ContactsByYear onClick={clearFilter}>
       <PageHeader
         title="Contacts by year"
-        subtitle={subtitle}
+        subtitle={subtitle || null}
       />
       <Section title="Contacts by year">
         <styled.Stats height={statsHeight}>

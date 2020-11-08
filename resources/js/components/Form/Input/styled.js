@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { formStyles } from '@theme/mixins';
+import { formStyles, responsive } from '@theme/mixins';
 import { size, weight } from '@theme/typography';
 
 const Container = styled.div`
@@ -15,15 +15,27 @@ const Input = styled.input`
   `}
 
   ${({ size: inputSize }) => inputSize === 'big' && css`
-    font-size: ${size.max};
+    font-size: ${size.large};
     font-weight: ${weight.bold};
     padding-left: 0;
     width: 100%;
+
+    ${responsive.mobile`
+      font-size: ${size.xlarge};
+    `}
+
+    ${responsive.laptop`
+      font-size: ${size.max};
+    `}
   `}
 
   &:disabled {
-    background: transparent;
-    border: 0;
+    background: ${({ theme }) => theme.selected.main[3]};
+
+    ${responsive.tablet`
+      background: transparent;
+      border: 0;
+    `}
   }
 `;
 

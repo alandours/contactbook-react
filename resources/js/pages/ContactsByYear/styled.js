@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { weight, size } from '@theme/typography';
+import { responsive } from '@theme/mixins';
 
 const ContactsByYear = styled.div`
   display: flex;
@@ -13,12 +14,20 @@ const Stats = styled.div`
   align-items: flex-end;
   display: flex;
   justify-content: space-between;
-  margin: 3rem 2rem;
-  max-width: 100%;
+  margin: 0.5rem 0rem 3.6rem;
 
-  ${({ height }) => !!height && `
-    height: ${height}px
+  ${({ height }) => !!height && css`
+    height: ${height * 0.8}px;
   `};
+
+  ${responsive.tablet`  
+    margin: 3rem 2rem;
+    max-width: 100%;
+
+    ${({ height }) => !!height && css`
+      height: ${height}px
+    `}
+  `}
 `;
 
 const Year = styled.div`
@@ -47,7 +56,7 @@ const Quantity = styled.div`
 const Stat = styled.div`
   background: ${({ theme }) => theme.mainColor.dark};
   cursor: pointer;
-  min-width: 5px;
+  min-width: 50px;
   width: 100%;
   position: relative;
 
@@ -65,18 +74,26 @@ const Stat = styled.div`
     transition: 200ms;
   }
 
-  ${({ height }) => !!height && `
-    height: ${height}px
-  `};
+  ${({ height }) => !!height && css`
+    height: ${height * 0.8}px;
+  `}
 
-  ${({ isActive }) => !!isActive && `
+  ${({ isActive }) => !!isActive && css`
     background: ${({ theme }) => theme.mainColor.light};
 
     & ${Quantity} {
       opacity: 1;
       transition: 200ms;
     }
-  `};
+  `}
+
+  ${responsive.tablet`
+    min-width: 5px;
+
+    ${({ height }) => !!height && css`
+      height: ${height}px;
+    `}
+  `}
 `;
 
 export default { ContactsByYear, Stats, Stat, Year, Quantity };

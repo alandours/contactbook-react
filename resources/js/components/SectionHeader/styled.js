@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { weight, size } from '@theme/typography';
 import zindex from '@theme/zindex';
+import { responsive } from '@theme/mixins';
 
 const SectionHeader = styled.h2`
   background: ${({ theme }) => theme.selected.main[3]};
@@ -12,9 +13,12 @@ const SectionHeader = styled.h2`
   width: 100%;
   z-index: ${zindex.tooltip};
 
-  ${({ sticky }) => sticky && `
-    position: sticky;
-    top: 46px;
+  
+  ${responsive.tablet`
+    ${({ sticky }) => sticky && `
+      position: sticky;
+      top: 46px;
+    `}
   `}
 `;
 

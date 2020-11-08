@@ -23,6 +23,10 @@ export const setYearFilter = (data) => ({
   payload: data
 });
 
+export const toggleContactList = () => ({
+  type: 'TOGGLE_CONTACT_LIST'
+});
+
 export const setAppData = (data) => ({
   type: 'SET_APP_DATA',
   payload: data
@@ -64,6 +68,13 @@ export const getContactList = (search) => async (dispatch) => {
   const url = search ? `/api/contacts/search/${search}` : '/api/contacts/list';
   const response = await axios.get(url);
   dispatch(setContactList(response.data));
+};
+
+export const getContactListByYear = (year) => async (dispatch) => {
+  const url = `/api/contacts/listByYear/${year}`;
+  const response = await axios.get(url);
+  dispatch(setContactList(response.data));
+  dispatch(setYearFilter(year));
 };
 
 export const getAppData = () => async (dispatch) => {

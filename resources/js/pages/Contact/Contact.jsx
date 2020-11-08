@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { objectOf, any } from 'prop-types';
 import { connect } from 'react-redux';
-import { setPageTitle } from '@utils';
+import { setPageTitle, isMedia } from '@utils';
 
 import NotFound from '@pages/NotFound';
 import Loader from '@components/Loader';
@@ -34,8 +34,8 @@ const Contact = ({ contact }) => {
   if (!loading && !id) return <NotFound page="contact" />;
 
   return (
-    <styled.ContactView onScroll={handleScroll}>
-      { showFixedInfo && <FixedInfo /> }
+    <styled.ContactView onScroll={isMedia('tablet') ? handleScroll : undefined}>
+      { isMedia('tablet') && showFixedInfo && <FixedInfo /> }
       <ContactMessage />
       <MainInfo />
       <SecondaryInfo />

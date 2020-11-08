@@ -36,7 +36,15 @@ class ContactController extends Controller
                   ->get();
   }
 
-  public function search($text) {
+  public function listByYear($year) {
+    return Contact::where('active', 1)
+                  ->where('met', $year)
+                  ->select(['id', 'name', 'lastname', 'birthday', 'address', 'met', 'photo', 'favorite', 'created_at'])
+                  ->orderBy('name', 'ASC')
+                  ->get();
+  }
+
+  public function search($text, $year) {
     $text = preg_replace('/\s+/', '', $text);
 
     return DB::select('SELECT * FROM 

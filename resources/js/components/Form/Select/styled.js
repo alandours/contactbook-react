@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { formStyles } from '@theme/mixins';
+import { formStyles, responsive } from '@theme/mixins';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SelectWrapper = styled.div`
@@ -11,8 +11,13 @@ const Selector = styled(FontAwesomeIcon)`
   font-size: 0.8rem;
   margin-top: -6px;
   position: absolute;
-  right: 2rem;
-  top: 50%;
+  right: 1rem;
+  top: 43%;
+
+  ${responsive.tablet`
+    right: 2rem;
+    top: 50%;
+  `}
 `;
 
 const Select = styled.select`
@@ -22,9 +27,14 @@ const Select = styled.select`
   border-radius: 3px;
   cursor: pointer;
   display: grid;
-  margin: 0 1.5rem;
+  margin: 1rem 0 1.75rem 0;
   padding: 0.25rem;
-  width: 200px;
+  width: 100%;
+
+  ${responsive.tablet`
+    margin: 0 1.5rem;
+    width: 200px;
+  `}
 
   &:hover, &:focus {
     border: 1px solid ${({ theme }) => theme.mainColor.main};

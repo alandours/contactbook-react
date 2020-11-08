@@ -28,6 +28,9 @@ const Name = styled.div`
   color: ${({ theme }) => theme.selected.contrast[1]};
   margin-left: 0.25rem;
   margin-right: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const Age = styled.div`

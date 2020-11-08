@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { weight } from '@theme/typography';
+import { responsive } from '@theme/mixins';
 
 const Datafield = styled.div`
   border-radius: 2px; 
@@ -20,6 +21,11 @@ const Text = styled.p`
 
 const DataContainer = styled.a`
   display: flex;
+  flex-direction: column;
+
+  ${responsive.tablet`
+    flex-direction: row;
+  `}
 `;
 
 const Name = styled.div`
@@ -27,13 +33,21 @@ const Name = styled.div`
   font-weight: ${weight.normal};
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 50%;
+  width: 100%;
+
+  ${responsive.tablet`
+    width: 50%;
+  `}
 `;
 
 const Label = styled.div`
   color: ${({ theme }) => theme.selected.contrast[3]};
   word-wrap: break-word;
-  width: 50%;
+  width: 100%;
+
+  ${responsive.tablet`
+    width: 50%;
+  `}
 `;
 
 export default { Datafield, Text, DataContainer, Name, Label };
