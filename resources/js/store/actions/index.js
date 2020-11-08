@@ -23,6 +23,10 @@ export const setYearFilter = (data) => ({
   payload: data
 });
 
+export const toggleContactList = () => ({
+  type: 'TOGGLE_CONTACT_LIST'
+});
+
 export const setAppData = (data) => ({
   type: 'SET_APP_DATA',
   payload: data

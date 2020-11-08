@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { weight } from '@theme/typography';
 import zindex from '@theme/zindex';
+import { responsive } from '@theme/mixins';
 
 const MainForm = styled.div`
   align-items: center;
@@ -23,7 +24,7 @@ const PhotoLabel = styled.label`
     display: flex;
     font-weight: ${weight.semiBold};
     justify-content: center;
-    opacity: 0;
+    opacity: 1;
     position: absolute;
     top: 6px;
     left: 6px;
@@ -31,6 +32,10 @@ const PhotoLabel = styled.label`
     height: 188px;
     transition: all ease 200ms;
     z-index: ${zindex.tooltip};
+
+    ${responsive.laptop`
+      opacity: 0;
+    `}
   }
 
   &:hover {

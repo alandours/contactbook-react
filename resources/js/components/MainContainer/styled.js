@@ -1,18 +1,25 @@
 import styled from 'styled-components';
+import { responsive } from '@theme/mixins';
 
 const MainContainer = styled.div`
   align-items: center;
   background: ${({ theme }) => theme.selected.main[1]};
-  border-radius: 8px; 
-  box-shadow: 0 2px 6px 0 ${({ theme }) => theme.selected.main.shadow};
   display: flex;
   flex-direction: column;
-  height: 80vh;
+  height: 100%;
   justify-content: center;
-  margin-left: 1rem;
-  overflow: hidden;
+  margin: 0;
+  overflow: scroll;
   position: relative;
-  width: 75%;
+  width: 100%;
+
+  ${responsive.tablet`
+    border-radius: 8px; 
+    box-shadow: 0 2px 6px 0 ${({ theme }) => theme.selected.main.shadow};
+    margin-left: 1rem;
+    width: 75%;
+    height: 80vh;
+  `}
 `;
 
 export default { MainContainer };

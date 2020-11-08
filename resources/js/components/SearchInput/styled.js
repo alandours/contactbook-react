@@ -5,6 +5,7 @@ import zindex from '@theme/zindex';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Container = styled.div`
+  background: ${({ theme }) => theme.selected.main[1]};
   position: sticky;
   top: 0;
   z-index: ${zindex.fixed};

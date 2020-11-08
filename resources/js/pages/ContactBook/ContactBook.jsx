@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
-import { getAppData, getContact } from '@store/actions';
+import { getAppData, getContactList, getContact } from '@store/actions';
 import GlobalStyle from '@theme/globalStyle';
 import { palette, color } from '@theme/palette';
 
@@ -33,6 +33,7 @@ const ContactBook = () => {
       document.body.classList.remove('preload');
     });
     dispatch(getAppData());
+    dispatch(getContactList());
   }, []);
 
   return (

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { size } from '@theme/typography';
 
 const FavoriteButton = styled.button`
-  align-self: flex-start;
+  align-self: center;
   background: none;
   border: 0;
   cursor: pointer;

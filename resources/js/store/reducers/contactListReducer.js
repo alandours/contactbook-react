@@ -13,6 +13,11 @@ const contactListReducer = (state = {}, { type, payload }) => {
         ...state,
         filter: payload
       };
+    case 'TOGGLE_CONTACT_LIST':
+      return {
+        ...state,
+        open: !!state && !state.open
+      };
     default:
       return state;
   }

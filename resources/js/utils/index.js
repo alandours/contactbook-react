@@ -65,3 +65,30 @@ export const setPageTitle = (title) => {
 */
 
 export const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min) + min);
+
+/**
+ * @function isMedia
+ * @description Validate if the current width is equal or greater to a given device
+ * @param {string} media - The device name
+ * @param {string} px - A custom value in pixels (optional)
+ * @returns {boolean} The validation result
+ * @example
+ * // returns true
+ * isMedia('desktop')
+*/
+
+export const isMedia = (media, px) => {
+  const devices = {
+    mobileXs: '320',
+    mobileXsLandscape: '320',
+    mobile: '360',
+    mobileLandscape: '480',
+    tablet: '768',
+    tabletLandscape: '992',
+    laptop: '1024',
+    desktop: '1270',
+    custom: px
+  };
+
+  return window.matchMedia(`(min-width: ${Number(devices[media])}px)`).matches;
+};
