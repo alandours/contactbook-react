@@ -14,7 +14,7 @@ const SideBar = styled.div`
   min-width: 100%;
   transform: translateX(-100%);
   transition: transform 250ms, opacity 500ms;
-  z-index: ${zindex.tooltip};
+  z-index: ${zindex.fixed};
 
   ${({ open }) => !!open && css`
     opacity: 1;

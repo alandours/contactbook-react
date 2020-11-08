@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { size, weight } from '@theme/typography';
+import { responsive } from '@theme/mixins';
 
 const Label = styled.label`
   background: ${({ theme }) => theme.selected.main[1]};
@@ -7,14 +8,20 @@ const Label = styled.label`
   flex-direction: column;
   position: relative;
   min-width: 30%;
-  width: 40%;
+  width: 100%;
 
-  ${({ label }) => label === 'Alias' && css`
-    width: 207px;
+  ${responsive.tablet`
+    width: 40%;
+
+    ${({ label }) => label === 'Alias' && css`
+      width: 207px;
+    `}
   `}
 
   & + & {
-    margin-left: 1rem;
+    ${responsive.tablet`
+      margin-left: 1rem;
+    `}
   }
 `;
 

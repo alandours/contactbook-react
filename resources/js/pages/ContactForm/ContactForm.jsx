@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { objectOf, any, func, bool } from 'prop-types';
 import { yupResolver } from '@hookform/resolvers';
 import * as actions from '@store/actions';
-import { setPageTitle } from '@utils';
+import { setPageTitle, isMedia } from '@utils';
 import { appendParsedData } from '@utils/contacts';
 
 import FixedInfo from '@components/FixedInfo';
@@ -90,10 +90,10 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
     <FormProvider { ...methods }>
       <styled.ContactForm
         onSubmit={handleSubmit(onSubmit)}
-        onScroll={handleScroll}
+        onScroll={isMedia('tablet') ? handleScroll : undefined}
         ref={formRef}
       >
-        { showFixedInfo && <FixedInfo contact={contact} isForm /> }
+        { isMedia('tablet') && showFixedInfo && <FixedInfo contact={contact} isForm /> }
         { message && message.type === 'error' && <ContactMessage /> }
         <MainForm />
         <SecondaryForm />

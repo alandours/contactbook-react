@@ -6,9 +6,13 @@ const Title = styled.h1`
   align-items: center;
   color: ${({ theme }) => theme.selected.contrast[1]};
   display: flex;
-  font-size: ${size.xlarge};
+  font-size: ${size.large};
   font-weight: ${weight.bold};
   margin: 0.5rem 0;
+
+  ${responsive.mobile`
+    font-size: ${size.xlarge};
+  `}
 
   ${responsive.laptop`
     font-size: ${size.max};
