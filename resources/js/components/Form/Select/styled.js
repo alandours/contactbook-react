@@ -9,9 +9,10 @@ const SelectWrapper = styled.div`
 const Selector = styled(FontAwesomeIcon)`
   color: ${({ theme }) => theme.selected.contrast[3]};
   font-size: 0.8rem;
-  right: 2rem;
+  margin-top: -6px;
   position: absolute;
-  top: 0.7rem;
+  right: 2rem;
+  top: 50%;
 `;
 
 const Select = styled.select`
@@ -22,7 +23,7 @@ const Select = styled.select`
   cursor: pointer;
   display: grid;
   margin: 0 1.5rem;
-
+  padding: 0.25rem;
   width: 200px;
 
   &:hover, &:focus {

@@ -4,8 +4,12 @@ import XButton from '@components/XButton';
 
 const CloseButton = styled(XButton)`
   position: absolute;
-  top: 0.6rem;
+  top: 0.7rem;
   right: 1rem;
+
+  & > svg {
+    color: ${({ theme }) => theme.mainColor.dark};
+  }
 `;
 
 const ContactMessage = styled.div`

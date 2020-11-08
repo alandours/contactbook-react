@@ -59,14 +59,11 @@ const Dashboard = () => {
     }
   }, [contacts]);
 
-  const subtitle = contacts && contacts.length && `${contacts.length} contacts`;
-
   return (
     <styled.Dashboard>
       <ContactMessage />
       <PageHeader
         title={process.env.MIX_APP_NAME}
-        subtitle={subtitle}
       />
       <Section title="Upcoming birthdays" icon="birthday-cake">
         { upcomingBirthdays }

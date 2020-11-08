@@ -5,6 +5,10 @@ import { color } from '@theme/palette';
 const ColorSelector = styled.button`
   ${nonStyledButton};
   cursor: pointer;
+
+  & + & {
+    margin-left: 0.5rem;
+  }
 `;
 
 const ColorBox = styled.div`

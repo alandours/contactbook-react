@@ -77,7 +77,7 @@ const Settings = () => {
             initialState={!!localStorage.getItem('showFavoriteIcon')}
             handleClick={toggleFavoriteIcon}
           />
-          <styled.SettingName>Show favorite icon next to contacts</styled.SettingName>
+          <styled.SettingName>Show a favorite icon next to the contacts</styled.SettingName>
         </styled.Setting>
         <styled.Setting>
           <ToggleButton
@@ -93,25 +93,22 @@ const Settings = () => {
             initialState={!!localStorage.getItem('darkTheme')}
             handleClick={toggleDarkTheme}
           />
-          <styled.SettingName>Use dark theme</styled.SettingName>
+          <styled.SettingName>Dark theme</styled.SettingName>
         </styled.Setting>
         <styled.Setting>
+          <styled.SettingName>Main color:</styled.SettingName>
           <ColorSelector
             color="green"
             handleClick={changeMainColor}
-            label="Green"
           />
           <ColorSelector
             color="orange"
             handleClick={changeMainColor}
-            label="Orange"
           />
           <ColorSelector
             color="purple"
             handleClick={changeMainColor}
-            label="Purple"
           />
-          <styled.SettingName>Test main color</styled.SettingName>
         </styled.Setting>
       </Section>
     </styled.Settings>
