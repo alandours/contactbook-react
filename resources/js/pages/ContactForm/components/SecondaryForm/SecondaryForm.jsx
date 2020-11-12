@@ -184,6 +184,17 @@ const SecondaryForm = ({ contact, appData }) => {
     );
   };
 
+  const renderNotes = () => {
+    const { notes: notesError } = errors || {};
+    const { message } = notesError || {};
+
+    return (
+      <Textarea
+        name="notes"
+        error={message}
+      />
+    );
+  };
 
   return (
     <styled.SecondaryForm>
@@ -243,9 +254,7 @@ const SecondaryForm = ({ contact, appData }) => {
         </Button>
       </Section>
       <Section title="Notes" icon="sticky-note" sticky>
-        <Textarea
-          name="notes"
-        />
+        {renderNotes()}
       </Section>
     </styled.SecondaryForm>
   );

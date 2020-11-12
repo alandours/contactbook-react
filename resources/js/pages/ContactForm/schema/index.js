@@ -49,7 +49,7 @@ const schema = yup.object().shape({
       .max(50, "The label can't be longer than 50 characters")
   })),
   notes: yup.string()
-    .max(1000, "The notes can't be longer than 1000 characters")
+    .max(2000, "The notes can't be longer than 2000 characters")
 });
 
 export default schema;

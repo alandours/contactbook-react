@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { responsive } from '@theme/mixins';
 
 import XButton from '@components/XButton';
@@ -18,10 +18,6 @@ const RemoveButton = styled(XButton)`
     opacity: 0;
     position: initial;
     visibility: hidden;
-
-    ${({ variant }) => variant === 'alias' && `
-      margin-right: -0.5rem;
-    `}
   `}
 `;
 

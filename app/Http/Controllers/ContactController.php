@@ -44,11 +44,11 @@ class ContactController extends Controller
                   ->get();
   }
 
-  public function search($text, $year) {
+  public function search($text) {
     $text = preg_replace('/\s+/', '', $text);
 
     return DB::select('SELECT * FROM 
-                        (SELECT CONCAT_WS(" ", name, lastname) AS fullname, name, lastname, address, met, notes, contacts.id AS id, alias, email, number, username FROM contacts
+                        (SELECT CONCAT_WS(" ", name, lastname) AS fullname, name, lastname, address, birthday, met, notes, photo, contacts.id AS id, alias, email, number, username FROM contacts
                         LEFT JOIN alias ON contacts.id = alias.id_contact
                         LEFT JOIN emails ON contacts.id = emails.id_contact
                         LEFT JOIN numbers ON contacts.id = numbers.id_contact
@@ -95,7 +95,7 @@ class ContactController extends Controller
       'lastname' => 'nullable|max:50',
       'birthday' => 'nullable|before_or_equal:today',
       'address' => 'nullable|max:50',
-      'notes' => 'nullable|max:1000',
+      'notes' => 'nullable|max:2000',
       'met' => 'nullable|date_format:Y|after_or_equal:1900',
       'aliases' => 'nullable|array',
       'aliases.*.alias' => 'max:50',
