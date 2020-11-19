@@ -25,10 +25,10 @@ export const palette = {
   },
   dark: {
     main: {
-      1: lighten('0.03', '#080808'),
+      1: lighten('0.05', '#080808'),
       2: '#080808',
-      3: lighten('0.08', '#080808'),
-      4: lighten('0.1', '#080808'),
+      3: lighten('0.09', '#080808'),
+      4: lighten('0.12', '#080808'),
       shadow: darken('0.02', '#080808')
     },
     contrast: {
