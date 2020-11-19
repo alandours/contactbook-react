@@ -149,9 +149,10 @@ export const getBirthdayText = (birthday) => {
 
 export const getListDate = (birthday, showMonth) => {
   const day = `${birthday.getUTCDate()}`;
+  const month = birthday.getUTCMonth() + 1;
 
   if (showMonth)
-    return `${day}/${birthday.getUTCMonth()}`;
+    return `${day}/${month}`;
 
   return day;
 };
