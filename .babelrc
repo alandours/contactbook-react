@@ -9,5 +9,6 @@
         "fileName": false
       }
     ]
-  ]
+  ],
+  "presets": ["@babel/react", "@babel/env"]
 }

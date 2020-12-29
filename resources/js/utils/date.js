@@ -5,7 +5,7 @@
  * @returns {date} The birthday as a date
 */
 
-const formatDate = (birthdayDate) => {
+export const formatDate = (birthdayDate) => {
   const parts = birthdayDate.split('-');
   return new Date(parts[0], (parts[1] - 1), parts[2], 12, 0o0, 0o0);
 };
