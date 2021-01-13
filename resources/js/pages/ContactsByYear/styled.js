@@ -35,9 +35,9 @@ const Year = styled.div`
   color: ${({ theme }) => theme.selected.contrast[2]};
   font-size: ${size.small};
   font-weight: ${weight.light};
-  transform: rotate(90deg);
+  left: calc(50% - 17px);
   position: absolute;
-  width: 100%;
+  transform: rotate(90deg);
 `;
 
 const Quantity = styled.div`
