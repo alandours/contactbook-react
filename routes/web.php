@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('{any?}', function() {
+Route::get('{all}', function() {
   return view('index');
-})->where('any', '.*');
+})->where('all','^((?!assets).)*?');
