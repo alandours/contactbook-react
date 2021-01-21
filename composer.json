@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3.7",
         "ext-gd": "^7.4",
+        "ext-exif": "*",
         "barryvdh/laravel-cors": "^1.0",
         "caouecs/laravel-lang": "~4.0",
         "doctrine/dbal": "^2.10",
