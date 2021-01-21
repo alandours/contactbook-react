@@ -43,10 +43,11 @@ const ContactMessage = ({ text, type, setContactMessage }) => {
   }, [text]);
 
   return !!text && (
-    <styled.ContactMessage type={type} visible={visible}>
+    <styled.ContactMessage variant={type} visible={visible}>
       { text }
       <styled.CloseButton
         type="button"
+        variant={type}
         handleClick={closeMessage}
       >
         <Icon icon="times" />

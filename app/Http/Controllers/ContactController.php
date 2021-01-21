@@ -21,6 +21,11 @@ use App\SocialNetwork;
 
 class ContactController extends Controller
 {
+  private $demoWarning = [
+    'type' => 'warning',
+    'message' => 'You can\'t perform this action in a demo'
+  ];
+
   public function getAppData() {
     $numberTypes = NumberType::get();
     $emailTypes = EmailType::get();
@@ -113,6 +118,9 @@ class ContactController extends Controller
   }
 
   public function add(Request $request) {
+    if (env('APP_DEMO'))
+      return response()->json($this->demoWarning);
+
     $request->merge([
       'birthday' => json_decode($request->birthday, true),
       'aliases' => json_decode($request->aliases, true),
@@ -182,6 +190,9 @@ class ContactController extends Controller
   }
 
   public function update($id, Request $request) {
+    if (env('APP_DEMO'))
+      return response()->json($this->demoWarning);
+
     $request->merge([
       'birthday' => json_decode($request->birthday, true),
       'aliases' => json_decode($request->aliases, true),
@@ -375,6 +386,9 @@ class ContactController extends Controller
   }
 
   public function delete($id) {
+    if (env('APP_DEMO'))
+      return response()->json($this->demoWarning);
+
     $contact = $this->get($id);
 
     if (Contact::where('id', $id)->where('active', 1)->update(['active' => 0])) {

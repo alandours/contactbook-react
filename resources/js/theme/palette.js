@@ -1,9 +1,15 @@
 import { lighten, darken } from 'polished';
 
 const danger = {
-  main: '#d42222',
-  light: lighten('0.02', '#d42222'),
-  dark: darken('0.1', '#d42222')
+  main: '#e2d619',
+  light: lighten('0.02', '#e2d619'),
+  dark: darken('0.1', '#e2d619')
+};
+
+const warning = {
+  main: '#d4ca22',
+  light: lighten('0.02', '#d4ca22'),
+  dark: darken('0.1', '#d4ca22')
 };
 
 export const palette = {
@@ -21,7 +27,8 @@ export const palette = {
       3: lighten('0.6', '#000000'),
       4: lighten('0.78', '#000000')
     },
-    danger
+    danger,
+    warning
   },
   dark: {
     main: {
@@ -37,7 +44,8 @@ export const palette = {
       3: darken('0.5', '#e9e9e9'),
       4: darken('0.75', '#e9e9e9')
     },
-    danger
+    danger,
+    warning
   }
 };
 

@@ -42,7 +42,7 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
   useEffect(() => {
     const { isSubmitting } = formState || {};
 
-    if (!isSubmitting && (!message || message.type !== 'error')) {
+    if (!isSubmitting && (!message || message.type !== 'error' || message.type !== 'warning')) {
       reset(contact);
       setFormLoading(false);
     }
@@ -94,7 +94,7 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
         ref={formRef}
       >
         { isMedia('tablet') && showFixedInfo && <FixedInfo contact={contact} isForm /> }
-        { message && message.type === 'error' && <ContactMessage /> }
+        { message && (message.type === 'error' || message.type === 'warning') && <ContactMessage /> }
         <MainForm />
         <SecondaryForm />
         <styled.FormActions edit={edit}>

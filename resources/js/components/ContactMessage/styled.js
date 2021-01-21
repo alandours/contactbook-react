@@ -8,7 +8,17 @@ const CloseButton = styled(XButton)`
   right: 1rem;
 
   & > svg {
-    color: ${({ theme }) => theme.mainColor.dark};
+    ${({ variant }) => variant === 'success' && css`
+      color: ${({ theme }) => theme.mainColor.dark};
+    `};
+
+    ${({ variant }) => variant === 'error' && css`
+      color: ${({ theme }) => theme.selected.danger.dark};
+    `};
+
+    ${({ variant }) => variant === 'warning' && css`
+      color: ${({ theme }) => theme.selected.warning.dark};
+    `};
   }
 `;
 
@@ -23,15 +33,21 @@ const ContactMessage = styled.div`
   width: 96%;
   z-index: 1000;
 
-  ${({ type }) => type === 'success' && css`
+  ${({ variant }) => variant === 'success' && css`
     background: ${({ theme }) => theme.mainColor.main};
     border: 1px solid ${({ theme }) => theme.mainColor.dark};
     color: ${({ theme }) => theme.selected.main[1]};
   `};
 
-  ${({ type }) => type === 'error' && css`
+  ${({ variant }) => variant === 'error' && css`
     background: ${({ theme }) => theme.selected.danger.main};
     border: 1px solid ${({ theme }) => theme.selected.danger.dark};
+    color: ${({ theme }) => theme.selected.main[1]};
+  `};
+
+  ${({ variant }) => variant === 'warning' && css`
+    background: ${({ theme }) => theme.selected.warning.main};
+    border: 1px solid ${({ theme }) => theme.selected.warning.dark};
     color: ${({ theme }) => theme.selected.main[1]};
   `};
 
