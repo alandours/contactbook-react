@@ -13,5 +13,6 @@ npm-debug.log
 yarn-error.log
 public/img/contacts/*
 !public/img/contacts/contact-*.jpg
+!public/img/contacts/demo_*.jpg
 notes.txt
 *.sql
