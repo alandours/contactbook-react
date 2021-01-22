@@ -1,9 +1,9 @@
 import { lighten, darken } from 'polished';
 
 const danger = {
-  main: '#e2d619',
-  light: lighten('0.02', '#e2d619'),
-  dark: darken('0.1', '#e2d619')
+  main: '#d42222',
+  light: lighten('0.02', '#d42222'),
+  dark: darken('0.1', '#d42222')
 };
 
 const warning = {
