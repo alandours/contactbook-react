@@ -1,5 +1,6 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { toggleContactList } from '@store/actions';
 
 import Icon from '@components/Icon';
@@ -9,6 +10,13 @@ import styled from './styled';
 
 const Header = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const contactListOpen = useSelector((state) => state && state.contactList && state.contactList.open);
+
+  useEffect(() => {
+    if (contactListOpen)
+      dispatch(toggleContactList());
+  }, [location]);
 
   return (
     <styled.Header>
