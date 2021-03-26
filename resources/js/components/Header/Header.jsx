@@ -13,6 +13,8 @@ const Header = () => {
   const location = useLocation();
   const contactListOpen = useSelector((state) => state && state.contactList && state.contactList.open);
 
+  const logoSrc = `${process.env.MIX_BASE_URL}/favicon-32x32.png`;
+
   useEffect(() => {
     if (contactListOpen)
       dispatch(toggleContactList());
@@ -28,7 +30,7 @@ const Header = () => {
           <Icon icon="bars" />
         </styled.ToggleMenuButton>
         <styled.Sitelink to="/">
-          {process.env.MIX_APP_NAME}
+          <styled.Logo src={logoSrc} alt="ContactBook" />
         </styled.Sitelink>
       </styled.Sitename>
       <Navigation />
