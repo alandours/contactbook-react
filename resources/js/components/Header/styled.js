@@ -42,6 +42,10 @@ const ToggleMenuButton = styled.button`
 
 const Sitelink = styled(Link)`
   color: ${({ theme }) => theme.selected.contrast[1]};
+  display: flex;
 `;
 
-export default { Header, Sitename, ToggleMenuButton, Sitelink };
+const Logo = styled.img`
+`;
+
+export default { Header, Sitename, ToggleMenuButton, Sitelink, Logo };

@@ -6,7 +6,6 @@ const SideBar = styled.div`
   background: ${({ theme }) => theme.selected.main[1]};
   left: -100%;
   max-height: calc(100% - 61px);
-  opacity: 0;
   overflow-x: hidden;
   overflow-y: scroll;
   position: absolute;
@@ -17,11 +16,10 @@ const SideBar = styled.div`
 
   ${({ open }) => !!open && css`
     min-height: calc(100% - 61px);
-    opacity: 1;
     position: fixed;
     top: 61px;
     transform: translateX(100%);
-    transition: transform 250ms, opacity 500ms;
+    transition: transform 250ms;
   `};
 
   ${responsive.tablet`
@@ -31,7 +29,6 @@ const SideBar = styled.div`
     left: 0;
     min-width: 25%;
     max-height: 80vh;
-    opacity: 1;
     position: initial;
     transform: none;
     width: 25%;
