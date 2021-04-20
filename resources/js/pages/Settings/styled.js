@@ -18,6 +18,8 @@ const Setting = styled.li`
 
 const SettingName = styled.span`
   margin-right: 1rem;
+  transition: all 420ms ease;
+  transition-property: color;
 
   * + & {
     margin-left: 1rem;

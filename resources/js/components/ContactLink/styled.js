@@ -31,6 +31,8 @@ const Name = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: all 420ms ease;
+  transition-property: color;
 `;
 
 const Age = styled.div`

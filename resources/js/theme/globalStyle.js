@@ -26,9 +26,9 @@ const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.selected.contrast[1]};
   }
 
-  body, body * {
-    transition: all 500ms ease;
-    transition-property: background, color, box-shadow, border-color;
+  body {
+    transition: all 420ms ease;
+    transition-property: background;
   }
 
   body.preload, body.preload * {

@@ -11,6 +11,8 @@ const SectionHeader = styled.h2`
   font-weight: ${weight.semiBold};
   padding: 0.5rem 1.5rem;
   width: 100%;
+  transition: all 420ms ease;
+  transition-property: background, border, color;
   z-index: ${zindex.tooltip};
 
   
