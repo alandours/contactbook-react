@@ -17,6 +17,8 @@ const Icon = styled(FontAwesomeIcon)`
   left: 6px;
   position: absolute;
   top: 9px;
+  transition: all 420ms ease;
+  transition-property: color;
 `;
 
 const SearchInput = styled.input`
@@ -24,6 +26,13 @@ const SearchInput = styled.input`
   background: ${({ theme }) => theme.selected.main[1]};
   border-color: ${({ theme }) => theme.selected.main[2]};
   border-radius: 4px 0 0 0;
+  transition: all 420ms ease;
+  transition-property: background, border;
+
+  &::placeholder {
+    transition: all 420ms ease;
+    transition-property: color;
+  }
 
   &:hover, &:focus {
     border-color: ${({ theme }) => theme.selected.main[2]};

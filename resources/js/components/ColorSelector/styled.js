@@ -20,6 +20,8 @@ const ColorBox = styled.div`
   border-radius: 100%;
   box-shadow: 0 0 5px ${({ theme }) => theme.selected.contrast[4]};
   height: 30px;
+  transition: all 420ms ease;
+  transition-property: border, box-shadow;
   width: 30px;
 `;
 

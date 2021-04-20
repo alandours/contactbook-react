@@ -12,6 +12,8 @@ const Header = styled.header`
   justify-content: space-between;
   padding: 1rem 1.5rem;
   position: fixed;
+  transition: all 420ms ease;
+  transition-property: background, box-shadow;
   width: 100%;
   z-index: ${zindex.fixed};
 

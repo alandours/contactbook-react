@@ -9,6 +9,8 @@ const Title = styled.h1`
   font-size: ${size.large};
   font-weight: ${weight.bold};
   margin: 0.5rem 0;
+  transition: all 420ms ease;
+  transition-property: color;
 
   ${responsive.mobile`
     font-size: ${size.xlarge};

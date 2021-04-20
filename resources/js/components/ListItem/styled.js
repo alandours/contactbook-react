@@ -30,6 +30,9 @@ const ListItem = styled.li`
     position: sticky;
     top: 30px;
   `};
+
+  transition: all 420ms ease;
+  transition-property: border, color;
 `;
 
 export default { ListItem };

@@ -13,6 +13,8 @@ const HeaderLink = styled(Link)`
   color: ${({ theme }) => theme.selected.contrast[1]};
   display: flex;
   font-size: ${size.large};
+  transition: all 420ms ease;
+  transition-property: color;
 
   ${responsive.tablet`
     font-size: ${size.normal};

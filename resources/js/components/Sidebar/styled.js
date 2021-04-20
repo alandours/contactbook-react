@@ -11,7 +11,7 @@ const SideBar = styled.div`
   position: absolute;
   min-width: 100%;
   transform: translateX(-100%);
-  transition: all 500ms, transform 250ms;
+  transition: all 500ms, transform 250ms, background 420ms, box-shadow 420ms;
   z-index: ${zindex.fixed};
 
   ${({ open }) => !!open && css`

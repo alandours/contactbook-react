@@ -11,6 +11,8 @@ const MainContainer = styled.div`
   margin: 0;
   overflow: scroll;
   position: relative;
+  transition: all 420ms ease;
+  transition-property: background, box-shadow;
   width: 100%;
 
   ${responsive.tablet`
