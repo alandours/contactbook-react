@@ -15,7 +15,7 @@ const ContactLink = ({ contact, showPhoto, showAge, showMonth }) => {
 
   const { id, fullName, birthday, nextBirthday, favorite } = contact || {};
   const showFavoriteIcon = localStorage.getItem('showFavoriteIcon');
-  const age = nextBirthday ? calculateNextBirthdayAge(birthday, nextBirthday) : calculateAge(birthday);
+  const age = nextBirthday ? calculateNextBirthdayAge(birthday) : calculateAge(birthday);
 
   return (
     <styled.ContactLink
