@@ -14,6 +14,12 @@ const Input = styled.input`
     margin: 1rem;
   `}
 
+  ${({ type }) => type === 'date' && `
+    &::-webkit-calendar-picker-indicator {
+        filter: invert(0.5);
+    }
+  `}
+
   ${({ size: inputSize }) => inputSize === 'big' && css`
     font-size: ${size.large};
     font-weight: ${weight.bold};

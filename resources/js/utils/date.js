@@ -106,13 +106,9 @@ export const calculateAge = (birthdayDate) => {
  * @returns {number|null} The age for the next birthday
 */
 
-export const calculateNextBirthdayAge = (birthday, nextBirthday) => {
-  const currentMonth = new Date().getMonth();
-  const nextBirthdayMonth = nextBirthday.getMonth();
-  const isNextYearBirthday = (currentMonth - nextBirthdayMonth) > 0;
+export const calculateNextBirthdayAge = (birthday) => {
   const age = calculateAge(birthday);
-  if (!age) return null;
-  return isNextYearBirthday ? age + 1 : age;
+  return age ? age + 1 : null;
 };
 
 /**
