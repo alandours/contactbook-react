@@ -20,9 +20,9 @@ const Settings = () => {
 
   const toggleLastnameFirst = (active) => {
     if (active)
-      localStorage.setItem('orderLastnameFirst', active);
+      localStorage.setItem('orderByLastnameFirst', active);
     else
-      localStorage.removeItem('orderLastnameFirst');
+      localStorage.removeItem('orderByLastnameFirst');
 
     dispatch(getContactList());
   };
@@ -43,6 +43,24 @@ const Settings = () => {
       localStorage.removeItem('favoritesOnly');
 
     dispatch(getContactList());
+  };
+
+  const toggleShowAge = (active) => {
+    if (active)
+      localStorage.setItem('showAge', active);
+    else
+      localStorage.removeItem('showAge');
+
+    dispatch(setTheme(getTheme()));
+  };
+
+  const toggleShowPhoto = (active) => {
+    if (active)
+      localStorage.setItem('showPhoto', active);
+    else
+      localStorage.removeItem('showPhoto');
+
+    dispatch(setTheme(getTheme()));
   };
 
   const toggleDarkTheme = (active) => {
@@ -67,24 +85,38 @@ const Settings = () => {
       <Section title="Contacts">
         <styled.Setting>
           <ToggleButton
-            initialState={!!localStorage.getItem('orderLastnameFirst')}
+            initialState={!!localStorage.getItem('orderByLastnameFirst')}
             handleClick={toggleLastnameFirst}
           />
-          <styled.SettingName>Order contacts by last name</styled.SettingName>
+          <styled.SettingName>Order by last name</styled.SettingName>
+        </styled.Setting>
+        <styled.Setting>
+          <ToggleButton
+            initialState={!!localStorage.getItem('showAge')}
+            handleClick={toggleShowAge}
+          />
+          <styled.SettingName>Show age</styled.SettingName>
+        </styled.Setting>
+        <styled.Setting>
+          <ToggleButton
+            initialState={!!localStorage.getItem('showPhoto')}
+            handleClick={toggleShowPhoto}
+          />
+          <styled.SettingName>Show photo</styled.SettingName>
         </styled.Setting>
         <styled.Setting>
           <ToggleButton
             initialState={!!localStorage.getItem('showFavoriteIcon')}
             handleClick={toggleFavoriteIcon}
           />
-          <styled.SettingName>Show a favorite icon next to the contacts</styled.SettingName>
+          <styled.SettingName>Show favorite icon</styled.SettingName>
         </styled.Setting>
         <styled.Setting>
           <ToggleButton
             initialState={!!localStorage.getItem('favoritesOnly')}
             handleClick={toggleFavoritesOnly}
           />
-          <styled.SettingName>Show only favorite contacts</styled.SettingName>
+          <styled.SettingName>Show favorites only</styled.SettingName>
         </styled.Setting>
       </Section>
       <Section title="Colors">

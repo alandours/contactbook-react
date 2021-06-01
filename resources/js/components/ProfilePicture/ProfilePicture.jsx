@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { useFormContext } from 'react-hook-form';
 import { func, objectOf, any, bool } from 'prop-types';
 import { setContactPalette } from '@store/actions';
@@ -16,6 +16,8 @@ const ProfilePicture = ({ thumbnail, contact, setContactPalette, handleClick }) 
   const [uploaded, setUploaded] = useState(null);
   const { watch } = useFormContext() || {};
   const imageRef = useRef(null);
+
+  const mainColor = useSelector((state) => state.themeData && state.themeData.mainColor);
 
   const { photo, fullName, palette } = contact;
 
@@ -36,7 +38,7 @@ const ProfilePicture = ({ thumbnail, contact, setContactPalette, handleClick }) 
 
   return (
     <styled.ProfilePicture
-      src={uploaded || `/img/contacts/${photo || getDefaultPhoto()}`}
+      src={uploaded || `/img/contacts/${photo || getDefaultPhoto(mainColor)}`}
       alt={`${fullName}'s profile picture`}
       thumbnail={thumbnail}
       ref={imageRef}

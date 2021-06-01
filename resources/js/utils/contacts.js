@@ -1,9 +1,8 @@
 import { getRandomInt } from '@utils';
-import { getMainColor } from '@utils/color';
 
 /**
  * @function formatFullName
- * @description Format the contacts name according to the orderLastnameFirst setting
+ * @description Format the contacts name according to the orderByLastnameFirst setting
  * @param {string} name - A string with the contact's name
  * @param {string} lastname - A string with the contact's lastname
  * @returns {string} A string with the contact's full name
@@ -14,8 +13,8 @@ import { getMainColor } from '@utils/color';
 
 const formatFullName = (name, lastname) => {
   if (!lastname) return name;
-  const orderLastnameFirst = localStorage.getItem('orderLastnameFirst');
-  return orderLastnameFirst ? `${lastname}, ${name}` : `${name} ${lastname}`;
+  const orderByLastnameFirst = localStorage.getItem('orderByLastnameFirst');
+  return orderByLastnameFirst ? `${lastname}, ${name}` : `${name} ${lastname}`;
 };
 
 /**
@@ -37,15 +36,15 @@ export const addFullNames = (contacts) => {
 
 /**
  * @function sortContacts
- * @description Sort contacts according to the orderLastnameFirst setting
+ * @description Sort contacts according to the orderByLastnameFirst setting
  * @param {array} contacts - An array of contacts
  * @returns {array} An array with the sorted contacts
 */
 
 export const sortContacts = (contacts) => {
-  const orderLastnameFirst = localStorage.getItem('orderLastnameFirst');
+  const orderByLastnameFirst = localStorage.getItem('orderByLastnameFirst');
 
-  if (orderLastnameFirst) {
+  if (orderByLastnameFirst) {
     return contacts.sort((c1, c2) => {
       const name1 = c1.name;
       const name2 = c2.name;
@@ -94,13 +93,14 @@ export const appendParsedData = (formData, data) => {
 /**
  * @function getDefaultPhoto
  * @description Get the default profile picture name
+ * @param {string} mainColor - The current main color
  * @returns {string} A string of the default profile picture name
  * @example
  * // returns 'contact-orange.jpg'
- * getDefaultPhoto()
+ * getDefaultPhoto('orange')
 */
 
-export const getDefaultPhoto = () => `contact-${getMainColor()}.jpg`;
+export const getDefaultPhoto = (mainColor) => `contact-${mainColor || 'green'}.jpg`;
 
 /**
  * @function getRandomContact
