@@ -6,8 +6,9 @@ import { getTheme } from '@utils/color';
 import Section from '@components/Section';
 import ToggleButton from '@components/ToggleButton';
 import ColorSelector from '@components/ColorSelector';
-
 import Setting from '../Setting';
+
+const colors = ['green', 'turquoise', 'blue', 'purple', 'fuchsia', 'red', 'orange'];
 
 const ColorSettings = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,13 @@ const ColorSettings = () => {
     dispatch(setMainColor(color));
   };
 
+  const ColorSelectors = colors.map((color) => (
+    <ColorSelector
+      color={color}
+      handleClick={changeMainColor}
+    />
+  ));
+
   return (
     <Section title="Colors">
       <Setting label="Dark theme">
@@ -35,18 +43,7 @@ const ColorSettings = () => {
         />
       </Setting>
       <Setting label="Main Color:" labelFirst>
-        <ColorSelector
-          color="green"
-          handleClick={changeMainColor}
-        />
-        <ColorSelector
-          color="orange"
-          handleClick={changeMainColor}
-        />
-        <ColorSelector
-          color="purple"
-          handleClick={changeMainColor}
-        />
+        { ColorSelectors }
       </Setting>
     </Section>
   );
