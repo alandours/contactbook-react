@@ -93,7 +93,8 @@ export const calculateAge = (birthdayDate) => {
   const month = today.getMonth() - birthday.getMonth();
   let age = today.getFullYear() - birthday.getFullYear();
 
-  if (month < 0 || (month === 0 && today.getDate() < birthday.getDate())) age -= 1;
+  if (month < 0 || (month === 0 && today.getDate() <= birthday.getDate()))
+    age -= 1;
 
   return (age < 100) ? age : null;
 };

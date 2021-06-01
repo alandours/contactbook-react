@@ -28,7 +28,7 @@ const ListItem = styled.li`
 
   ${({ sticky }) => sticky && css`
     position: sticky;
-    top: 28px;
+    top: 27px;
   `};
 
   transition: all 420ms ease;
