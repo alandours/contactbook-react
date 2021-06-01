@@ -10,21 +10,4 @@ const Settings = styled.div`
   `}
 `;
 
-const Setting = styled.li`
-  align-items: center;
-  margin: 0.5rem 0;
-  display: flex;
-`;
-
-const SettingName = styled.span`
-  margin-right: 1rem;
-  transition: all 420ms ease;
-  transition-property: color;
-
-  * + & {
-    margin-left: 1rem;
-    margin-right: 0;
-  }
-`;
-
-export default { Settings, Setting, SettingName };
+export default { Settings };

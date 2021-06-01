@@ -55,14 +55,34 @@ export const color = {
     light: lighten('0.02', '#12c450'),
     dark: darken('0.1', '#12c450')
   },
-  orange: {
-    main: '#de9d2b',
-    light: lighten('0.02', '#de9d2b'),
-    dark: darken('0.1', '#de9d2b')
+  turquoise: {
+    main: '#12d0ae',
+    light: lighten('0.02', '#12d0ae'),
+    dark: darken('0.1', '#12d0ae')
+  },
+  blue: {
+    main: '#158de8',
+    light: lighten('0.02', '#158de8'),
+    dark: darken('0.1', '#158de8')
   },
   purple: {
     main: '#9a60ed',
     light: lighten('0.02', '#9a60ed'),
     dark: darken('0.1', '#9a60ed')
+  },
+  fuchsia: {
+    main: '#e8158c',
+    light: lighten('0.02', '#e8158c'),
+    dark: darken('0.1', '#e8158c')
+  },
+  red: {
+    main: '#f31717',
+    light: lighten('0.02', '#f31717'),
+    dark: darken('0.1', '#f31717')
+  },
+  orange: {
+    main: '#de9d2b',
+    light: lighten('0.02', '#de9d2b'),
+    dark: darken('0.1', '#de9d2b')
   }
 };
