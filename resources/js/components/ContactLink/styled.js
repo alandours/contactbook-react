@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { size, weight } from '@theme/typography';
 
@@ -22,6 +22,11 @@ const Date = styled.div`
   margin-right: 1rem;
   text-align: center;
   width: 35px;
+
+  ${({ isDashboard }) => isDashboard && css`
+    text-align: left;
+    width: 45px;
+  `};
 `;
 
 const Name = styled.div`

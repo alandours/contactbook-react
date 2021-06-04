@@ -6,6 +6,9 @@
 */
 
 const formatDate = (birthdayDate) => {
+  if (typeof birthdayDate !== 'string')
+    return birthdayDate;
+
   const parts = birthdayDate.split('-');
   return new Date(parts[0], (parts[1] - 1), parts[2], 12, 0o0, 0o0);
 };
@@ -134,8 +137,21 @@ export const getBirthdayText = (birthday) => {
 };
 
 /**
+ * @function isBirthdayToday
+ * @description Tell if the birthday is today
+ * @param {string} birthday - A birthday date
+ * @returns {boolean} If the birthday is today
+*/
+
+export const isBirthdayToday = (birthday) => {
+  const todayDate = new Date();
+  const birthdayDate = formatDate(birthday);
+  return birthdayDate.getDate() === todayDate.getDate() && birthdayDate.getMonth() === todayDate.getMonth();
+};
+
+/**
  * @function getListDate
- * @description Get the date in DD or DD/MM format
+ * @description Get the date in DD or DD/MM format (or Today)
  * @param {string} birthday - A birthday date
  * @param {boolean} showMonth - A boolean to show the month
  * @returns {string} A string with the formatted date
@@ -144,9 +160,12 @@ export const getBirthdayText = (birthday) => {
  * getListDate(birthday, showMonth)
 */
 
-export const getListDate = (birthday, showMonth) => {
+export const getListDate = (birthday, showMonth, todayBirthdayText = false) => {
   const day = `${birthday.getUTCDate()}`;
   const month = birthday.getUTCMonth() + 1;
+
+  if (todayBirthdayText && isBirthdayToday(birthday))
+    return 'Today';
 
   if (showMonth)
     return `${day}/${month}`;

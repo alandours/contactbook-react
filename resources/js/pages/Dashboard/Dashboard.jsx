@@ -23,6 +23,7 @@ const getUpcomingBirthdays = (birthdays) => {
       showPhoto
       showAge
       showMonth
+      isDashboard
     />
   ));
 };

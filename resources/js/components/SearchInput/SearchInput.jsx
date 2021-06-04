@@ -7,7 +7,7 @@ const SearchInput = ({ handleTyping }) => (
   <styled.Container>
     <styled.Icon icon="search" />
     <styled.SearchInput
-      type="search"
+      type="text"
       placeholder="Search contacts"
       onKeyUp={handleTyping}
       hasIcon
