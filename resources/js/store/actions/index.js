@@ -97,7 +97,10 @@ export const addContact = (data) => async (dispatch) => {
   dispatch(setContact(contact));
   dispatch(setContactMessage({ message, type }));
   dispatch(getContactList());
-  return type === 'success';
+  return {
+    success: type === 'success',
+    newContactId: contact.id
+  };
 };
 
 export const updateContact = (id, data) => async (dispatch) => {
@@ -108,7 +111,9 @@ export const updateContact = (id, data) => async (dispatch) => {
   dispatch(setContact(contact));
   dispatch(setContactMessage({ message, type }));
   dispatch(getContactList());
-  return type === 'success';
+  return {
+    success: type === 'success'
+  };
 };
 
 export const deleteContact = (id) => async (dispatch) => {

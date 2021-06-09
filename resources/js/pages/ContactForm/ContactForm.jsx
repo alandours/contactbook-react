@@ -63,9 +63,11 @@ const ContactForm = ({ edit, contact, appData, addContact, updateContact, delete
     }
   };
 
-  const redirect = (success) => {
+  const redirect = (data) => {
+    const { success, newContactId } = data;
+    const contactUrl = newContactId ? `/contacts/${newContactId}` : `/contacts/${contactId}`;
     if (success)
-      history.push(`/contacts/${contactId}`);
+      history.push(contactUrl);
   };
 
   const handleDelete = () => {
