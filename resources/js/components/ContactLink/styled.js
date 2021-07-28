@@ -22,11 +22,17 @@ const Date = styled.div`
   margin-right: 1rem;
   text-align: center;
   width: 35px;
+`;
 
-  ${({ isDashboard }) => isDashboard && css`
-    text-align: left;
-    width: 45px;
-  `};
+const NamedDate = styled.span`
+  border-radius: 2px;
+  color: ${({ theme }) => theme.mainColor.dark};
+  font-size: 0.7rem;
+  font-weight: ${weight.semiBold};
+  margin-left: 0;
+  padding: 0.125rem 0.5rem;
+  text-align: center;
+  text-transform: uppercase;
 `;
 
 const Name = styled.div`
@@ -49,4 +55,4 @@ const FavoriteIcon = styled.span`
   margin: 0 0.5rem;
 `;
 
-export default { ContactLink, Date, Name, Age, FavoriteIcon };
+export default { ContactLink, Date, NamedDate, Name, Age, FavoriteIcon };

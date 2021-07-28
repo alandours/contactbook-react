@@ -138,20 +138,22 @@ export const getBirthdayText = (birthday) => {
 
 /**
  * @function isBirthdayToday
- * @description Tell if the birthday is today
+ * @description Tell if the birthday is today or x days from today
  * @param {string} birthday - A birthday date
- * @returns {boolean} If the birthday is today
+ * @param {number} days - Days from today
+ * @returns {boolean} If the birthday is today or x days from today
 */
 
-export const isBirthdayToday = (birthday) => {
+export const isBirthdayToday = (birthday, days = 0) => {
   const todayDate = new Date();
+  todayDate.setDate(todayDate.getDate() + days);
   const birthdayDate = formatDate(birthday);
   return birthdayDate.getDate() === todayDate.getDate() && birthdayDate.getMonth() === todayDate.getMonth();
 };
 
 /**
  * @function getListDate
- * @description Get the date in DD or DD/MM format (or Today)
+ * @description Get the date in DD or DD/MM format
  * @param {string} birthday - A birthday date
  * @param {boolean} showMonth - A boolean to show the month
  * @returns {string} A string with the formatted date
@@ -160,15 +162,29 @@ export const isBirthdayToday = (birthday) => {
  * getListDate(birthday, showMonth)
 */
 
-export const getListDate = (birthday, showMonth, todayBirthdayText = false) => {
+export const getListDate = (birthday, showMonth) => {
   const day = `${birthday.getUTCDate()}`;
   const month = birthday.getUTCMonth() + 1;
-
-  if (todayBirthdayText && isBirthdayToday(birthday))
-    return 'Today';
 
   if (showMonth)
     return `${day}/${month}`;
 
   return day;
+};
+
+/**
+ * @function getNamedDate
+ * @description Get the date as Today or Tomorrow
+ * @param {string} birthday - A birthday date
+ * @returns {string|null} A string with the formatted date
+*/
+
+export const getNamedDate = (birthday) => {
+  if (isBirthdayToday(birthday))
+    return 'Today';
+
+  if (isBirthdayToday(birthday, 1))
+    return 'Tomorrow';
+
+  return null;
 };
