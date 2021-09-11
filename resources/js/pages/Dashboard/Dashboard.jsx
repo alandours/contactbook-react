@@ -8,6 +8,7 @@ import ContactMessage from '@components/ContactMessage';
 import ContactLink from '@components/ContactLink';
 import ContactBookLink from '@components/ContactBookLink';
 import Section from '@components/Section';
+import Loader from '@components/Loader';
 
 import styled from './styled';
 
@@ -40,8 +41,8 @@ const getLastAdded = (contacts) => {
 };
 
 const Dashboard = () => {
-  const [upcomingBirthdays, setUpcomingBirthdays] = useState(null);
-  const [lastAdded, setLastAdded] = useState(null);
+  const [upcomingBirthdays, setUpcomingBirthdays] = useState();
+  const [lastAdded, setLastAdded] = useState();
 
   const contacts = useSelector((state) => state.contactList && state.contactList.list);
 
@@ -69,11 +70,11 @@ const Dashboard = () => {
         subtitle={subtitle || null}
       />
       <Section title="Upcoming birthdays" icon="birthday-cake">
-        { upcomingBirthdays || 'There are no upcoming birthdays' }
+        { upcomingBirthdays === undefined ? <Loader /> : upcomingBirthdays || 'There are no upcoming birthdays'}
         { upcomingBirthdays && <ContactBookLink url="/birthdays" highlight>See all birthdays</ContactBookLink> }
       </Section>
       <Section title="Last contacts" icon="user-friends">
-        { lastAdded && lastAdded.length ? lastAdded : 'There are no contacts' }
+        { lastAdded === undefined ? <Loader /> : (lastAdded && lastAdded.length && lastAdded) || 'There are no contacts' }
         { lastAdded && !!lastAdded.length && <ContactBookLink url="/contacts/year" highlight>See contacts by year</ContactBookLink> }
       </Section>
     </styled.Dashboard>
